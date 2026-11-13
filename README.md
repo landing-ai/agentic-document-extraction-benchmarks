@@ -11,7 +11,7 @@ This repository reports how ADE performs on third-party benchmarks for AI docume
 | Benchmark | Task | Metric | ADE score | ADE version | Run date | Details |
 |---|---|---|---|---|---|---|
 | [DocVQA](benchmarks/docvqa/) | Document visual question answering | ANLS | _pending_ | _pending_ | _pending_ | [README](benchmarks/docvqa/README.md) |
-| [ExtractBench](benchmarks/extractbench/) | Structured field extraction | Field-level F1 | _pending_ | _pending_ | _pending_ | [README](benchmarks/extractbench/README.md) |
+| [ExtractBench](benchmarks/extractbench/) (LlamaIndex) | Schema-guided extraction | Value F1 | _pending_ | _pending_ | _pending_ | [README](benchmarks/extractbench/README.md) |
 
 The machine-readable version of this table is in [`results.csv`](results.csv). The full history of runs is in [`CHANGELOG.md`](CHANGELOG.md).
 

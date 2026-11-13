@@ -3,3 +3,5 @@ datasets
 pyyaml
 python-Levenshtein
 tqdm
+llama-extract-bench
+huggingface_hub

@@ -1,22 +1,37 @@
 # ExtractBench: LandingAI ADE results
 
-**ExtractBench** is a benchmark for structured field extraction from documents. _TODO: add a one-sentence description, authors, and link to the paper/repo._
+**ExtractBench** ([run-llama/ExtractBench](https://github.com/run-llama/ExtractBench), [arXiv 2607.29677](https://arxiv.org/abs/2607.29677)) is a benchmark from LlamaIndex for **schema-guided extraction from enterprise documents**. Given a document and a JSON Schema, a system must return schema-valid JSON with correct values, every record of each repeated structure, `null` for missing fields, and source evidence for each value. The benchmark has 370 documents (4,869 pages, 67 document types), split into short, medium, and long documents.
+
+> Not to be confused with a different benchmark of the same name, [ExtractBench (arXiv 2602.12247)](https://arxiv.org/abs/2602.12247), by Ferguson et al. Results here use the LlamaIndex benchmark.
+
+**Metrics** (as defined by the benchmark authors):
+- **Value F1:** F1 of extracted values, averaged across documents (each document weighted equally). Reported overall and by split.
+- **Grounding F1:** a value counts only if it is correct *and* its evidence box overlaps an accepted box at IoU ≥ 0.5 (word level), or cites the correct page (page level).
+- **Cost per page:** mean of each document's cost divided by its page count, at public list prices.
+
+Documents that fail or exceed the official 30-minute limit score zero.
 
 ## LandingAI results (run by us, reproducible here)
 
-| Run date | Split | Samples | Field F1 | ADE version | Results |
-|---|---|---|---|---|---|
-| _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | [`results/2026-11/`](results/2026-11/) |
+| Run date | Value F1 (Overall) | Short | Medium | Long | Word grounding F1 | ¢ / page | ADE version | Results |
+|---|---|---|---|---|---|---|---|---|
+| _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | [`results/2026-11/`](results/2026-11/) |
 
 ## Other published results for reference
 
-Scores below are copied from the cited source as reported there. LandingAI did not run these systems. Differences in split or setup may limit direct comparison.
+Copied from the [official ExtractBench leaderboard](https://github.com/run-llama/ExtractBench#extractbench-leaderboard) as reported there, retrieved 2026-11-13. LandingAI did not run these systems. Top 5 of 54 ranked systems by overall value F1; see the source for the full list.
 
-| System | Field F1 | Split | Source | Retrieved |
-|---|---|---|---|---|
-| _to be added_ | | | _TODO: official leaderboard or paper_ | |
+| Rank | System | Value F1 (Overall) | Short | Medium | Long | ¢ / page |
+|---:|---|---:|---:|---:|---:|---:|
+| 1 | LlamaExtract Agentic Plus | 96.17 | 97.02 | 94.30 | 94.65 | 7.50¢ |
+| 2 | LlamaExtract Agentic Plus (Max Effort) | 96.17 | 96.82 | 95.48 | 91.36 | 19.11¢ |
+| 3 | Reducto Deep Extract | 96.08 | 96.84 | 94.80 | 92.85 | 6.35¢ |
+| 4 | Pulse (Effort) | 96.07 | 96.83 | 94.70 | 93.24 | 10.50¢ |
+| 5 | LlamaExtract Agentic | 95.65 | 96.06 | 94.79 | 94.73 | 3.12¢ |
 
 ## Reproduce
+
+Scoring uses the benchmark's official evaluator (`llama-extract-bench`), not a reimplementation.
 
 ```bash
 pip install -r requirements.txt
@@ -25,10 +40,20 @@ python benchmarks/extractbench/download_data.py
 python -m harness.run --benchmark extractbench
 ```
 
-## Dataset license
+The configuration used for the published run is in [`config.yaml`](config.yaml).
 
-The ExtractBench data is not redistributed in this repository. _TODO: link the dataset's license._
+## Dataset and license
+
+The data is not redistributed in this repository. It is published on Hugging Face at [llamaindex/ExtractBench](https://huggingface.co/datasets/llamaindex/ExtractBench); the benchmark code is licensed Apache-2.0. Check the dataset card for the data's terms of use.
 
 ## Citation
 
-_TODO: add the benchmark authors' BibTeX._
+```bibtex
+@misc{zhang2026extractbench,
+  title         = {ExtractBench: A Benchmark for Schema-Guided Enterprise Document Extraction},
+  author        = {Zhang, Boyang and Lyjak, Adrian and Stewart, Eli and Li, Zhaoqi and Suo, Simon},
+  year          = {2026},
+  eprint        = {2607.29677},
+  archivePrefix = {arXiv}
+}
+```

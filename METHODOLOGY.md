@@ -34,7 +34,7 @@ This document describes how LandingAI runs Agentic Document Extraction (ADE) on 
 | Metric | Used by | Definition |
 |---|---|---|
 | ANLS | DocVQA | Average Normalized Levenshtein Similarity, threshold τ = 0.5, max over ground-truth answers, as defined by the DocVQA authors |
-| Field-level F1 | ExtractBench | Precision/recall over extracted fields against ground truth, per the benchmark's official definition |
+| Value F1, Grounding F1 | ExtractBench (LlamaIndex) | Per-document value F1 and IoU-based evidence F1, computed with the benchmark's official evaluator (`llama-extract-bench`) |
 
 Metric implementations live in `harness/metrics.py`. Where a benchmark provides an official scorer, we use it or verify that our implementation matches it.
 

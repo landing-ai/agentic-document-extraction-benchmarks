@@ -1,10 +1,13 @@
 name: extractbench
-task: structured_field_extraction
-split: null              # TODO: set to the official evaluation split
-metric: field_f1
+source: https://github.com/run-llama/ExtractBench   # LlamaIndex ExtractBench, arXiv 2607.29677
+task: schema_guided_extraction
+splits: [short, medium, long]
+metric: value_f1          # primary; also report word/page grounding F1 and cost per page
+evaluator: official       # use llama-extract-bench's evaluator, not harness/metrics.py
+time_limit_minutes: 30    # official rule: failed or timed-out documents score zero
 data_dir: data/extractbench
 ade:
   endpoint: https://api.va.landing.ai   # confirm before running
   model: null                           # fill in the exact ADE model/version used
   max_retries: 3
-  timeout_s: 120
+  timeout_s: 1800
