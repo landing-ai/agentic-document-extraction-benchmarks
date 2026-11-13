@@ -35,7 +35,7 @@ Scoring uses the benchmark's official evaluator (`llama-extract-bench`), not a r
 
 ```bash
 pip install -r requirements.txt
-export VISION_AGENT_API_KEY=...
+export ADE_API_KEY=...
 python benchmarks/extractbench/download_data.py
 python -m harness.run --benchmark extractbench
 ```

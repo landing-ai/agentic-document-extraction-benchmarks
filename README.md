@@ -51,7 +51,7 @@ cd agentic-document-extraction-benchmarks
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-export VISION_AGENT_API_KEY=...   # your LandingAI API key, never commit it
+export ADE_API_KEY=...   # your LandingAI API key, never commit it
 
 python benchmarks/docvqa/download_data.py
 python -m harness.run --benchmark docvqa

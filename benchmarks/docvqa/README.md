@@ -20,7 +20,7 @@ Scores below are copied from the cited source as reported there. LandingAI did n
 
 ```bash
 pip install -r requirements.txt
-export VISION_AGENT_API_KEY=...
+export ADE_API_KEY=...
 python benchmarks/docvqa/download_data.py
 python -m harness.run --benchmark docvqa
 ```
