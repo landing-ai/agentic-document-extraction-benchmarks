@@ -1,0 +1,17 @@
+# Downloaded benchmark data is never committed
+data/
+benchmarks/*/data/
+
+# Secrets
+.env
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# OS
+.DS_Store

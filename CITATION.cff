@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you reference these results, please cite this repository and the original benchmark papers."
+title: "Agentic Document Extraction Benchmarks"
+abstract: "Reproducible results for LandingAI Agentic Document Extraction (ADE) on public document AI benchmarks."
+type: software
+authors:
+  - name: "LandingAI"
+repository-code: "https://github.com/landing-ai/agentic-document-extraction-benchmarks"
+url: "https://landing.ai/agentic-document-extraction"
+license: Apache-2.0
+keywords:
+  - agentic document extraction
+  - document AI
+  - intelligent document processing
+  - document extraction
+  - DocVQA
+  - benchmark

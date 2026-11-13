@@ -1,0 +1,5 @@
+landingai-ade
+datasets
+pyyaml
+python-Levenshtein
+tqdm

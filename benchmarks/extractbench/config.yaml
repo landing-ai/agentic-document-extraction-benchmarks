@@ -1,0 +1,10 @@
+name: extractbench
+task: structured_field_extraction
+split: null              # TODO: set to the official evaluation split
+metric: field_f1
+data_dir: data/extractbench
+ade:
+  endpoint: https://api.va.landing.ai   # confirm before running
+  model: null                           # fill in the exact ADE model/version used
+  max_retries: 3
+  timeout_s: 120
