@@ -1,0 +1,42 @@
+{
+  "benchmark": "docvqa",
+  "split": "validation",
+  "num_questions": 5349,
+  "num_documents": 1286,
+  "pipeline": "ADE Parse (DPT-2) -> Claude Sonnet answers each question from the parsed markdown/JSON only (no image access)",
+  "metric": "exact_match_accuracy",
+  "metric_definition": "Case-insensitive exact string match against any ground-truth answer, after stripping whitespace",
+  "score": 0.98822,
+  "correct": 5286,
+  "secondary_metrics": {
+    "exact_match_accuracy_excluding_dataset_issues": 0.99156,
+    "excluded_dataset_issues": 18,
+    "anls_derived": 0.9908,
+    "anls_derived_excluding_dataset_issues": 0.9930
+  },
+  "error_breakdown": {
+    "prompt_llm_miss": 18,
+    "incorrect_parse": 13,
+    "not_ade_focus": 9,
+    "missed_parse": 5,
+    "dataset_issue": 18
+  },
+  "ade_model": "dpt-2-latest",
+  "ade_endpoint": "https://api.va.staging.landing.ai/v1/ade/parse",
+  "qa_model": "Claude Sonnet 4.5 (claude-sonnet-4-5-20250929 per client default; evaluate.py passes claude-sonnet-4-20250514; see notes)",
+  "qa_temperature": 0.0,
+  "qa_max_tokens": 4096,
+  "prompt": "prompt.md",
+  "source_repository": "https://github.com/landing-ai/ade-docvqa-benchmark",
+  "source_commit": "9d9bdff3b941a54f0961d428adba1bbeb261f378",
+  "run_date": "2025-11-09",
+  "imported_date": "2026-11-13",
+  "notes": [
+    "Imported from landing-ai/ade-docvqa-benchmark; not re-run in this repository.",
+    "Headline score counts all 5,349 questions. The source repo reports 99.156% after excluding 18 questions LandingAI judged to have questionable ground truth; both are shown.",
+    "ANLS is derived, not computed from a full predictions file: the 5,286 exact-match answers each score 1.0, and the 63 listed failures are scored individually in errors.jsonl.",
+    "The source repo does not contain a complete predictions file for this run, so predictions.jsonl is not published here. errors.jsonl lists every incorrect answer.",
+    "QA model is ambiguous in the source: README and blog say Sonnet 4.5, evaluate.py hard-codes claude-sonnet-4-20250514 (Sonnet 4).",
+    "ADE parse ran against the staging endpoint with dpt-2-latest; the exact dated model version was not recorded."
+  ]
+}

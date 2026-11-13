@@ -33,6 +33,7 @@ This document describes how LandingAI runs Agentic Document Extraction (ADE) on 
 
 | Metric | Used by | Definition |
 |---|---|---|
+| Exact-match accuracy | DocVQA | Case-insensitive exact string match against any ground-truth answer (stricter than ANLS) |
 | ANLS | DocVQA | Average Normalized Levenshtein Similarity, threshold τ = 0.5, max over ground-truth answers, as defined by the DocVQA authors |
 | Value F1, Grounding F1 | ExtractBench (LlamaIndex) | Per-document value F1 and IoU-based evidence F1, computed with the benchmark's official evaluator (`llama-extract-bench`) |
 
@@ -41,7 +42,11 @@ Metric implementations live in `harness/metrics.py`. Where a benchmark provides 
 ## Failures and exclusions
 
 - API errors or timeouts are retried up to the limit in the config. Samples that still fail are **scored as incorrect**, not dropped, and the count is recorded in `notes`.
-- No samples are excluded after seeing results.
+- No samples are excluded after seeing results. If questions are judged to have faulty ground truth, the headline score still counts them; a secondary score without them may be shown alongside, with every excluded question listed.
+
+## Pipelines that use an LLM
+
+Some benchmarks (e.g. DocVQA) are run parse-then-query: ADE parses the document, then an LLM answers from the parsed output only. These results record the LLM model, prompt, and settings alongside the ADE version, and are described as ADE + LLM results, not standalone ADE scores.
 
 ## Versioning
 

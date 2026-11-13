@@ -1,11 +1,20 @@
 name: docvqa
 task: document_visual_question_answering
 split: validation        # test-set answers are hidden; test scores require the official leaderboard
-metric: anls
+approach: parse_then_query   # ADE parses once; an LLM answers from the parsed output only, no image
+metrics:
+  primary: exact_match_accuracy   # case-insensitive, stripped, match any ground-truth answer
+  secondary: [anls]
 anls_threshold: 0.5
 data_dir: data/docvqa
 ade:
-  endpoint: https://api.va.landing.ai   # confirm before running
-  model: null                           # fill in the exact ADE model/version used
+  model: dpt-2-latest                  # 2025-11 run; pin a dated version for future runs
+  endpoint: null                       # 2025-11 run used the staging endpoint; use production for future runs
   max_retries: 3
   timeout_s: 120
+qa:
+  provider: anthropic
+  model: claude-sonnet-4-5-20250929    # confirm; see results/2025-11/README.md
+  temperature: 0.0
+  max_tokens: 4096
+  prompt: results/2025-11/prompt.md
