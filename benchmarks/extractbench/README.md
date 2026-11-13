@@ -11,11 +11,14 @@
 
 Documents that fail or exceed the official 30-minute limit score zero.
 
-## LandingAI results (run by us, reproducible here)
+## LandingAI results (run by us)
 
-| Run date | Value F1 (Overall) | Short | Medium | Long | Word grounding F1 | ¢ / page | ADE version | Results |
-|---|---|---|---|---|---|---|---|---|
-| _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | _pending_ | [`results/2026-11/`](results/2026-11/) |
+| Run | ADE Extract version | Value F1 (Overall) | Short | Medium | Long | Word grounding F1 | Latency p50 (s/doc) | LLM cost / doc | Status | Results |
+|---|---|---:|---:|---:|---:|---|---:|---:|---|---|
+| 2026-11-12 | extract-20261111 | **94.02** | 94.66 | 93.43 | 88.99 | _not reported_ | 124 | $0.039 | Preliminary | [`results/2026-11/`](results/2026-11/) |
+| 2026-11-12 | extract-20260903 | 91.62 | 93.42 | 89.74 | 78.26 | _not reported_ | 38 | $0.637 | Previous version | [`results/2026-11/`](results/2026-11/) |
+
+All 370 documents (252 short, 98 medium, 20 long), scored with the official ExtractBench harness. `extract-20261111` ran with grounding enabled. Cost is LLM cost per document, not the leaderboard's cents per page at list prices. The results are preliminary: a re-run with latency improvements is pending, followed by an official leaderboard submission. See the [run README](results/2026-11/README.md) for latency, cost, and what is still missing.
 
 ## Other published results for reference
 

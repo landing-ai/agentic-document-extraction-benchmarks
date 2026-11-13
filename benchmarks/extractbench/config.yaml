@@ -8,6 +8,8 @@ time_limit_minutes: 30    # official rule: failed or timed-out documents score z
 data_dir: data/extractbench
 ade:
   endpoint: https://api.va.landing.ai   # confirm before running
-  model: null                           # fill in the exact ADE model/version used
+  extract_version: extract-20261111     # 2026-11 run; previous: extract-20260903
+  parse_model: null                     # not recorded for the 2026-11 run
+  grounding: true
   max_retries: 3
   timeout_s: 1800
