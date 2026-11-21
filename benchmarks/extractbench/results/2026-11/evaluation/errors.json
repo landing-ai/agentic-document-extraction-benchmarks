@@ -1,0 +1,67 @@
+[
+  {
+    "example_id": "short/sched_i__after_violence_project_ty2024",
+    "file_path": "data/short/sched_i__after_violence_project_ty2024.pdf",
+    "error": "Provider error: Invalid attempt billing: Final attempt cost 0.027999999999999997 is below recorded component charges 0.028000000000000004 [debug payload: short/sched_i__after_violence_project_ty2024.error.raw.json]",
+    "error_type": "_BillingError",
+    "traceback": "Traceback (most recent call last):\n  File \"src/extract_bench/inference/runner.py\", line 100, in observe\n    self.billing.observe(event, payload)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"src/extract_bench/inference/cost_accounting.py\", line 134, in observe\n    raise ValueError(f\"Final attempt cost {value} is below recorded component charges {component_total}\")\nValueError: Final attempt cost 0.027999999999999997 is below recorded component charges 0.028000000000000004\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"src/extract_bench/inference/runner.py\", line 1017, in _process_test_case\n    raw_result = self._run_provider_inference(request)\n  File \"src/extract_bench/inference/runner.py\", line 445, in _run_provider_inference\n    attempt.observe(\n    ~~~~~~~~~~~~~~~^\n        COST_ATTEMPT_EVENT,\n        ^^^^^^^^^^^^^^^^^^^\n        {KNOWN_COST_USD: raw.get(COST_USD), COMPLETE: raw.get(RAW_COST_COMPLETE, True)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"src/extract_bench/inference/runner.py\", line 104, in observe\n    raise self.billing_error from error\nextract_bench.inference.runner._BillingError: Invalid attempt billing: Final attempt cost 0.027999999999999997 is below recorded component charges 0.028000000000000004\n",
+    "timestamp": "2026-11-20T20:01:10.547265",
+    "_attempt_accounting": {
+      "attempts": [
+        {
+          "cost_usd": 0.028000000000000004,
+          "cost_complete": false,
+          "components": {
+            "landingai_v2/parse/parse-<job-id>": {
+              "cost_usd": 0.01,
+              "complete": true,
+              "usage": {
+                "job_id": "parse-<job-id>",
+                "filename": "9f38eff9698dd968.pdf",
+                "org_id": "<org-id>",
+                "model_version": "dpt-3-pro-20261111",
+                "page_count": 1,
+                "output_markdown_chars": 1780,
+                "range_units": "unicode_codepoints",
+                "openapi_spec": "https://api.ade.landing.ai/openapi.json",
+                "failed_pages": [],
+                "duration_ms": 5291,
+                "billing": {
+                  "service_tier": "standard",
+                  "total_credits": 1.0
+                }
+              }
+            },
+            "landingai_v2/extract/extract-<job-id>": {
+              "cost_usd": 0.018000000000000002,
+              "complete": true,
+              "usage": {
+                "job_id": "extract-<job-id>",
+                "model_version": "extract-20261111",
+                "duration_ms": 172488,
+                "filename": "inline_markdown.md",
+                "org_id": "<org-id>",
+                "doc_id": "parse-<job-id>",
+                "range_units": "unicode_codepoints",
+                "input_markdown_chars": 1780,
+                "output_extraction_chars": 1367,
+                "openapi_spec": "https://api.ade.landing.ai/openapi.json",
+                "billing": {
+                  "service_tier": "standard",
+                  "total_credits": 1.8
+                }
+              }
+            }
+          },
+          "usage": null,
+          "ordinal": 1,
+          "outcome": "error"
+        }
+      ],
+      "known_cost_usd": 0.028000000000000004,
+      "total_cost_usd": null,
+      "successful_attempt_cost_usd": null,
+      "cost_complete": false
+    }
+  }
+]

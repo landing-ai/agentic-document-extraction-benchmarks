@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark Leaderboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #f8f7f4;
+    --fg: #1c1917;
+    --card: #ffffff;
+    --border: #e7e5e4;
+    --muted: #78716c;
+    --muted-light: #a8a29e;
+    --cream: #faf9f6;
+    --emerald: #059669;
+    --emerald-bg: #ecfdf5;
+    --emerald-light: #d1fae5;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --red: #dc2626;
+    --red-bg: #fef2f2;
+    --blue: #2563eb;
+    --blue-bg: #eff6ff;
+    --gold: #b8860b;
+    --gold-bg: #fef9e7;
+    --gold-border: #e6c547;
+    --font-heading: 'Newsreader', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --shadow-sm: 0 1px 2px rgba(28,25,23,0.05);
+    --shadow-md: 0 4px 6px -1px rgba(28,25,23,0.07), 0 2px 4px -2px rgba(28,25,23,0.05);
+    --shadow-lg: 0 10px 25px -5px rgba(28,25,23,0.1), 0 4px 10px -4px rgba(28,25,23,0.06);
+    --radius: 12px;
+    --radius-sm: 6px;
+}
+html { font-size: 15px; }
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--muted-light); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+.report-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+}
+
+/* ───── Header ───── */
+.report-header { margin-bottom: 40px; }
+.report-header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    line-height: 1.15;
+}
+.report-header .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: 0.01em;
+}
+
+/* ───── Table wrapper ───── */
+.leaderboard-wrap {
+    overflow-x: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+}
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+/* ───── Cells ───── */
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    vertical-align: middle;
+    transition: background 0.12s ease;
+}
+.leaderboard-table th {
+    background: var(--cream);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 20px 24px;
+    border-bottom: 2px solid var(--border);
+    vertical-align: bottom;
+}
+
+/* Sticky first column */
+.leaderboard-table th:first-child,
+.leaderboard-table td:first-child {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    min-width: 220px;
+    padding-left: 28px;
+}
+.leaderboard-table th:first-child {
+    background: var(--cream);
+    z-index: 3;
+    vertical-align: bottom;
+}
+.category-header-label {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--fg);
+    text-transform: none;
+    letter-spacing: -0.01em;
+}
+.leaderboard-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Row hover (category label column only) */
+.leaderboard-table tbody tr:not(.overall-row):hover td:first-child {
+    background: #f5f4f1;
+}
+
+/* ───── Pipeline header ───── */
+.pipeline-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 140px;
+}
+.pipeline-header .pipeline-crown {
+    font-size: 1.3rem;
+    line-height: 1;
+    filter: drop-shadow(0 1px 2px rgba(184,134,11,0.3));
+}
+.pipeline-header .pipeline-name {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--fg);
+    text-transform: none;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+.pipeline-header .pipeline-name a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s, color 0.15s;
+}
+.pipeline-header .pipeline-name a:hover {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+}
+.pipeline-header .pipeline-tier {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--muted-light);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    background: var(--bg);
+    padding: 2px 8px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+}
+
+/* Winner column header glow */
+.pipeline-header.is-winner .pipeline-name a {
+    color: var(--gold);
+}
+.pipeline-header.is-winner .pipeline-tier {
+    background: var(--gold-bg);
+    border-color: var(--gold-border);
+    color: var(--gold);
+}
+
+/* ───── Category cell ───── */
+.category-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.category-name {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--fg);
+    line-height: 1.3;
+}
+.category-name .file-count {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--muted-light);
+    margin-left: 2px;
+}
+.category-selector {
+    width: 100%;
+    max-width: 210px;
+    padding: 5px 8px;
+    font-family: var(--font-body);
+    font-size: 0.73rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--cream);
+    color: var(--muted);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s;
+}
+.category-selector:focus { border-color: var(--blue); }
+.category-selector:hover { border-color: var(--muted-light); }
+/* The 0.73rem above sized a dropdown repeated inside each narrow row cell.
+   The single selector is the table's primary control, so it reads at the
+   size of the "Category" label it sits under. */
+#metric-select {
+    margin-top: 8px;
+    max-width: none;
+    padding: 7px 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--fg);
+}
+
+/* ───── Column hover: simple bounding box ───── */
+.leaderboard-table th[data-col],
+.leaderboard-table td[data-col] {
+    cursor: pointer;
+}
+.leaderboard-table th[data-col].col-hover {
+    box-shadow: inset 2px 0 0 var(--muted), inset -2px 0 0 var(--muted), inset 0 2px 0 var(--muted);
+}
+.leaderboard-table .overall-row td[data-col].col-hover {
+    box-shadow: inset 2px 0 0 var(--muted), inset -2px 0 0 var(--muted), inset 0 -2px 0 var(--muted);
+}
+.leaderboard-table tbody tr:not(.overall-row) td[data-col].col-hover {
+    box-shadow: inset 2px 0 0 var(--muted), inset -2px 0 0 var(--muted);
+}
+
+/* ───── Score cell ───── */
+.score-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 90px;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s ease;
+}
+.score-wrap.is-best {
+    background: var(--emerald-bg);
+}
+.score-number {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    line-height: 1;
+}
+.score-wrap.is-best .score-number {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+.score-bar-track {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.score-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+.bar-emerald { background: var(--emerald); }
+.bar-amber { background: var(--amber); }
+.bar-red { background: var(--red); }
+.score-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    line-height: 1;
+}
+.score-na {
+    color: var(--muted-light);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+.color-emerald { color: var(--emerald); }
+.color-amber { color: var(--amber); }
+.color-red { color: var(--red); }
+
+/* ───── Overall row ───── */
+/* ───── Cost, inline under the score it belongs to ───── */
+.cell-cost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-mono);
+    line-height: 1.3;
+    margin-top: 6px;
+}
+.cell-cost-page {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #6b6759;
+}
+.cell-cost-unit {
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: #8a8577;
+}
+.cell-cost-total {
+    font-size: 0.66rem;
+    font-weight: 400;
+    color: #a5a094;
+}
+/* ───── Failures, under the cost they invalidate ───── */
+/* Shown on every cell, not only the failing ones: a missing line would leave
+   "nothing failed" indistinguishable from "nobody counted". */
+.cell-fail, .cell-fail-none {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    line-height: 1.3;
+    margin-top: 4px;
+}
+.cell-fail {
+    font-weight: 500;
+    color: var(--red);
+}
+.cell-fail-none { color: #a5a094; }
+
+.overall-row td {
+    border-top: 2px solid var(--border);
+    border-bottom: none;
+    background: var(--cream);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.overall-row td:first-child {
+    background: var(--cream) !important;
+    border-right-color: var(--border);
+}
+.overall-row:hover td,
+.overall-row:hover td:first-child {
+    background: #f3f1ec !important;
+}
+.overall-label {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+}
+.overall-sublabel {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+}
+/* Overall score cells */
+.overall-row .score-wrap {
+    background: transparent;
+}
+.overall-row .score-wrap.is-best {
+    background: var(--emerald-bg);
+}
+.overall-row .score-number {
+    color: var(--fg);
+}
+.overall-row .score-wrap.is-best .score-number {
+    color: var(--emerald);
+    font-weight: 600;
+}
+.overall-row .score-bar-track {
+    background: var(--border);
+}
+.overall-row .score-badge {
+    color: var(--emerald);
+}
+.overall-row .score-na {
+    color: var(--muted-light);
+}
+
+@media (max-width: 768px) {
+    .report-container { padding: 20px 16px 48px; }
+    .report-header h1 { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+<div class="report-container">
+  <header class="report-header">
+    <h1>Benchmark Leaderboard</h1>
+    <p class="subtitle" id="subtitle"></p>
+  </header>
+
+  <div class="leaderboard-wrap">
+    <table class="leaderboard-table" id="leaderboard-table">
+      <thead id="table-head"></thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const DATA = {"generatedAt": "2026-11-21 04:53:02 UTC", "defaultMetrics": {"long": "extract_unified_value_f1", "medium": "extract_unified_value_f1", "short": "extract_unified_value_f1"}, "unifiedMetrics": ["extract_unified_value_f1", "extract_unified_grounded_f1", "extract_unified_page_f1", "__separator__", "accuracy", "array_record_accuracy", "array_record_f1", "array_record_precision", "array_record_recall", "array_record_row_count_ratio", "confidence_scoped_auc", "confidence_scoped_coverage_at_95pct_precision", "confidence_scoped_normalized_auc", "confidence_scoped_precision_at_80pct_coverage", "confidence_scoped_unique_value_count", "confidence_signal_coverage", "extract_evidence_bbox_IOU_alignment", "extract_evidence_bbox_IOU_pass_rate", "extract_evidence_bbox_coverage", "extract_evidence_bbox_covered_pass_rate", "extract_evidence_page_covered_pass_rate", "extract_evidence_page_pass_rate", "extract_evidence_value_pass_rate", "extract_unified_grounded_precision", "extract_unified_grounded_recall", "extract_unified_page_precision", "extract_unified_page_recall", "extract_unified_value_precision", "extract_unified_value_recall"], "defaultMetric": "extract_unified_value_f1", "pipelines": [{"name": "landingai_ade_v2_extract", "dirName": "landingai_ade_v2_extract", "displayName": "Landingai Ade V2 Extract", "provider": "landingai_ade_v2_extract", "productType": "extract", "config": {"parse_model": "dpt-3-pro-20261111", "model": "extract-20261111", "grounding": true, "service_tier": "standard"}, "dashboardUrl": "landingai_ade_v2_extract/_evaluation_report_dashboard.html"}], "categories": ["long", "medium", "short"], "categoryDisplayNames": {"long": "Long", "medium": "Medium", "short": "Short"}, "categoryFiles": {"long": {"landingai_ade_v2_extract": 20}, "medium": {"landingai_ade_v2_extract": 98}, "short": {"landingai_ade_v2_extract": 252}}, "categoryFailures": {"long": {"landingai_ade_v2_extract": 1}, "medium": {"landingai_ade_v2_extract": 0}, "short": {"landingai_ade_v2_extract": 0}}, "overallFailures": {"landingai_ade_v2_extract": 1}, "overallFiles": {"landingai_ade_v2_extract": 370}, "scores": {"long": {"landingai_ade_v2_extract": {"accuracy": 0.7737492129725283, "array_record_accuracy": 0.8763425119261076, "array_record_f1": 0.8741986988197853, "array_record_precision": 0.8721469827887907, "array_record_recall": 0.8763425119261076, "array_record_row_count_ratio": 0.9552596909500817, "confidence_scoped_auc": 0.0, "confidence_scoped_coverage_at_95pct_precision": 0.0, "confidence_scoped_normalized_auc": 0.0, "confidence_scoped_precision_at_80pct_coverage": 0.0, "confidence_scoped_unique_value_count": 0.0, "confidence_signal_coverage": 0.0, "extract_evidence_bbox_IOU_alignment": 0.7073067350411154, "extract_evidence_bbox_IOU_pass_rate": 0.5463490307194255, "extract_evidence_bbox_coverage": 0.942071230418696, "extract_evidence_bbox_covered_pass_rate": 0.7057145527652556, "extract_evidence_page_covered_pass_rate": 0.7610128428422694, "extract_evidence_page_pass_rate": 0.7695525806663236, "extract_evidence_value_pass_rate": 0.7748230291580891, "extract_unified_grounded_f1": 0.761278143925908, "extract_unified_grounded_precision": 0.7661867031192796, "extract_unified_grounded_recall": 0.7565795013601498, "extract_unified_page_f1": 0.8521434639886107, "extract_unified_page_precision": 0.8589877158270576, "extract_unified_page_recall": 0.845560822186306, "extract_unified_value_f1": 0.8864604466701056, "extract_unified_value_precision": 0.8842775676324243, "extract_unified_value_recall": 0.8887420011444321}}, "medium": {"landingai_ade_v2_extract": {"accuracy": 0.8716032848236397, "array_record_accuracy": 0.9068042572906108, "array_record_f1": 0.9102656307972466, "array_record_precision": 0.9156917000233734, "array_record_recall": 0.9068042572906108, "array_record_row_count_ratio": 0.8091576927462871, "confidence_scoped_auc": 0.0, "confidence_scoped_coverage_at_95pct_precision": 0.0, "confidence_scoped_normalized_auc": 0.0, "confidence_scoped_precision_at_80pct_coverage": 0.0, "confidence_scoped_unique_value_count": 0.0, "confidence_signal_coverage": 0.0, "extract_evidence_bbox_IOU_alignment": 0.7170938988880317, "extract_evidence_bbox_IOU_pass_rate": 0.668420941765973, "extract_evidence_bbox_coverage": 0.9007441804544386, "extract_evidence_bbox_covered_pass_rate": 0.8560919217999835, "extract_evidence_page_covered_pass_rate": 0.8279710437166896, "extract_evidence_page_pass_rate": 0.7824913891121728, "extract_evidence_value_pass_rate": 0.8778828148388337, "extract_unified_grounded_f1": 0.7967399523085026, "extract_unified_grounded_precision": 0.8215418784973023, "extract_unified_grounded_recall": 0.7827651990534394, "extract_unified_page_f1": 0.8786316562708146, "extract_unified_page_precision": 0.9209781797392973, "extract_unified_page_recall": 0.8585049598313489, "extract_unified_value_f1": 0.9325789977918381, "extract_unified_value_precision": 0.9364941768848012, "extract_unified_value_recall": 0.9303426757136314}}, "short": {"landingai_ade_v2_extract": {"accuracy": 0.9444838647917391, "array_record_accuracy": 0.9320592774074707, "array_record_f1": 0.9321832914928797, "array_record_precision": 0.9328024115292979, "array_record_recall": 0.9320592774074707, "array_record_row_count_ratio": 0.9352606864901948, "confidence_scoped_auc": 0.0, "confidence_scoped_coverage_at_95pct_precision": 0.0, "confidence_scoped_normalized_auc": 0.0, "confidence_scoped_precision_at_80pct_coverage": 0.0, "confidence_scoped_unique_value_count": 0.0, "confidence_signal_coverage": 0.0, "extract_evidence_bbox_IOU_alignment": 0.6246596235132805, "extract_evidence_bbox_IOU_pass_rate": 0.5926410353642341, "extract_evidence_bbox_coverage": 0.9508443861102355, "extract_evidence_bbox_covered_pass_rate": 0.9283200329088191, "extract_evidence_page_covered_pass_rate": 0.859356870848159, "extract_evidence_page_pass_rate": 0.8382648808175622, "extract_evidence_value_pass_rate": 0.9373445410024326, "extract_unified_grounded_f1": 0.6927526380149409, "extract_unified_grounded_precision": 0.7101644538913878, "extract_unified_grounded_recall": 0.6789049483813633, "extract_unified_page_f1": 0.8716806255226515, "extract_unified_page_precision": 0.9533057036357983, "extract_unified_page_recall": 0.8198628303972824, "extract_unified_value_f1": 0.9487599992913958, "extract_unified_value_precision": 0.949194444399343, "extract_unified_value_recall": 0.9488566205978036}}}, "metricCounts": {"long": {"landingai_ade_v2_extract": {"accuracy": 20, "array_record_accuracy": 20, "array_record_precision": 20, "array_record_recall": 20, "array_record_f1": 20, "array_record_row_count_ratio": 20, "extract_unified_value_precision": 20, "extract_unified_value_recall": 20, "extract_unified_value_f1": 20, "extract_unified_page_precision": 19, "extract_unified_page_recall": 19, "extract_unified_page_f1": 19, "extract_unified_grounded_precision": 19, "extract_unified_grounded_recall": 19, "extract_unified_grounded_f1": 19, "extract_evidence_value_pass_rate": 20, "extract_evidence_page_pass_rate": 20, "extract_evidence_page_covered_pass_rate": 20, "extract_evidence_bbox_IOU_alignment": 20, "extract_evidence_bbox_coverage": 20, "extract_evidence_bbox_covered_pass_rate": 20, "extract_evidence_bbox_IOU_pass_rate": 20, "confidence_signal_coverage": 20, "confidence_scoped_auc": 20, "confidence_scoped_normalized_auc": 20, "confidence_scoped_precision_at_80pct_coverage": 20, "confidence_scoped_coverage_at_95pct_precision": 20, "confidence_scoped_unique_value_count": 20}}, "medium": {"landingai_ade_v2_extract": {"accuracy": 98, "array_record_accuracy": 98, "array_record_precision": 98, "array_record_recall": 98, "array_record_f1": 98, "array_record_row_count_ratio": 98, "extract_unified_value_precision": 98, "extract_unified_value_recall": 98, "extract_unified_value_f1": 98, "extract_unified_page_precision": 98, "extract_unified_page_recall": 98, "extract_unified_page_f1": 98, "extract_evidence_value_pass_rate": 98, "extract_evidence_page_pass_rate": 98, "extract_evidence_page_covered_pass_rate": 98, "confidence_signal_coverage": 98, "confidence_scoped_auc": 98, "confidence_scoped_normalized_auc": 98, "confidence_scoped_precision_at_80pct_coverage": 98, "confidence_scoped_coverage_at_95pct_precision": 98, "confidence_scoped_unique_value_count": 98, "extract_unified_grounded_precision": 89, "extract_unified_grounded_recall": 89, "extract_unified_grounded_f1": 89, "extract_evidence_bbox_IOU_alignment": 89, "extract_evidence_bbox_coverage": 89, "extract_evidence_bbox_covered_pass_rate": 89, "extract_evidence_bbox_IOU_pass_rate": 89}}, "short": {"landingai_ade_v2_extract": {"accuracy": 252, "array_record_accuracy": 244, "array_record_precision": 244, "array_record_recall": 244, "array_record_f1": 244, "array_record_row_count_ratio": 244, "extract_unified_value_precision": 252, "extract_unified_value_recall": 252, "extract_unified_value_f1": 252, "extract_unified_page_precision": 237, "extract_unified_page_recall": 237, "extract_unified_page_f1": 237, "extract_unified_grounded_precision": 230, "extract_unified_grounded_recall": 230, "extract_unified_grounded_f1": 230, "extract_evidence_value_pass_rate": 245, "extract_evidence_page_pass_rate": 245, "extract_evidence_page_covered_pass_rate": 245, "extract_evidence_bbox_IOU_alignment": 223, "extract_evidence_bbox_coverage": 223, "extract_evidence_bbox_covered_pass_rate": 223, "extract_evidence_bbox_IOU_pass_rate": 223, "confidence_signal_coverage": 252, "confidence_scoped_auc": 252, "confidence_scoped_normalized_auc": 252, "confidence_scoped_precision_at_80pct_coverage": 252, "confidence_scoped_coverage_at_95pct_precision": 252, "confidence_scoped_unique_value_count": 252}}}, "metricNames": {"extract_unified_grounded_precision": "Bounding Box Precision", "extract_evidence_bbox_IOU_alignment": "Extract Evidence Bbox Iou Alignment", "extract_evidence_page_covered_pass_rate": "Extract Evidence Page Covered Pass Rate", "extract_unified_value_f1": "Value F1", "extract_unified_grounded_recall": "Bounding Box Recall", "extract_evidence_bbox_coverage": "Extract Evidence Bbox Coverage", "extract_unified_page_precision": "Page Precision", "confidence_scoped_auc": "Confidence Scoped Auc", "extract_evidence_bbox_covered_pass_rate": "Extract Evidence Bbox Covered Pass Rate", "confidence_scoped_precision_at_80pct_coverage": "Confidence Scoped Precision At 80Pct Coverage", "extract_evidence_value_pass_rate": "Extract Evidence Value Pass Rate", "array_record_row_count_ratio": "Array Record Row Count Ratio", "accuracy": "Accuracy", "extract_evidence_page_pass_rate": "Extract Evidence Page Pass Rate", "extract_unified_page_f1": "Page F1", "extract_unified_grounded_f1": "Bounding Box F1", "extract_unified_page_recall": "Page Recall", "extract_unified_value_recall": "Value Recall", "confidence_signal_coverage": "Confidence Signal Coverage", "array_record_recall": "Array Record Recall", "confidence_scoped_coverage_at_95pct_precision": "Confidence Scoped Coverage At 95Pct Precision", "extract_unified_value_precision": "Value Precision", "confidence_scoped_normalized_auc": "Confidence Scoped Normalized Auc", "array_record_precision": "Array Record Precision", "array_record_accuracy": "Array Record Accuracy", "confidence_scoped_unique_value_count": "Confidence Scoped Unique Value Count", "extract_evidence_bbox_IOU_pass_rate": "Extract Evidence Bbox Iou Pass Rate", "array_record_f1": "Array Record F1"}, "categoryMetrics": {"long": ["extract_unified_value_f1", "extract_unified_grounded_f1", "extract_unified_page_f1", "__separator__", "accuracy", "array_record_accuracy", "array_record_f1", "array_record_precision", "array_record_recall", "array_record_row_count_ratio", "confidence_scoped_auc", "confidence_scoped_coverage_at_95pct_precision", "confidence_scoped_normalized_auc", "confidence_scoped_precision_at_80pct_coverage", "confidence_scoped_unique_value_count", "confidence_signal_coverage", "extract_evidence_bbox_IOU_alignment", "extract_evidence_bbox_IOU_pass_rate", "extract_evidence_bbox_coverage", "extract_evidence_bbox_covered_pass_rate", "extract_evidence_page_covered_pass_rate", "extract_evidence_page_pass_rate", "extract_evidence_value_pass_rate", "extract_unified_grounded_precision", "extract_unified_grounded_recall", "extract_unified_page_precision", "extract_unified_page_recall", "extract_unified_value_precision", "extract_unified_value_recall"], "medium": ["extract_unified_value_f1", "extract_unified_grounded_f1", "extract_unified_page_f1", "__separator__", "accuracy", "array_record_accuracy", "array_record_f1", "array_record_precision", "array_record_recall", "array_record_row_count_ratio", "confidence_scoped_auc", "confidence_scoped_coverage_at_95pct_precision", "confidence_scoped_normalized_auc", "confidence_scoped_precision_at_80pct_coverage", "confidence_scoped_unique_value_count", "confidence_signal_coverage", "extract_evidence_bbox_IOU_alignment", "extract_evidence_bbox_IOU_pass_rate", "extract_evidence_bbox_coverage", "extract_evidence_bbox_covered_pass_rate", "extract_evidence_page_covered_pass_rate", "extract_evidence_page_pass_rate", "extract_evidence_value_pass_rate", "extract_unified_grounded_precision", "extract_unified_grounded_recall", "extract_unified_page_precision", "extract_unified_page_recall", "extract_unified_value_precision", "extract_unified_value_recall"], "short": ["extract_unified_value_f1", "extract_unified_grounded_f1", "extract_unified_page_f1", "__separator__", "accuracy", "array_record_accuracy", "array_record_f1", "array_record_precision", "array_record_recall", "array_record_row_count_ratio", "confidence_scoped_auc", "confidence_scoped_coverage_at_95pct_precision", "confidence_scoped_normalized_auc", "confidence_scoped_precision_at_80pct_coverage", "confidence_scoped_unique_value_count", "confidence_signal_coverage", "extract_evidence_bbox_IOU_alignment", "extract_evidence_bbox_IOU_pass_rate", "extract_evidence_bbox_coverage", "extract_evidence_bbox_covered_pass_rate", "extract_evidence_page_covered_pass_rate", "extract_evidence_page_pass_rate", "extract_evidence_value_pass_rate", "extract_unified_grounded_precision", "extract_unified_grounded_recall", "extract_unified_page_precision", "extract_unified_page_recall", "extract_unified_value_precision", "extract_unified_value_recall"]}, "cost": {"long": {"landingai_ade_v2_extract": {"totalUsd": 192.62800000000001, "meanPerPageUsd": 0.1048707606540702, "meanPerDocumentUsd": 10.138315789473685, "documents": 19, "documentsWithoutCost": 1, "hasCost": true}}, "medium": {"landingai_ade_v2_extract": {"totalUsd": 87.912, "meanPerPageUsd": 0.03732568530364894, "meanPerDocumentUsd": 0.897061224489796, "documents": 98, "documentsWithoutCost": 0, "hasCost": true}}, "short": {"landingai_ade_v2_extract": {"totalUsd": 26.935000000000002, "meanPerPageUsd": 0.04740411844684753, "meanPerDocumentUsd": 0.10731075697211157, "documents": 251, "documentsWithoutCost": 1, "hasCost": true}}}, "overallCost": {"landingai_ade_v2_extract": {"totalUsd": 307.475, "meanPerPageUsd": 0.04768721560419473, "meanPerDocumentUsd": 0.8355298913043478, "documents": 368, "documentsWithoutCost": 2, "hasCost": true}}};
+</script>
+<script>
+(function() {
+  function colorClass(rate) {
+    if (rate >= 80) return 'emerald';
+    if (rate >= 50) return 'amber';
+    return 'red';
+  }
+
+  function pct(val) { return val.toFixed(1) + '%'; }
+
+  function esc(s) {
+    if (s == null) return '';
+    var d = document.createElement('div');
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
+  // ─── State ───
+  // Divider entry between the paper's headline metrics and the rest.
+  var SEPARATOR = '__separator__';
+
+  // Cost formatters. Null means no priced document in the pool — an em dash,
+  // never a misleading $0.00.
+  function usd(v) {
+    if (v == null) return '—';
+    return v < 1 ? '$' + v.toFixed(4) : '$' + v.toFixed(2);
+  }
+  function cents(v) {
+    if (v == null) return '—';
+    return (v * 100).toFixed(2) + '¢';
+  }
+
+
+  // One metric for the whole table: every row and the overall move together.
+  var selectedMetric = DATA.defaultMetric;
+
+  // Subtitle
+  document.getElementById('subtitle').textContent =
+    DATA.pipelines.length + ' pipeline' + (DATA.pipelines.length !== 1 ? 's' : '') +
+    ' across ' + DATA.categories.length + ' categories';
+
+  // ─── Helpers ───
+  function getScore(category, pipelineName) {
+    var cs = DATA.scores[category];
+    if (!cs) return null;
+    var ps = cs[pipelineName];
+    if (!ps) return null;
+    var v = ps[selectedMetric];
+    return (v !== undefined && v !== null) ? v : null;
+  }
+
+  function findBest(category) {
+    var bestVal = -1, bestNames = [];
+    for (var i = 0; i < DATA.pipelines.length; i++) {
+      var v = getScore(category, DATA.pipelines[i].name);
+      if (v === null) continue;
+      if (v > bestVal) { bestVal = v; bestNames = [DATA.pipelines[i].name]; }
+      else if (v === bestVal) { bestNames.push(DATA.pipelines[i].name); }
+    }
+    return bestNames;
+  }
+
+  // Mean over DOCUMENTS, not over categories: each category's mean is weighted
+  // by the number of documents it was taken over, so a 20-document split cannot
+  // weigh as much as a 252-document one. Weights come from metricCounts rather
+  // than the file count, because grounding metrics are withheld on documents
+  // whose ground truth carries no boxes.
+  function getOverallScore(pipelineName) {
+    var weighted = 0, docs = 0, plainSum = 0, plainCount = 0;
+    for (var i = 0; i < DATA.categories.length; i++) {
+      var cat = DATA.categories[i];
+      var v = getScore(cat, pipelineName);
+      if (v === null) continue;
+      plainSum += v; plainCount++;
+      var counts = ((DATA.metricCounts || {})[cat] || {})[pipelineName] || {};
+      var n = counts[selectedMetric];
+      if (typeof n === 'number' && n > 0) { weighted += v * n; docs += n; }
+    }
+    if (docs > 0) return weighted / docs;
+    // No per-metric counts (older reports): fall back to the category mean
+    // rather than showing nothing.
+    return plainCount > 0 ? plainSum / plainCount : null;
+  }
+
+  function getOverallWinners() {
+    var best = -1, names = [];
+    for (var i = 0; i < DATA.pipelines.length; i++) {
+      var v = getOverallScore(DATA.pipelines[i].name);
+      if (v === null) continue;
+      if (v > best) { best = v; names = [DATA.pipelines[i].name]; }
+      else if (v === best) { names.push(DATA.pipelines[i].name); }
+    }
+    return names;
+  }
+
+  function getMaxFiles(category) {
+    var files = DATA.categoryFiles[category] || {};
+    var max = 0;
+    for (var p in files) { if (files[p] > max) max = files[p]; }
+    return max;
+  }
+
+  // Extract a clean tier/model label from config
+  function getTierLabel(p) {
+    var cfg = p.config || {};
+    if (cfg.tier) return cfg.tier;
+    if (cfg.model) return cfg.model;
+    if (cfg.ocr_system) return cfg.ocr_system;
+    // Fallback: use first config value that's a short string
+    for (var k in cfg) {
+      var v = cfg[k];
+      if (typeof v === 'string' && v.length < 30) return v;
+    }
+    return p.productType || '';
+  }
+
+  // Build a score cell with progress bar
+  // Cost rides in the same cell as the score it belongs to: per-page is the
+  // comparable figure so it leads, with the run total beneath it as context.
+  function costLines(c) {
+    if (!c || !c.hasCost) return '';
+    var h = '<div class="cell-cost">';
+    h += '<span class="cell-cost-page">' + cents(c.meanPerPageUsd)
+      + '<span class="cell-cost-unit"> / page</span></span>';
+    h += '<span class="cell-cost-total">' + usd(c.totalUsd) + ' total</span>';
+    h += '</div>';
+    return h;
+  }
+
+  // Documents the pipeline produced no usable result for. They are scored zero
+  // rather than dropped, so the score above already carries the penalty — this
+  // line separates "extracted badly" from "never returned an answer". Sits
+  // outside costLines because a wholly failed run reports no cost at all, and
+  // that is exactly when the count matters most.
+  function failLines(failed, total) {
+    if (!total) return '';
+    if (!failed) return '<span class="cell-fail-none">0 / ' + total + ' failed</span>';
+    return '<span class="cell-fail">' + failed + ' / ' + total + ' failed ('
+      + pct(100 * failed / total) + ')</span>';
+  }
+
+  function buildScoreCell(v, isBest, isOverall, cost, failed, total) {
+    var footer = costLines(cost) + failLines(failed, total);
+    if (v === null) return '<span class="score-na">N/A</span>' + footer;
+    var pctVal = v * 100;
+    var c = colorClass(pctVal);
+    var cls = 'score-wrap' + (isBest ? ' is-best' : '');
+    var h = '<div class="' + cls + '">';
+    h += '<span class="score-number color-' + c + '">' + pct(pctVal) + '</span>';
+    h += '<div class="score-bar-track"><div class="score-bar-fill bar-' + c
+      + '" style="width:' + Math.min(pctVal, 100).toFixed(1) + '%"></div></div>';
+    if (isBest) h += '<span class="score-badge">Best</span>';
+    h += footer;
+    h += '</div>';
+    return h;
+  }
+
+  // ─── Render ───
+  function renderHead() {
+    var winners = getOverallWinners();
+    var thead = document.getElementById('table-head');
+    // The metric selector heads the row axis it governs, rather than repeating
+    // once per row.
+    var html = '<tr><th><span class="category-header-label">Category</span>';
+    html += '<select class="category-selector" id="metric-select">';
+    var uMetrics = DATA.unifiedMetrics || [];
+    for (var mi = 0; mi < uMetrics.length; mi++) {
+      var um = uMetrics[mi];
+      if (um === SEPARATOR) {
+        html += '<option disabled>──────────</option>';
+        continue;
+      }
+      var usel = um === selectedMetric ? ' selected' : '';
+      html += '<option value="' + esc(um) + '"' + usel + '>' + esc(DATA.metricNames[um] || um) + '</option>';
+    }
+    html += '</select></th>';
+    for (var i = 0; i < DATA.pipelines.length; i++) {
+      var p = DATA.pipelines[i];
+      var isWinner = winners.indexOf(p.name) >= 0;
+      var tierLabel = getTierLabel(p);
+      html += '<th data-col="' + i + '" data-url="' + esc(p.dashboardUrl)
+        + '"><div class="pipeline-header' + (isWinner ? ' is-winner' : '') + '">';
+      if (isWinner) html += '<span class="pipeline-crown">\ud83d\udc51</span>';
+      html += '<span class="pipeline-name">' + esc(p.displayName) + '</span>';
+      var sub = p.provider || '';
+      if (tierLabel && tierLabel !== p.provider) sub += (sub ? ' / ' : '') + tierLabel;
+      if (sub) html += '<span class="pipeline-tier">' + esc(sub) + '</span>';
+      html += '</div></th>';
+    }
+    html += '</tr>';
+    thead.innerHTML = html;
+  }
+
+  function renderBody() {
+    var tbody = document.getElementById('table-body');
+    var html = '';
+
+    // Category rows
+    for (var ci = 0; ci < DATA.categories.length; ci++) {
+      var cat = DATA.categories[ci];
+      var bestPipelines = findBest(cat);
+      var files = getMaxFiles(cat);
+
+      html += '<tr>';
+      html += '<td><div class="category-cell">';
+      html += '<span class="category-name">' + esc(DATA.categoryDisplayNames[cat] || cat);
+      html += ' <span class="file-count">' + files + ' files</span></span>';
+      html += '</div></td>';
+
+      var catCost = ((DATA.cost || {})[cat]) || {};
+      var catFail = ((DATA.categoryFailures || {})[cat]) || {};
+      var catFiles = ((DATA.categoryFiles || {})[cat]) || {};
+      for (var pi = 0; pi < DATA.pipelines.length; pi++) {
+        var pName = DATA.pipelines[pi].name;
+        var v = getScore(cat, pName);
+        var isBest = bestPipelines.indexOf(pName) >= 0;
+        html += '<td data-col="' + pi + '" data-url="' + esc(DATA.pipelines[pi].dashboardUrl)
+          + '">' + buildScoreCell(v, isBest, false, catCost[pName], catFail[pName], catFiles[pName]) + '</td>';
+      }
+      html += '</tr>';
+    }
+
+    // Overall row
+    var overallWinners = getOverallWinners();
+
+    html += '<tr class="overall-row">';
+    html += '<td><span class="overall-label">Overall'
+      + '<span class="overall-sublabel">Mean over all documents</span></span></td>';
+    for (var opi = 0; opi < DATA.pipelines.length; opi++) {
+      var opName = DATA.pipelines[opi].name;
+      var ov = getOverallScore(opName);
+      var oIsBest = overallWinners.indexOf(opName) >= 0;
+      // Overall cost pools every document once across splits — NOT the mean of
+      // the per-category costs, which would let a 20-document split weigh as
+      // much as a 252-document one.
+      html += '<td data-col="' + opi + '" data-url="' + esc(DATA.pipelines[opi].dashboardUrl)
+        + '">' + buildScoreCell(ov, oIsBest, true, (DATA.overallCost || {})[opName],
+          (DATA.overallFailures || {})[opName], (DATA.overallFiles || {})[opName]) + '</td>';
+    }
+    html += '</tr>';
+
+    tbody.innerHTML = html;
+  }
+
+  // The selector lives in the head, which render() rebuilds, so rebind there.
+  function bindMetricSelector() {
+    var select = document.getElementById('metric-select');
+    if (!select) return;
+    select.addEventListener('change', function(e) {
+      selectedMetric = e.target.value;
+      render();
+      var again = document.getElementById('metric-select');
+      if (again) again.focus();
+    });
+  }
+
+  function bindColumnInteractions() {
+    var table = document.getElementById('leaderboard-table');
+    var lastCol = null;
+
+    function highlightCol(colIdx) {
+      if (colIdx === lastCol) return;
+      clearCol();
+      if (colIdx === null) return;
+      lastCol = colIdx;
+      var cells = table.querySelectorAll('[data-col="' + colIdx + '"]');
+      for (var i = 0; i < cells.length; i++) cells[i].classList.add('col-hover');
+    }
+
+    function clearCol() {
+      if (lastCol === null) return;
+      var cells = table.querySelectorAll('[data-col="' + lastCol + '"]');
+      for (var i = 0; i < cells.length; i++) cells[i].classList.remove('col-hover');
+      lastCol = null;
+    }
+
+    table.addEventListener('mouseover', function(e) {
+      var cell = e.target.closest('[data-col]');
+      if (cell) {
+        highlightCol(cell.getAttribute('data-col'));
+      }
+    });
+
+    table.addEventListener('mouseleave', function() {
+      clearCol();
+    });
+
+    table.addEventListener('click', function(e) {
+      // Don't navigate if clicking a dropdown
+      if (e.target.tagName === 'SELECT' || e.target.tagName === 'OPTION') return;
+      var cell = e.target.closest('[data-col]');
+      if (cell && cell.getAttribute('data-url')) {
+        window.location.href = cell.getAttribute('data-url');
+      }
+    });
+  }
+
+  // Best overall on the left. Re-sorted on every render because the overall
+  // depends on the metric selected per category, so changing a dropdown can
+  // legitimately reorder the board. Pipelines with no overall score sink to the
+  // right rather than being dropped.
+  function sortPipelinesByOverall() {
+    DATA.pipelines.sort(function(a, b) {
+      var av = getOverallScore(a.name);
+      var bv = getOverallScore(b.name);
+      if (av === null && bv === null) return a.name.localeCompare(b.name);
+      if (av === null) return 1;
+      if (bv === null) return -1;
+      if (bv !== av) return bv - av;
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  function render() {
+    sortPipelinesByOverall();
+    renderHead();
+    renderBody();
+    bindColumnInteractions();
+    bindMetricSelector();
+  }
+
+  render();
+})();
+
+</script>
+</body>
+</html>

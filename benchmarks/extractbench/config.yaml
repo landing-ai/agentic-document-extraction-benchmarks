@@ -1,15 +1,21 @@
 name: extractbench
 source: https://github.com/run-llama/ExtractBench   # LlamaIndex ExtractBench, arXiv 2607.29677
+dataset: llamaindex/ExtractBench                    # Hugging Face, revision f9b910906cd7
 task: schema_guided_extraction
 splits: [short, medium, long]
-metric: value_f1          # primary; also report word/page grounding F1 and cost per page
-evaluator: official       # use llama-extract-bench's evaluator, not harness/metrics.py
+metric: value_f1          # primary; also word/page grounding F1, cost per page, latency
+evaluator: official       # ExtractBench's own evaluator (run-llama/ExtractBench at ab573f7)
 time_limit_minutes: 30    # official rule: failed or timed-out documents score zero
-data_dir: data/extractbench
+run_date: 2026-11-20
 ade:
-  endpoint: https://api.va.landing.ai   # confirm before running
-  extract_version: extract-20261111     # 2026-11 run; previous: extract-20260903
-  parse_model: null                     # not recorded for the 2026-11 run
+  pipeline: landingai_ade_v2_extract   # connector: https://github.com/run-llama/ExtractBench/pull/172
+  api: public production API (v2 Parse Jobs + v2 Extract Jobs)
+  parse_model: dpt-3-pro-20261111
+  extract_model: extract-20261111
+  service_tier: standard
   grounding: true
-  max_retries: 3
-  timeout_s: 1800
+  sdk: landingai-ade 1.18.1
+run:
+  order: [long, medium, short]          # one output folder, then --skip_inference to score all
+  max_concurrent: {long: 4, medium: 8, short: 12}
+  cost_basis: billed credits x $0.01 list price

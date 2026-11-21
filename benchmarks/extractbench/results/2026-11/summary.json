@@ -1,44 +1,77 @@
 {
-  "benchmark": "extractbench",
-  "benchmark_source": "https://github.com/run-llama/ExtractBench (LlamaIndex, arXiv 2607.29677)",
-  "status": "preliminary",
-  "split": "full (short + medium + long)",
-  "num_documents": 370,
-  "metric": "value_f1",
-  "metric_definition": "Per-document value F1, averaged with equal weight per document, from the official ExtractBench harness",
-  "runs": [
-    {
-      "ade_extract_version": "extract-20261111",
-      "score": 0.9402,
-      "value_f1_by_split": {"short": 0.9466, "medium": 0.9343, "long": 0.8899},
-      "docs_by_split": {"short": 252, "medium": 98, "long": 20},
-      "latency_s_p50_p90": {"short": [107, 205], "medium": [201, 562], "long": [424, 1248], "all": [124, 362]},
-      "llm_cost_usd_per_doc": {"short": 0.019, "medium": 0.062, "long": 0.183, "all": 0.039},
-      "grounding": true
+  "benchmark": "extractbench (LlamaIndex)",
+  "dataset": "llamaindex/ExtractBench, Hugging Face revision f9b910906cd7",
+  "documents": 370,
+  "pages": 4869,
+  "run_date": "2026-11-20",
+  "status": "submitted to the official leaderboard: https://github.com/run-llama/ExtractBench/pull/172",
+  "system": {
+    "pipeline": "landingai_ade_v2_extract",
+    "parse_model": "dpt-3-pro-20261111",
+    "extract_model": "extract-20261111",
+    "service_tier": "standard",
+    "grounding": true,
+    "api": "public production API (v2 Parse Jobs + v2 Extract Jobs)",
+    "sdk": "landingai-ade 1.18.1"
+  },
+  "code": {
+    "connector": "https://github.com/run-llama/ExtractBench/pull/172",
+    "run_commit": "0ca22d0 (one document re-run with 8c7bb32, a cost-accounting fix)",
+    "evaluator": "run-llama/ExtractBench at ab573f7"
+  },
+  "metrics": {
+    "value_f1": {
+      "all": 94.11,
+      "short": 94.88,
+      "medium": 93.26,
+      "long": 88.65
     },
-    {
-      "ade_extract_version": "extract-20260903",
-      "score": 0.9162,
-      "value_f1_by_split": {"short": 0.9342, "medium": 0.8974, "long": 0.7826},
-      "docs_by_split": {"short": 252, "medium": 98, "long": 20},
-      "latency_s_p50_p90": {"short": [33, 120], "medium": [74, 392], "long": [530, 953], "all": [38, 382]},
-      "llm_cost_usd_per_doc": {"short": 0.12, "medium": 1.08, "long": 4.98, "all": 0.637},
-      "grounding": null
-    }
-  ],
-  "ade_parse_model": null,
-  "ade_endpoint": null,
-  "harness": "official ExtractBench harness (llama-extract-bench); version not recorded",
-  "run_date": "2026-11-12",
-  "imported_date": "2026-11-13",
+    "value_precision": {
+      "all": 94.23,
+      "short": 94.92,
+      "medium": 93.65,
+      "long": 88.43
+    },
+    "value_recall": {
+      "all": 94.07,
+      "short": 94.89,
+      "medium": 93.03,
+      "long": 88.87
+    },
+    "word_grounding_f1": {
+      "all": 66.14,
+      "short": 63.23,
+      "medium": 72.36,
+      "long": 72.32
+    },
+    "page_grounding_f1": {
+      "all": 83.48,
+      "short": 81.98,
+      "medium": 87.86,
+      "long": 80.95
+    },
+    "cost_per_page_usd": {
+      "all": 0.0474,
+      "short": 0.0472,
+      "medium": 0.0373,
+      "long": 0.0996
+    },
+    "total_cost_usd": 309.21,
+    "latency_s_per_doc_mean": {
+      "short": 293.5,
+      "medium": 444.4,
+      "long": 541.1
+    },
+    "latency_s_per_doc_p50_p90_max": [
+      279,
+      720,
+      1423
+    ],
+    "documents_failed": 1,
+    "documents_over_30_min": 0
+  },
   "notes": [
-    "Imported from an internal results summary posted 2026-11-12; not re-run in this repository.",
-    "extract-20261111 ran with grounding enabled. The grounding setting for extract-20260903 was not stated.",
-    "Grounding F1 (word/page level), precision/recall per split, and % perfect were not reported and are still missing.",
-    "Cost is LLM cost per document, not the leaderboard's cost per page at public list prices, so it is not directly comparable to the leaderboard's cents-per-page column.",
-    "The Parse model used underneath Extract was not recorded.",
-    "No per-document outputs or evaluation reports are available yet, so predictions are not published here.",
-    "A follow-up change that runs grounding and extraction together (to cut latency) was merged to staging after this run; a re-run is pending.",
-    "The official 30-minute per-document limit: long-split p90 latency for extract-20261111 was 1,248 s (~21 min); max latency was not reported, so whether any document hit the limit is unconfirmed."
+    "long/real_ishares_iboxx_bond_etfs failed (the service-side extract job timed out) and scores 0.",
+    "Cost = billed credits x $0.01 list price per credit."
   ]
 }

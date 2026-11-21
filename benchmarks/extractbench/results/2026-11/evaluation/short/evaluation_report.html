@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Evaluation Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .summary-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        .summary-card h3 {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .summary-card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .summary-card.success .value { color: #27ae60; }
+        .summary-card.failed .value { color: #e74c3c; }
+        .summary-card.skipped .value { color: #95a5a6; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+        tr:hover { background: #f8f9fa; }
+        .metric-value {
+            font-weight: 600;
+        }
+        .metric-value.high { color: #27ae60; }
+        .metric-value.medium { color: #f39c12; }
+        .metric-value.low { color: #e74c3c; }
+        .timestamp {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .error-section {
+            background: #fff5f5;
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .error-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>Evaluation Report</h1>
+        <div class='timestamp'>Generated: 2026-11-20T20:51:57.567249</div>
+
+        <h2>Summary</h2>
+        <div class='summary-grid'>
+            <div class='summary-card'>
+                <h3>Total Examples</h3>
+                <div class='value'>252</div>
+            </div>
+            <div class='summary-card success'>
+                <h3>Successful</h3>
+                <div class='value'>252</div>
+            </div>
+            <div class='summary-card failed'>
+                <h3>Failed</h3>
+                <div class='value'>0</div>
+            </div>
+            <div class='summary-card skipped'>
+                <h3>Skipped</h3>
+                <div class='value'>0</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Avg Cost Complete</h3>
+                <div class='value'>1ratio</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Avg Credits Used</h3>
+                <div class='value'>11credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Avg Extract Credits</h3>
+                <div class='value'>7credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Avg Known Cost Usd</h3>
+                <div class='value'>0.107107$</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Avg Latency Ms</h3>
+                <div class='value'>293550ms</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Avg Latency Ms Per Page</h3>
+                <div class='value'>200527ms/page</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Avg Parse Credits</h3>
+                <div class='value'>3credits</div>
+            </div>
+        </div>
+
+        <h2>Cost Complete Statistics</h2>
+        <div class='summary-grid'>
+            <div class='summary-card'>
+                <h3>Total</h3>
+                <div class='value'>251ratio</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Average</h3>
+                <div class='value'>1.0ratio</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Min</h3>
+                <div class='value'>0.0ratio</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Max</h3>
+                <div class='value'>1.0ratio</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P50</h3>
+                <div class='value'>1.0ratio</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P95</h3>
+                <div class='value'>1.0ratio</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P99</h3>
+                <div class='value'>1.0ratio</div>
+            </div>
+        </div>
+
+        <h2>Credits Used Statistics</h2>
+        <div class='summary-grid'>
+            <div class='summary-card'>
+                <h3>Total</h3>
+                <div class='value'>2696credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Average</h3>
+                <div class='value'>10.7credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Min</h3>
+                <div class='value'>1.8credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Max</h3>
+                <div class='value'>131.9credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P50</h3>
+                <div class='value'>5.9credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P95</h3>
+                <div class='value'>37.1credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P99</h3>
+                <div class='value'>75.8credits</div>
+            </div>
+        </div>
+
+        <h2>Extract Credits Statistics</h2>
+        <div class='summary-grid'>
+            <div class='summary-card'>
+                <h3>Total</h3>
+                <div class='value'>1822credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Average</h3>
+                <div class='value'>7.2credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Min</h3>
+                <div class='value'>1.0credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Max</h3>
+                <div class='value'>113.5credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P50</h3>
+                <div class='value'>3.6credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P95</h3>
+                <div class='value'>26.4credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P99</h3>
+                <div class='value'>63.5credits</div>
+            </div>
+        </div>
+
+        <h2>Known Cost Usd Statistics</h2>
+        <div class='summary-grid'>
+            <div class='summary-card'>
+                <h3>Total</h3>
+                <div class='value'>26.9910$</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Average</h3>
+                <div class='value'>0.107107$</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Min</h3>
+                <div class='value'>0.018000$</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Max</h3>
+                <div class='value'>1.319000$</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P50</h3>
+                <div class='value'>0.059000$</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P95</h3>
+                <div class='value'>0.371000$</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P99</h3>
+                <div class='value'>0.758000$</div>
+            </div>
+        </div>
+
+        <h2>Latency Ms Statistics</h2>
+        <div class='summary-grid'>
+            <div class='summary-card'>
+                <h3>Total</h3>
+                <div class='value'>73974577ms</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Average</h3>
+                <div class='value'>293549.9ms</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Min</h3>
+                <div class='value'>45291.0ms</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Max</h3>
+                <div class='value'>1335435.0ms</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P50</h3>
+                <div class='value'>258249.0ms</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P95</h3>
+                <div class='value'>626914.0ms</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P99</h3>
+                <div class='value'>1074151.0ms</div>
+            </div>
+        </div>
+
+        <h2>Latency Ms Per Page Statistics</h2>
+        <div class='summary-grid'>
+            <div class='summary-card'>
+                <h3>Total</h3>
+                <div class='value'>50532835ms/page</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Average</h3>
+                <div class='value'>200527.1ms/page</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Min</h3>
+                <div class='value'>10891.4ms/page</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Max</h3>
+                <div class='value'>1335435.0ms/page</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P50</h3>
+                <div class='value'>159170.0ms/page</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P95</h3>
+                <div class='value'>512291.0ms/page</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P99</h3>
+                <div class='value'>757027.0ms/page</div>
+            </div>
+        </div>
+
+        <h2>Parse Credits Statistics</h2>
+        <div class='summary-grid'>
+            <div class='summary-card'>
+                <h3>Total</h3>
+                <div class='value'>875credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Average</h3>
+                <div class='value'>3.5credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Min</h3>
+                <div class='value'>0.7credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>Max</h3>
+                <div class='value'>19.7credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P50</h3>
+                <div class='value'>1.8credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P95</h3>
+                <div class='value'>10.7credits</div>
+            </div>
+            <div class='summary-card'>
+                <h3>P99</h3>
+                <div class='value'>18.4credits</div>
+            </div>
+        </div>
+
+        <h2>Aggregate Metrics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Average</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Extract Unified Page Precision</td><td><span class='metric-value high'>0.9533</span></td><td>0.3333</td><td>1.0000</td></tr>
+                <tr><td>Extract Evidence Bbox Coverage</td><td><span class='metric-value high'>0.9508</span></td><td>0.3571</td><td>1.0000</td></tr>
+                <tr><td>Extract Unified Value Precision</td><td><span class='metric-value high'>0.9492</span></td><td>0.5641</td><td>1.0000</td></tr>
+                <tr><td>Extract Unified Value Recall</td><td><span class='metric-value high'>0.9489</span></td><td>0.5641</td><td>1.0000</td></tr>
+                <tr><td>Extract Unified Value F1</td><td><span class='metric-value high'>0.9488</span></td><td>0.5641</td><td>1.0000</td></tr>
+                <tr><td>Accuracy</td><td><span class='metric-value high'>0.9445</span></td><td>0.1207</td><td>1.0000</td></tr>
+                <tr><td>Extract Evidence Value Pass Rate</td><td><span class='metric-value high'>0.9373</span></td><td>0.3538</td><td>1.0000</td></tr>
+                <tr><td>Array Record Row Count Ratio</td><td><span class='metric-value high'>0.9353</span></td><td>0.0000</td><td>2.0000</td></tr>
+                <tr><td>Array Record Precision</td><td><span class='metric-value high'>0.9328</span></td><td>0.4815</td><td>1.0000</td></tr>
+                <tr><td>Array Record F1</td><td><span class='metric-value high'>0.9322</span></td><td>0.4815</td><td>1.0000</td></tr>
+                <tr><td>Array Record Accuracy</td><td><span class='metric-value high'>0.9321</span></td><td>0.4815</td><td>1.0000</td></tr>
+                <tr><td>Array Record Recall</td><td><span class='metric-value high'>0.9321</span></td><td>0.4815</td><td>1.0000</td></tr>
+                <tr><td>Extract Evidence Bbox Covered Pass Rate</td><td><span class='metric-value high'>0.9283</span></td><td>0.3571</td><td>1.0000</td></tr>
+                <tr><td>Extract Unified Page F1</td><td><span class='metric-value medium'>0.8717</span></td><td>0.2857</td><td>1.0000</td></tr>
+                <tr><td>Extract Evidence Page Covered Pass Rate</td><td><span class='metric-value medium'>0.8594</span></td><td>0.0000</td><td>1.0000</td></tr>
+                <tr><td>Extract Evidence Page Pass Rate</td><td><span class='metric-value medium'>0.8383</span></td><td>0.0000</td><td>1.0000</td></tr>
+                <tr><td>Extract Unified Page Recall</td><td><span class='metric-value medium'>0.8199</span></td><td>0.2500</td><td>1.0000</td></tr>
+                <tr><td>Extract Unified Grounded Precision</td><td><span class='metric-value medium'>0.7102</span></td><td>0.0000</td><td>1.0000</td></tr>
+                <tr><td>Extract Unified Grounded F1</td><td><span class='metric-value low'>0.6928</span></td><td>0.0000</td><td>1.0000</td></tr>
+                <tr><td>Extract Unified Grounded Recall</td><td><span class='metric-value low'>0.6789</span></td><td>0.0000</td><td>1.0000</td></tr>
+                <tr><td>Extract Evidence Bbox Iou Alignment</td><td><span class='metric-value low'>0.6247</span></td><td>0.0021</td><td>0.9290</td></tr>
+                <tr><td>Extract Evidence Bbox Iou Pass Rate</td><td><span class='metric-value low'>0.5926</span></td><td>0.0019</td><td>0.9246</td></tr>
+                <tr><td>Confidence Signal Coverage</td><td><span class='metric-value low'>0.0000</span></td><td>0.0000</td><td>0.0000</td></tr>
+                <tr><td>Confidence Scoped Auc</td><td><span class='metric-value low'>0.0000</span></td><td>0.0000</td><td>0.0000</td></tr>
+                <tr><td>Confidence Scoped Normalized Auc</td><td><span class='metric-value low'>0.0000</span></td><td>0.0000</td><td>0.0000</td></tr>
+                <tr><td>Confidence Scoped Precision At 80Pct Coverage</td><td><span class='metric-value low'>0.0000</span></td><td>0.0000</td><td>0.0000</td></tr>
+                <tr><td>Confidence Scoped Coverage At 95Pct Precision</td><td><span class='metric-value low'>0.0000</span></td><td>0.0000</td><td>0.0000</td></tr>
+                <tr><td>Confidence Scoped Unique Value Count</td><td><span class='metric-value low'>0.0000</span></td><td>0.0000</td><td>0.0000</td></tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

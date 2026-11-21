@@ -1,53 +1,60 @@
 # ExtractBench: LandingAI ADE results
 
-**ExtractBench** ([run-llama/ExtractBench](https://github.com/run-llama/ExtractBench), [arXiv 2607.29677](https://arxiv.org/abs/2607.29677)) is a benchmark from LlamaIndex for **schema-guided extraction from enterprise documents**. Given a document and a JSON Schema, a system must return schema-valid JSON with correct values, every record of each repeated structure, `null` for missing fields, and source evidence for each value. The benchmark has 370 documents (4,869 pages, 67 document types), split into short, medium, and long documents.
+[ExtractBench](https://github.com/run-llama/ExtractBench) is LlamaIndex's benchmark for schema-guided extraction: 370 public documents (4,869 pages, 67 document types), each with a fixed JSON schema and an answer key, scored by a deterministic evaluator. Documents that fail or exceed 30 minutes score zero.
 
-> Not to be confused with a different benchmark of the same name, [ExtractBench (arXiv 2602.12247)](https://arxiv.org/abs/2602.12247), by Ferguson et al. Results here use the LlamaIndex benchmark.
+> Not to be confused with a different benchmark of the same name, [arXiv 2602.12247](https://arxiv.org/abs/2602.12247).
 
-**Metrics** (as defined by the benchmark authors):
-- **Value F1:** F1 of extracted values, averaged across documents (each document weighted equally). Reported overall and by split.
-- **Grounding F1:** a value counts only if it is correct *and* its evidence box overlaps an accepted box at IoU ≥ 0.5 (word level), or cites the correct page (page level).
-- **Cost per page:** mean of each document's cost divided by its page count, at public list prices.
+## Results (run 2026-11-20)
 
-Documents that fail or exceed the official 30-minute limit score zero.
+LandingAI Agentic Document Extraction (ADE): Parse `dpt-3-pro-20261111` and Extract `extract-20261111`, public production API, standard tier, grounding on. Submitted to the official leaderboard in [run-llama/ExtractBench#172](https://github.com/run-llama/ExtractBench/pull/172).
 
-## LandingAI results (run by us)
+| | All (370) | Short (252) | Medium (98) | Long (20) |
+|---|---:|---:|---:|---:|
+| **Value F1** | **94.11** | 94.88 | 93.26 | 88.65 |
+| Precision / recall | 94.23 / 94.07 | 94.92 / 94.89 | 93.65 / 93.03 | 88.43 / 88.87 |
+| Word-level grounding F1 | 66.14 | 63.23 | 72.36 | 72.32 |
+| Page-level grounding F1 | 83.48 | 81.98 | 87.86 | 80.95 |
+| Cost per page (list price) | $0.0474 | $0.0472 | $0.0373 | $0.0996 |
+| Mean latency per document | | 294 s | 444 s | 541 s |
 
-| Run | ADE Extract version | Value F1 (Overall) | Short | Medium | Long | Word grounding F1 | Latency p50 (s/doc) | LLM cost / doc | Status | Results |
-|---|---|---:|---:|---:|---:|---|---:|---:|---|---|
-| 2026-11-12 | extract-20261111 | **94.02** | 94.66 | 93.43 | 88.99 | _not reported_ | 124 | $0.039 | Preliminary | [`results/2026-11/`](results/2026-11/) |
-| 2026-11-12 | extract-20260903 | 91.62 | 93.42 | 89.74 | 78.26 | _not reported_ | 38 | $0.637 | Previous version | [`results/2026-11/`](results/2026-11/) |
+- **Failures and timeouts:** one document failed (`long/real_ishares_iboxx_bond_etfs`: the extraction job hit the service's own time limit). No document exceeded 30 minutes; the median was 279 s and the slowest 1,423 s.
+- **Cost:** billed credits × $0.01 list price per credit; $309.21 in total.
+- **Scoring:** ExtractBench's own evaluator at [`ab573f7`](https://github.com/run-llama/ExtractBench/commit/ab573f7). Scores are identical under the earlier evaluator (`36e9d20`).
+- **Leaderboard context:** on the leaderboard as of 2026-11-20 this ranks 17th of 59 on value F1 and has the highest word-level grounding of the 12 specialized document APIs. The leader is LlamaExtract Agentic Plus at 96.17. See the [official leaderboard](https://github.com/run-llama/ExtractBench#extractbench-leaderboard) for current standings.
 
-All 370 documents (252 short, 98 medium, 20 long), scored with the official ExtractBench harness. `extract-20261111` ran with grounding enabled. Cost is LLM cost per document, not the leaderboard's cents per page at list prices. The results are preliminary: a re-run with latency improvements is pending, followed by an official leaderboard submission. See the [run README](results/2026-11/README.md) for latency, cost, and what is still missing.
+## Files
 
-## Other published results for reference
+Everything from the run is in [`results/2026-11/`](results/2026-11/). Large files are gzipped. Internal job and organization IDs, and local file paths, are replaced with placeholders; nothing else is changed.
 
-Copied from the [official ExtractBench leaderboard](https://github.com/run-llama/ExtractBench#extractbench-leaderboard) as reported there, retrieved 2026-11-13. LandingAI did not run these systems. Top 5 of 54 ranked systems by overall value F1; see the source for the full list.
-
-| Rank | System | Value F1 (Overall) | Short | Medium | Long | ¢ / page |
-|---:|---|---:|---:|---:|---:|---:|
-| 1 | LlamaExtract Agentic Plus | 96.17 | 97.02 | 94.30 | 94.65 | 7.50¢ |
-| 2 | LlamaExtract Agentic Plus (Max Effort) | 96.17 | 96.82 | 95.48 | 91.36 | 19.11¢ |
-| 3 | Reducto Deep Extract | 96.08 | 96.84 | 94.80 | 92.85 | 6.35¢ |
-| 4 | Pulse (Effort) | 96.07 | 96.83 | 94.70 | 93.24 | 10.50¢ |
-| 5 | LlamaExtract Agentic | 95.65 | 96.06 | 94.79 | 94.73 | 3.12¢ |
+| Path | Contents |
+|---|---|
+| `summary.json` | Headline metrics, models, code versions |
+| `leaderboard_row.csv` | The row submitted to ExtractBench's `leaderboard.csv` |
+| `per_document.csv` | Value, precision, recall, grounding, latency, pages and cost for each of the 370 documents |
+| `outputs/<split>/<doc>.result.json.gz` | Normalized output: extracted data and field citations (what the evaluator scores) |
+| `outputs/<split>/<doc>.raw.json.gz` | Raw API output: parse Markdown and structure, extraction, extraction metadata, billing |
+| `outputs/<split>/<doc>.cost.json.gz` | Cost accounting per document |
+| `evaluation/<split>/` | Evaluator output per split: `evaluation_results.csv`, `evaluation_report.md`, the full `evaluation_report.json.gz`, and HTML reports |
+| `evaluation/` | Error list, run metadata, dashboard and leaderboard HTML |
+| `logs/` | Run record and console logs |
 
 ## Reproduce
 
-Scoring uses the benchmark's official evaluator (`llama-extract-bench`), not a reimplementation.
+The connector is in [run-llama/ExtractBench#172](https://github.com/run-llama/ExtractBench/pull/172). With that branch checked out and `LANDING_AI_API_KEY` set in `.env`:
 
 ```bash
-pip install -r requirements.txt
-export ADE_API_KEY=...
-python benchmarks/extractbench/download_data.py
-python -m harness.run --benchmark extractbench
+uv sync --extra runners
+uv run extract-bench run landingai_ade_v2_extract --output_dir output --group long   --max_concurrent 4
+uv run extract-bench run landingai_ade_v2_extract --output_dir output --group medium --max_concurrent 8
+uv run extract-bench run landingai_ade_v2_extract --output_dir output --group short  --max_concurrent 12
+uv run extract-bench run landingai_ade_v2_extract --output_dir output --skip_inference
 ```
 
-The configuration used for the published run is in [`config.yaml`](config.yaml).
+The dataset downloads from Hugging Face ([llamaindex/ExtractBench](https://huggingface.co/datasets/llamaindex/ExtractBench), revision `f9b910906cd7`) on first run. One document (`short/sched_i__after_violence_project_ty2024`) failed in the first pass on a rounding bug in the connector's cost total; it was re-run after the fix, which does not affect extraction, and all 370 documents were re-scored.
 
 ## Dataset and license
 
-The data is not redistributed in this repository. It is published on Hugging Face at [llamaindex/ExtractBench](https://huggingface.co/datasets/llamaindex/ExtractBench); the benchmark code is licensed Apache-2.0. Check the dataset card for the data's terms of use.
+The dataset is not redistributed here; it is published on Hugging Face under the benchmark's terms, and the benchmark code is Apache-2.0. The output files contain values extracted from those public documents.
 
 ## Citation
 

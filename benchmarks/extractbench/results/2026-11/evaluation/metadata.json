@@ -1,0 +1,33 @@
+{
+  "pipeline": {
+    "pipeline_name": "landingai_ade_v2_extract",
+    "provider_name": "landingai_ade_v2_extract",
+    "product_type": "extract",
+    "config": {
+      "parse_model": "dpt-3-pro-20261111",
+      "model": "extract-20261111",
+      "grounding": true,
+      "service_tier": "standard"
+    }
+  },
+  "run_config": {
+    "max_concurrent": 12,
+    "save_raw": true,
+    "save_normalized": true,
+    "force": false,
+    "randomize_external_filenames": true
+  },
+  "summary": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0,
+    "skipped": 251,
+    "total_latency_ms": 45291,
+    "avg_latency_ms": 45291.0,
+    "success_rate": 100.0,
+    "errors": [],
+    "started_at": "2026-11-20T20:25:29.508203",
+    "completed_at": "2026-11-20T20:26:15.521796"
+  },
+  "test_cases_dir": "data"
+}
