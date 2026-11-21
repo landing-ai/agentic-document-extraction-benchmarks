@@ -1,0 +1,19 @@
+commit: 0ca22d0f23294e1612e3393ab5620ba358d97998
+upstream_base: 36e9d20887b797be974abfb27cbae450f5a204f6
+landingai-ade: 1.18.1
+started: 2026-11-20T23:48:45Z
+== long start 15:48:45
+== long exit 0 at 16:48:34
+== medium start 16:48:34
+== medium exit 0 at 18:24:10
+== short start 18:24:10
+== short exit 0 at 20:10:20
+== score start 20:10:20
+== score exit 0 at 20:19:17
+finished: 2026-11-21T04:19:17Z
+== rerun sched_i__after_violence_project_ty2024 at commit 8c7bb32ccbfe529a80552bc96d3b555a5f28320f start 20:25:07 (fix for billing rounding bug; other docs skipped)
+== rerun exit 0 at 20:27:20
+== rescore start 20:27:29
+== rescore exit 0 at 20:36:35
+== rescore with upstream ab573f7 + connector 0af67cc start 20:43:33
+== exit 0 at 20:53:03

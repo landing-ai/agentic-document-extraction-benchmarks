@@ -1,0 +1,211 @@
+
+============================================================
+Step 1/3: Running Inference
+============================================================
+
+Filtered to 20 test cases in group 'long' (from 370 total)
+Loaded 20 test cases from data
+Creating InferenceRunner with max_concurrent=4, per_file_timeout=pipeline/default, timeout_retries=0
+Starting async run_test_cases with max_concurrent=4 max_concurrent_pages=None
+╭────────────────────── landingai_ade_v2_extract ───────────────────────╮
+│ ╭─────────────────────────── Statistics ────────────────────────────╮ │
+│ │                                                                   │ │
+│ │ Pipeline: landingai_ade_v2_extract                                │ │
+│ │ Total Files: 20                                                   │ │
+│ │ Processed: 20                                                     │ │
+│ │ In Progress: 0                                                    │ │
+│ │ Successful: 19                                                    │ │
+│ │ Failed: 1                                                         │ │
+│ │ Skipped: 0                                                        │ │
+│ │ Success Rate: 95.0%                                               │ │
+│ │ Avg Latency: 569537.3ms                                           │ │
+│ │ Elapsed: 3227.6s                                                  │ │
+│ │                                                                   │ │
+│ ╰───────────────────────────────────────────────────────────────────╯ │
+│                              Active Jobs                              │
+│ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━┳━━━━━━━┓ │
+│ ┃ Example ID                                 ┃ Stat… ┃ Lat… ┃ File  ┃ │
+│ ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━╇━━━━━━━┩ │
+│ │ long/sf1449_supplies_services_0059         │ ✓     │ 301… │ sf14… │ │
+│ │                                            │ Done  │      │       │ │
+│ │ long/sf1449_supplies_services_0042         │ ✓     │ 192… │ sf14… │ │
+│ │                                            │ Done  │      │       │ │
+│ │ long/real_ofac_ssi_full                    │ ✓     │ 142… │ real… │ │
+│ │                                            │ Done  │      │       │ │
+│ │ long/sec_13f_0010_renaissance_technologies │ ✓     │ 251… │ sec_… │ │
+│ │                                            │ Done  │      │       │ │
+│ │ long/sec_13f_0026_brown_brothers_harriman  │ ✓     │ 161… │ sec_… │ │
+│ │                                            │ Done  │      │       │ │
+│ │ long/real_sm0801_eco_full                  │ ✓     │ 322… │ real… │ │
+│ │                                            │ Done  │      │       │ │
+│ │ long/real_ishares_iboxx_bond_etfs          │ ✗     │    - │ real… │ │
+│ │                                            │ Fail… │      │       │ │
+│ │ long/real_sm0801_eco_full_corrupted        │ ✓     │ 176… │ real… │ │
+│ │                                            │ Done  │      │       │ │
+│ │ long/real_oklahoma_unclaimed_2024          │ ✓     │ 885… │ real… │ │
+│ │                                            │ Done  │      │       │ │
+│ │ long/real_sm0801_ae_full                   │ ✓     │ 556… │ real… │ │
+│ │                                            │ Done  │      │       │ │
+│ └────────────────────────────────────────────┴───────┴──────┴───────┘ │
+│   Processing landingai_ade_v2_extract ━━━━ 100% • 20/20 • 0:5… • 0:0… │
+╰───────────────────────────────────────────────────────────────────────╯
+============================================================
+Inference Run Summary
+============================================================
+Total:        20
+Successful:   19
+Failed:       1
+Skipped:      0
+Success Rate: 95.00%
+Avg Latency:  569537.32ms
+Output Dir:   output_full_2026-11-20/landingai_ade_v2_extract
+============================================================
+
+⚠️  1 error(s) occurred. See output_full_2026-11-20/landingai_ade_v2_extract/_errors.json
+
+First few errors:
+
+  1. long/real_ishares_iboxx_bond_etfs: Provider error: LandingAI job failed: extract job extract-<job-id> failed: timeout Request timed out [debug payload: long/real_ishares_iboxx_bond_etfs.error.raw.json]
+    Traceback (last 5 lines):
+          raw_output = self._extract_from_document(document_path=file_path, schema=request.schema_override)
+        File "src/extract_bench/inference/providers/extract/landingai_v2.py", line 295, in _extract_from_document
+          raise self._classify(error, accounting) from error
+      extract_bench.inference.providers.base.ProviderPermanentError: LandingAI job failed: extract job extract-<job-id> failed: timeout Request timed out
+
+============================================================
+Step 2/3: Running Evaluation [long]
+============================================================
+
+Running evaluation on: output_full_2026-11-20/landingai_ade_v2_extract
+Test cases directory: data
+Filtering by product type: extract
+Filtering by group: long
+=== Evaluation Plan ===
+  Result files found: 19 | Skipped: 0
+  Documents to evaluate: 19 (19 standard, 0 QA)
+=======================
+  [1/19] long/dd1155_schedule_continuation_0012: OK
+  [2/19] long/gov_clin_schedule_0005: OK
+  [3/19] long/dd1155_schedule_continuation_0011: OK
+  [4/19] long/gov_clin_schedule_0031: OK
+  [5/19] long/real_credit_strategies_full: OK
+  [6/19] long/real_sm0801_ae_full: OK
+  [7/19] long/real_sm0801_eco_full: OK
+  [8/19] long/real_freer_register_full: OK
+  [9/19] long/real_sm0801_eco_full_corrupted: OK
+  [10/19] long/sec_13f_0026_brown_brothers_harriman: OK
+  [11/19] long/sf1449_supplies_services_0042: OK
+  [12/19] long/real_ftx_full: OK
+  [13/19] long/sf1449_supplies_services_0059: OK
+  [14/19] long/real_ftx_full_corrupted: OK
+  [15/19] long/sec_13f_0010_renaissance_technologies: OK
+  [16/19] long/real_imedia_full: OK
+  [17/19] long/real_imedia_full_corrupted: OK
+  [18/19] long/real_oklahoma_unclaimed_2024: OK
+  [19/19] long/real_ofac_ssi_full: OK
+
+✅ Evaluation complete!
+📊 Results saved to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report.json
+
+============================================================
+Evaluation Summary
+============================================================
+Total Examples:  20
+Successful:     19
+Failed:          1
+Skipped:         0
+
+Aggregate Metrics:
+  avg_accuracy: 0.7737
+  avg_array_record_accuracy: 0.8763
+  avg_array_record_f1: 0.8742
+  avg_array_record_precision: 0.8721
+  avg_array_record_recall: 0.8763
+  avg_array_record_row_count_ratio: 0.9553
+  avg_confidence_scoped_auc: 0.0000
+  avg_confidence_scoped_coverage_at_95pct_precision: 0.0000
+  avg_confidence_scoped_normalized_auc: 0.0000
+  avg_confidence_scoped_precision_at_80pct_coverage: 0.0000
+  avg_confidence_scoped_unique_value_count: 0.0000
+  avg_confidence_signal_coverage: 0.0000
+  avg_extract_evidence_bbox_IOU_alignment: 0.7073
+  avg_extract_evidence_bbox_IOU_pass_rate: 0.5463
+  avg_extract_evidence_bbox_coverage: 0.9421
+  avg_extract_evidence_bbox_covered_pass_rate: 0.7057
+  avg_extract_evidence_page_covered_pass_rate: 0.7610
+  avg_extract_evidence_page_pass_rate: 0.7696
+  avg_extract_evidence_value_pass_rate: 0.7748
+  avg_extract_unified_grounded_f1: 0.7613
+  avg_extract_unified_grounded_precision: 0.7662
+  avg_extract_unified_grounded_recall: 0.7566
+  avg_extract_unified_page_f1: 0.8521
+  avg_extract_unified_page_precision: 0.8590
+  avg_extract_unified_page_recall: 0.8456
+  avg_extract_unified_value_f1: 0.8865
+  avg_extract_unified_value_precision: 0.8843
+  avg_extract_unified_value_recall: 0.8887
+
+Total Counts:
+  total_array_record_accuracy_evaluated: 548219
+  total_array_record_accuracy_passed: 512003
+  total_array_record_f1_fn: 36216
+  total_array_record_f1_fp: 38678
+  total_array_record_f1_tp: 512003
+  total_array_record_precision_fn: 36216
+  total_array_record_precision_fp: 38678
+  total_array_record_precision_tp: 512003
+  total_array_record_recall_fn: 36216
+  total_array_record_recall_fp: 38678
+  total_array_record_recall_tp: 512003
+  total_array_record_row_count_ratio: 72093
+  total_extract_evidence_bbox_IOU_alignment_fn: 0
+  total_extract_evidence_bbox_IOU_alignment_fp: 0
+  total_extract_evidence_bbox_IOU_alignment_tp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fn: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_tp: 0
+  total_extract_evidence_bbox_coverage_fn: 0
+  total_extract_evidence_bbox_coverage_fp: 53095
+  total_extract_evidence_bbox_coverage_tp: 327322
+  total_extract_evidence_bbox_covered_pass_rate_fn: 0
+  total_extract_evidence_bbox_covered_pass_rate_fp: 222480
+  total_extract_evidence_bbox_covered_pass_rate_tp: 157937
+  total_extract_evidence_page_covered_pass_rate_fn: 0
+  total_extract_evidence_page_covered_pass_rate_fp: 203246
+  total_extract_evidence_page_covered_pass_rate_tp: 376266
+  total_extract_evidence_page_pass_rate_fn: 0
+  total_extract_evidence_page_pass_rate_fp: 256893
+  total_extract_evidence_page_pass_rate_tp: 386759
+  total_extract_evidence_value_pass_rate_fn: 0
+  total_extract_evidence_value_pass_rate_fp: 256240
+  total_extract_evidence_value_pass_rate_tp: 387412
+
+⚠️  1 evaluation(s) failed
+============================================================
+📄 CSV exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_results.csv
+🧩 Rule CSV exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_rule_results.csv
+📝 Markdown report exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report.md
+🌐 HTML report exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report.html
+🌐 Detailed HTML report exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report_detailed.html
+
+============================================================
+Step 3/3: Generating Detailed Report [long]
+============================================================
+
+Loading evaluation summary from: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report.json
+Generating detailed HTML report...
+  Evaluation dir: output_full_2026-11-20/landingai_ade_v2_extract
+  Output dir (inference): output_full_2026-11-20/landingai_ade_v2_extract
+  Test cases dir: data
+  Output file: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report_detailed.html
+
+✓ Detailed report saved to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report_detailed.html
+  Open in browser to view interactive report
+
+============================================================
+Pipeline Complete!
+============================================================
+
+Results: output_full_2026-11-20/landingai_ade_v2_extract
+Report:  output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report_detailed.html
+0

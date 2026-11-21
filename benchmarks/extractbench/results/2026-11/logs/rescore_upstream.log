@@ -1,0 +1,712 @@
+
+============================================================
+Step 1/3: Skipping Inference (--skip_inference)
+============================================================
+
+
+Discovered 3 categories: long, medium, short
+
+============================================================
+Category 1/3: long
+============================================================
+Running evaluation on: output_full_2026-11-20_rescored/landingai_ade_v2_extract
+Test cases directory: data
+Filtering by product type: extract
+Filtering by group: long
+=== Evaluation Plan ===
+  Result files found: 19 | Skipped: 0
+  Documents to evaluate: 19 (19 standard, 0 QA)
+=======================
+  [1/19] long/dd1155_schedule_continuation_0012: OK
+  [2/19] long/dd1155_schedule_continuation_0011: OK
+  [3/19] long/gov_clin_schedule_0031: OK
+  [4/19] long/gov_clin_schedule_0005: OK
+  [5/19] long/real_credit_strategies_full: OK
+  [6/19] long/real_sm0801_ae_full: OK
+  [7/19] long/real_sm0801_eco_full: OK
+  [8/19] long/real_sm0801_eco_full_corrupted: OK
+  [9/19] long/real_freer_register_full: OK
+  [10/19] long/real_ftx_full: OK
+  [11/19] long/sf1449_supplies_services_0042: OK
+  [12/19] long/sf1449_supplies_services_0059: OK
+  [13/19] long/sec_13f_0026_brown_brothers_harriman: OK
+  [14/19] long/real_ftx_full_corrupted: OK
+  [15/19] long/sec_13f_0010_renaissance_technologies: OK
+  [16/19] long/real_imedia_full: OK
+  [17/19] long/real_imedia_full_corrupted: OK
+  [18/19] long/real_oklahoma_unclaimed_2024: OK
+  [19/19] long/real_ofac_ssi_full: OK
+
+✅ Evaluation complete!
+📊 Results saved to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_report.json
+
+============================================================
+Evaluation Summary
+============================================================
+Total Examples:  20
+Successful:     19
+Failed:          1
+Skipped:         0
+
+Aggregate Metrics:
+  avg_accuracy: 0.7737
+  avg_array_record_accuracy: 0.8763
+  avg_array_record_f1: 0.8742
+  avg_array_record_precision: 0.8721
+  avg_array_record_recall: 0.8763
+  avg_array_record_row_count_ratio: 0.9553
+  avg_confidence_scoped_auc: 0.0000
+  avg_confidence_scoped_coverage_at_95pct_precision: 0.0000
+  avg_confidence_scoped_normalized_auc: 0.0000
+  avg_confidence_scoped_precision_at_80pct_coverage: 0.0000
+  avg_confidence_scoped_unique_value_count: 0.0000
+  avg_confidence_signal_coverage: 0.0000
+  avg_extract_evidence_bbox_IOU_alignment: 0.7073
+  avg_extract_evidence_bbox_IOU_pass_rate: 0.5463
+  avg_extract_evidence_bbox_coverage: 0.9421
+  avg_extract_evidence_bbox_covered_pass_rate: 0.7057
+  avg_extract_evidence_page_covered_pass_rate: 0.7610
+  avg_extract_evidence_page_pass_rate: 0.7696
+  avg_extract_evidence_value_pass_rate: 0.7748
+  avg_extract_unified_grounded_f1: 0.7613
+  avg_extract_unified_grounded_precision: 0.7662
+  avg_extract_unified_grounded_recall: 0.7566
+  avg_extract_unified_page_f1: 0.8521
+  avg_extract_unified_page_precision: 0.8590
+  avg_extract_unified_page_recall: 0.8456
+  avg_extract_unified_value_f1: 0.8865
+  avg_extract_unified_value_precision: 0.8843
+  avg_extract_unified_value_recall: 0.8887
+
+Total Counts:
+  total_array_record_accuracy_evaluated: 548219
+  total_array_record_accuracy_passed: 512003
+  total_array_record_f1_fn: 36216
+  total_array_record_f1_fp: 38678
+  total_array_record_f1_tp: 512003
+  total_array_record_precision_fn: 36216
+  total_array_record_precision_fp: 38678
+  total_array_record_precision_tp: 512003
+  total_array_record_recall_fn: 36216
+  total_array_record_recall_fp: 38678
+  total_array_record_recall_tp: 512003
+  total_array_record_row_count_ratio: 72093
+  total_extract_evidence_bbox_IOU_alignment_fn: 0
+  total_extract_evidence_bbox_IOU_alignment_fp: 0
+  total_extract_evidence_bbox_IOU_alignment_tp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fn: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_tp: 0
+  total_extract_evidence_bbox_coverage_fn: 0
+  total_extract_evidence_bbox_coverage_fp: 498
+  total_extract_evidence_bbox_coverage_tp: 327322
+  total_extract_evidence_bbox_covered_pass_rate_fn: 0
+  total_extract_evidence_bbox_covered_pass_rate_fp: 169883
+  total_extract_evidence_bbox_covered_pass_rate_tp: 157937
+  total_extract_evidence_page_covered_pass_rate_fn: 0
+  total_extract_evidence_page_covered_pass_rate_fp: 203246
+  total_extract_evidence_page_covered_pass_rate_tp: 376266
+  total_extract_evidence_page_pass_rate_fn: 0
+  total_extract_evidence_page_pass_rate_fp: 204296
+  total_extract_evidence_page_pass_rate_tp: 386759
+  total_extract_evidence_value_pass_rate_fn: 0
+  total_extract_evidence_value_pass_rate_fp: 203643
+  total_extract_evidence_value_pass_rate_tp: 387412
+
+⚠️  1 evaluation(s) failed
+============================================================
+📄 CSV exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_results.csv
+🧩 Rule CSV exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_rule_results.csv
+📝 Markdown report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_report.md
+🌐 HTML report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_report.html
+🌐 Detailed HTML report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_report_detailed.html
+Loading evaluation summary from: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_report.json
+Generating detailed HTML report...
+  Evaluation dir: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long
+  Output dir (inference): output_full_2026-11-20_rescored/landingai_ade_v2_extract
+  Test cases dir: data
+  Output file: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_report_detailed.html
+
+✓ Detailed report saved to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_report_detailed.html
+  Open in browser to view interactive report
+
+============================================================
+Category 2/3: medium
+============================================================
+Running evaluation on: output_full_2026-11-20_rescored/landingai_ade_v2_extract
+Test cases directory: data
+Filtering by product type: extract
+Filtering by group: medium
+=== Evaluation Plan ===
+  Result files found: 98 | Skipped: 0
+  Documents to evaluate: 98 (98 standard, 0 QA)
+=======================
+  [1/98] medium/baker_hughes_earnings_deck_q4fy25: OK
+  [2/98] medium/1G1PC5SB6E7111015_professional_valuation_corrupted: OK
+  [3/98] medium/1G1PC5SB6E7111015_professional_valuation: OK
+  [4/98] medium/bar-lev-2022: OK
+  [5/98] medium/arif-2023: OK
+  [6/98] medium/bar-lev-2021: OK
+  [7/98] medium/bar-lev-2023: OK
+  [8/98] medium/bar-lev-2024: OK
+  [9/98] medium/becerra-2021: OK
+  [10/98] medium/becerra-2022: OK
+  [11/98] medium/13f__nalls_sherbakoff_2025q4: OK
+  [12/98] medium/byline_bancorp_investor_deck_q2_2023: OK
+  [13/98] medium/cabrera-2021: OK
+  [14/98] medium/cabrera-2022: OK
+  [15/98] medium/cabrera-2023: OK
+  [16/98] medium/ccc_online_0003_geico_ford_crown_victoria_corrupted: OK
+  [17/98] medium/ccc_online_0003_geico_ford_crown_victoria: OK
+  [18/98] medium/bianco-2021: OK
+  [19/98] medium/ccc_online_0004_liberty_dodge_journey_corrupted: OK
+  [20/98] medium/bianco-2022: OK
+  [21/98] medium/ccc_online_0004_liberty_dodge_journey: OK
+  [22/98] medium/becerra-2024: OK
+  [23/98] medium/ccc_online_0008_state_farm_genesis_gv80_corrupted: OK
+  [24/98] medium/ccc_online_0008_state_farm_genesis_gv80: OK
+  [25/98] medium/becerra-2023: OK
+  [26/98] medium/ccc_online_0009_travelers_ford_f150: OK
+  [27/98] medium/ccc_online_0009_travelers_ford_f150_corrupted: OK
+  [28/98] medium/ccc_online_0010_travelers_ford_explorer: OK
+  [29/98] medium/ccc_online_0010_travelers_ford_explorer_corrupted: OK
+  [30/98] medium/coreweave_earnings_deck_q4fy25: OK
+  [31/98] medium/ccc_online_0011_infinity_toyota_tacoma: OK
+  [32/98] medium/dd1155_schedule_continuation_0007: OK
+  [33/98] medium/crh_results_deck_q4fy25: OK
+  [34/98] medium/ccc_online_0011_infinity_toyota_tacoma_corrupted: OK
+  [35/98] medium/ccc_online_0012_chubb_dodge_durango_corrupted: OK
+  [36/98] medium/ccc_online_0012_chubb_dodge_durango: OK
+  [37/98] medium/gov_clin_schedule_0035: OK
+  [38/98] medium/gov_clin_schedule_0038: OK
+  [39/98] medium/gov_clin_schedule_0033: OK
+  [40/98] medium/gsa_mas_it_labor_0006: OK
+  [41/98] medium/gsa_mas_it_labor_0010: OK
+  [42/98] medium/gsa_mas_it_labor_0014: OK
+  [43/98] medium/gsa_mas_it_labor_0007: OK
+  [44/98] medium/gsa_mas_it_labor_0008: OK
+  [45/98] medium/gsa_mas_it_labor_0016: OK
+  [46/98] medium/gsa_mas_it_labor_0003: OK
+  [47/98] medium/hpe_earnings_deck_q4fy25: OK
+  [48/98] medium/jackson_college_2024_federal_awards_audit: OK
+  [49/98] medium/gsa_mas_it_labor_0005: OK
+  [50/98] medium/gsa_mas_it_labor_0011: OK
+  [51/98] medium/q4-2025-earnings-press-release: OK
+  [52/98] medium/gsa_mas_it_labor_0018: OK
+  [53/98] medium/erie_county_2017_single_audit: OK
+  [54/98] medium/gsa_mas_it_labor_0019: OK
+  [55/98] medium/real_bbb_service_list: OK
+  [56/98] medium/real_bbb_service_list_corrupted: OK
+  [57/98] medium/nport__advisors_inner_circle_fund: OK
+  [58/98] medium/real_dcd_sumf_full: OK
+  [59/98] medium/real_dcd_sumf_full_corrupted: OK
+  [60/98] medium/real_blackrock_muni_bmn: OK
+  [61/98] medium/real_blackrock_schedule_full: OK
+  [62/98] medium/real_enotes_deviations: OK
+  [63/98] medium/nport__sei_etf_2025q4: OK
+  [64/98] medium/real_enotes_deviations_corrupted: OK
+  [65/98] medium/real_sm0801_dispositions_full: OK
+  [66/98] medium/real_sm0801_dispositions_full_corrupted: OK
+  [67/98] medium/real_franklin_sep_2025: OK
+  [68/98] medium/real_vg_divgrowth_full: OK
+  [69/98] medium/13f__leonteq_securities_2025q4: OK
+  [70/98] medium/nport__dunham_funds: OK
+  [71/98] medium/real_vg_esg_full: OK
+  [72/98] medium/real_vg_gcc_full: OK
+  [73/98] medium/real_vg_healthcare_full: OK
+  [74/98] medium/real_pueblo_oct_2025: OK
+  [75/98] medium/real_vg_megacap_full: OK
+  [76/98] medium/real_vg_equity_income_full: OK
+  [77/98] medium/real_vg_reit2_full: OK
+  [78/98] medium/real_vg_reit_full: OK
+  [79/98] medium/real_vg_primecap_full: OK
+  [80/98] medium/schwab_dana_jones_2012: OK
+  [81/98] medium/sched_i__united_way_worldwide_ty2024: OK
+  [82/98] medium/sf1449_supplies_services_0003: OK
+  [83/98] medium/sf1449_supplies_services_0046: OK
+  [84/98] medium/sf1449_supplies_services_0047: OK
+  [85/98] medium/smfg-kessan-tanshin-2024-ja: OK
+  [86/98] medium/sunoco_investor_deck_march_2026: OK
+  [87/98] medium/synchrony_investor_deck_q1_2026: OK
+  [88/98] medium/sysco_earnings_deck_q2fy26: OK
+  [89/98] medium/transunion_earnings_deck_q4fy25: OK
+  [90/98] medium/real_wright_co_mn: OK
+  [91/98] medium/united_way_san_antonio_fy23_single_audit: OK
+  [92/98] medium/veralto_earnings_deck_q4fy25: OK
+  [93/98] medium/real_vg_divappr_full: OK
+  [94/98] medium/sched_i__akron_community_foundation_ty2024: OK
+  [95/98] medium/real_cooke_co_tx_2024: OK
+  [96/98] medium/real_penn_hills_pa_2023: OK
+  [97/98] medium/sec_13f_0031_loomis_sayles: OK
+  [98/98] medium/real_fidelity_northstar: OK
+
+✅ Evaluation complete!
+📊 Results saved to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_report.json
+
+============================================================
+Evaluation Summary
+============================================================
+Total Examples:  98
+Successful:     98
+Failed:          0
+Skipped:         0
+
+Aggregate Metrics:
+  avg_accuracy: 0.8716
+  avg_array_record_accuracy: 0.9068
+  avg_array_record_f1: 0.9103
+  avg_array_record_precision: 0.9157
+  avg_array_record_recall: 0.9068
+  avg_array_record_row_count_ratio: 0.8092
+  avg_confidence_scoped_auc: 0.0000
+  avg_confidence_scoped_coverage_at_95pct_precision: 0.0000
+  avg_confidence_scoped_normalized_auc: 0.0000
+  avg_confidence_scoped_precision_at_80pct_coverage: 0.0000
+  avg_confidence_scoped_unique_value_count: 0.0000
+  avg_confidence_signal_coverage: 0.0000
+  avg_extract_evidence_bbox_IOU_alignment: 0.7171
+  avg_extract_evidence_bbox_IOU_pass_rate: 0.6684
+  avg_extract_evidence_bbox_coverage: 0.9007
+  avg_extract_evidence_bbox_covered_pass_rate: 0.8561
+  avg_extract_evidence_page_covered_pass_rate: 0.8280
+  avg_extract_evidence_page_pass_rate: 0.7825
+  avg_extract_evidence_value_pass_rate: 0.8779
+  avg_extract_unified_grounded_f1: 0.7967
+  avg_extract_unified_grounded_precision: 0.8215
+  avg_extract_unified_grounded_recall: 0.7828
+  avg_extract_unified_page_f1: 0.8786
+  avg_extract_unified_page_precision: 0.9210
+  avg_extract_unified_page_recall: 0.8585
+  avg_extract_unified_value_f1: 0.9326
+  avg_extract_unified_value_precision: 0.9365
+  avg_extract_unified_value_recall: 0.9303
+
+Total Counts:
+  total_array_record_accuracy_evaluated: 134510
+  total_array_record_accuracy_passed: 131146
+  total_array_record_f1_fn: 3364
+  total_array_record_f1_fp: 3124
+  total_array_record_f1_tp: 131146
+  total_array_record_precision_fn: 3364
+  total_array_record_precision_fp: 3124
+  total_array_record_precision_tp: 131146
+  total_array_record_recall_fn: 3364
+  total_array_record_recall_fp: 3124
+  total_array_record_recall_tp: 131146
+  total_array_record_row_count_ratio: 12193
+  total_extract_evidence_bbox_IOU_alignment_fn: 0
+  total_extract_evidence_bbox_IOU_alignment_fp: 0
+  total_extract_evidence_bbox_IOU_alignment_tp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fn: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_tp: 0
+  total_extract_evidence_bbox_coverage_fn: 0
+  total_extract_evidence_bbox_coverage_fp: 1664
+  total_extract_evidence_bbox_coverage_tp: 109271
+  total_extract_evidence_bbox_covered_pass_rate_fn: 0
+  total_extract_evidence_bbox_covered_pass_rate_fp: 6845
+  total_extract_evidence_bbox_covered_pass_rate_tp: 104090
+  total_extract_evidence_page_covered_pass_rate_fn: 0
+  total_extract_evidence_page_covered_pass_rate_fp: 8349
+  total_extract_evidence_page_covered_pass_rate_tp: 122984
+  total_extract_evidence_page_pass_rate_fn: 0
+  total_extract_evidence_page_pass_rate_fp: 10574
+  total_extract_evidence_page_pass_rate_tp: 135293
+  total_extract_evidence_value_pass_rate_fn: 0
+  total_extract_evidence_value_pass_rate_fp: 8628
+  total_extract_evidence_value_pass_rate_tp: 137239
+============================================================
+📄 CSV exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_results.csv
+🧩 Rule CSV exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_rule_results.csv
+📝 Markdown report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_report.md
+🌐 HTML report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_report.html
+🌐 Detailed HTML report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_report_detailed.html
+Loading evaluation summary from: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_report.json
+Generating detailed HTML report...
+  Evaluation dir: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium
+  Output dir (inference): output_full_2026-11-20_rescored/landingai_ade_v2_extract
+  Test cases dir: data
+  Output file: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_report_detailed.html
+
+✓ Detailed report saved to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_report_detailed.html
+  Open in browser to view interactive report
+
+============================================================
+Category 3/3: short
+============================================================
+Running evaluation on: output_full_2026-11-20_rescored/landingai_ade_v2_extract
+Test cases directory: data
+Filtering by product type: extract
+Filtering by group: short
+=== Evaluation Plan ===
+  Result files found: 252 | Skipped: 0
+  Documents to evaluate: 252 (252 standard, 0 QA)
+=======================
+  [1/252] short/00581-2011-p0050: OK
+  [2/252] short/00581-2011-p0052: OK
+  [3/252] short/07021-2016-p0016: OK
+  [4/252] short/00581-2011-p0102: OK
+  [5/252] short/02-10121 H-12 7-2-2024 F-22628: OK
+  [6/252] short/07021-2016-p0014: OK
+  [7/252] short/00581-2011-p0098: OK
+  [8/252] short/07021-2016-p0018: OK
+  [9/252] short/07021-2016-p0026: OK
+  [10/252] short/07021-2016-p0029: OK
+  [11/252] short/07021-2016-p0038: OK
+  [12/252] short/07021-2016-p0032: OK
+  [13/252] short/07021-2016-p0039: OK
+  [14/252] short/07021-2016-p0040: OK
+  [15/252] short/07021-2016-p0051: OK
+  [16/252] short/07021-2016-p0052: OK
+  [17/252] short/07021-2016-p0053: OK
+  [18/252] short/07021-2016-p0074: OK
+  [19/252] short/07021-2016-p0078: OK
+  [20/252] short/07021-2016-p0082: OK
+  [21/252] short/08-15427 H-12 1-21-2003 F-01341: OK
+  [22/252] short/08-20813 H-12 10-17-2008 F-01094A: OK
+  [23/252] short/08-37943 H-12 09-25-2014 F-01249: OK
+  [24/252] short/08-43259 H-12 3-18-2024 F-22737: OK
+  [25/252] short/08-51344 H-12 10-2-2023 F-22666: OK
+  [26/252] short/2A-9-136008_97695: OK
+  [27/252] short/2A-27-103150_116454: OK
+  [28/252] short/2A-9-156032_107792: OK
+  [29/252] short/2A-9-160258_109909: OK
+  [30/252] short/2A-9-160266_109913: OK
+  [31/252] short/2A-9-160248_109904: OK
+  [32/252] short/2A-9-160294_109927: OK
+  [33/252] short/2A-9-160282_109921: OK
+  [34/252] short/2A-9-160298_109929: OK
+  [35/252] short/2A-9-160268_109914: OK
+  [36/252] short/2A-9-160318_109939: OK
+  [37/252] short/3N1AB7AP8FY283932_professional_valuation_corrupted: OK
+  [38/252] short/3N1AB7AP8FY283932_professional_valuation: OK
+  [39/252] short/593338187_200912_990PF-p0023: OK
+  [40/252] short/593338187_200912_990PF-p0024: OK
+  [41/252] short/593338187_200912_990PF-p0025: OK
+  [42/252] short/13f__dedeker_financial_llc: OK
+  [43/252] short/593338187_200912_990PF-p0026: OK
+  [44/252] short/13f__audent_global_2025q4: OK
+  [45/252] short/593338187_200912_990PF-p0030: OK
+  [46/252] short/593338187_200912_990PF-p0027: OK
+  [47/252] short/13f__sl_advisors_llc: OK
+  [48/252] short/593338187_200912_990PF-p0031: OK
+  [49/252] short/593338187_200912_990PF-p0032: OK
+  [50/252] short/593338187_200912_990PF-p0033: OK
+  [51/252] short/7C-02014 H-12 5-20-2013 F-01083: OK
+  [52/252] short/593338187_200912_990PF-p0034: OK
+  [53/252] short/593338187_200912_990PF-p0035: OK
+  [54/252] short/7C-04947 H-12 12-7-2009 F-01079: OK
+  [55/252] short/H9-53-1621_1656: OK
+  [56/252] short/H9-53-2119_2144: OK
+  [57/252] short/593338187_200912_990PF-p0036: OK
+  [58/252] short/H9-53-30_30: OK
+  [59/252] short/593338187_200912_990PF-p0037: OK
+  [60/252] short/H9-53-319_311: OK
+  [61/252] short/H9-53-23_23: OK
+  [62/252] short/H9-53-31_31: OK
+  [63/252] short/593338187_200912_990PF-p0038: OK
+  [64/252] short/H9-53-32_32: OK
+  [65/252] short/H9-53-24_24: OK
+  [66/252] short/H9-53-514_1043: OK
+  [67/252] short/H9-53-7226_7240: OK
+  [68/252] short/H9-53-59_60: OK
+  [69/252] short/H9-53-7234_7248: OK
+  [70/252] short/H9-53-7239_7253: OK
+  [71/252] short/H9-53-9349_9509: OK
+  [72/252] short/P18-28-1547: OK
+  [73/252] short/P18-28-21_77: OK
+  [74/252] short/H9-53-9386_9545: OK
+  [75/252] short/P18-28-35_39: OK
+  [76/252] short/P18-28-43_44: OK
+  [77/252] short/P18-28-44_45: OK
+  [78/252] short/P18-28-52_53: OK
+  [79/252] short/P18-28-56_57: OK
+  [80/252] short/P18-28-62_62: OK
+  [81/252] short/P18-28-55_56: OK
+  [82/252] short/P4-27-51022_74198: OK
+  [83/252] short/P4-27-51094_74234: OK
+  [84/252] short/P4-27-51220_74625: OK
+  [85/252] short/P4-27-51300_74665: OK
+  [86/252] short/P4-27-51318_74674: OK
+  [87/252] short/P4-83-201_30: OK
+  [88/252] short/P4-83-449_155: OK
+  [89/252] short/P18-28-50_51: OK
+  [90/252] short/P18-28-54_55: OK
+  [91/252] short/P4-83-631_246: OK
+  [92/252] short/P4-Historical Single Signature83-10963_5480: OK
+  [93/252] short/P4-83-693_277: OK
+  [94/252] short/P4-Historical Single Signature83-223_41: OK
+  [95/252] short/P4-83-199_29: OK
+  [96/252] short/P4-Historical Single Signature83-257_58: OK
+  [97/252] short/P4-83-211_35: OK
+  [98/252] short/P4-83-443_152: OK
+  [99/252] short/P4-83-433_147: OK
+  [100/252] short/W-1-9-258_260: OK
+  [101/252] short/REDACTED_2007_NISSAN_MURANO_professional_valuation: OK
+  [102/252] short/ROGER-WINFIELD-SCOTT-FOUNDATION-INC-2009-580655183-p0025: OK
+  [103/252] short/P4-83-457_159: OK
+  [104/252] short/W-1-9-260_262: OK
+  [105/252] short/W-1-9-261_263: OK
+  [106/252] short/ROGER-WINFIELD-SCOTT-FOUNDATION-INC-2009-580655183-p0023: OK
+  [107/252] short/ROGER-WINFIELD-SCOTT-FOUNDATION-INC-2009-580655183-p0024: OK
+  [108/252] short/W14-2nd Sub 55975 Revised W14 ADMIN REVIEWED: OK
+  [109/252] short/W14-2nd Sub 53269 Revised W14: OK
+  [110/252] short/W14-52342_W14: OK
+  [111/252] short/W14-54500_W14 admin reviewed: OK
+  [112/252] short/W14-53632_W14 ADMIN REVIEWED: OK
+  [113/252] short/W14-55311_W14 reviewed: OK
+  [114/252] short/W14-55711_W14 ADMIN REVIEWED: OK
+  [115/252] short/W14-57077_W14: OK
+  [116/252] short/W14-58025_W14 Admin Reviewed: OK
+  [117/252] short/W14-57728_W14_REVISED: OK
+  [118/252] short/W14-58509_W14 2nd sub revised: OK
+  [119/252] short/W14-Atascosa SWD Well No. 4 - W-14 (Updated 01.22.2025): OK
+  [120/252] short/W2-27-217314_213200: OK
+  [121/252] short/W2-27-217184_213122: OK
+  [122/252] short/W2-27-217884_213729: OK
+  [123/252] short/W2-27-216874_212740: OK
+  [124/252] short/W14-58549_W14: OK
+  [125/252] short/WVWJK73C19P047779_professional_valuation: OK
+  [126/252] short/WVWJK73C19P047779_professional_valuation_corrupted: OK
+  [127/252] short/aclu_cdwg_invoice: OK
+  [128/252] short/YV4952BL2C1140915_professional_valuation: OK
+  [129/252] short/YV4952BL2C1140915_professional_valuation_corrupted: OK
+  [130/252] short/arif-2021: OK
+  [131/252] short/arif-2022: OK
+  [132/252] short/arif-2024: OK
+  [133/252] short/ca_rad_crossover_inpatient_p5: OK
+  [134/252] short/ca_rad_crossover_inpatient_p5_corrupted: OK
+  [135/252] short/ca_rad_crossover_outpatient_p5: OK
+  [136/252] short/ca_rad_crossover_outpatient_p5_corrupted: OK
+  [137/252] short/bianco-2024: OK
+  [138/252] short/caterpillar_spec_sheet_312c_excavator_corrupted: OK
+  [139/252] short/budget_appendix_legis: OK
+  [140/252] short/budget_appendix_doe: OK
+  [141/252] short/brand_price_list_lifescience_2024_corrupted: OK
+  [142/252] short/cbp_7501_continuation_0001: OK
+  [143/252] short/caterpillar_spec_sheet_330_excavator_corrupted: OK
+  [144/252] short/cbp_7501_continuation_0007: OK
+  [145/252] short/cbp_7501_continuation_0002: OK
+  [146/252] short/cbp_7501_continuation_0016: OK
+  [147/252] short/caterpillar_spec_sheet_312c_excavator: OK
+  [148/252] short/caterpillar_spec_sheet_330_excavator: OK
+  [149/252] short/ccc_online_0005_american_family_chevrolet_sonic_corrupted: OK
+  [150/252] short/ccc_online_0005_american_family_chevrolet_sonic: OK
+  [151/252] short/ccc_online_0006_esurance_toyota_rav4_corrupted: OK
+  [152/252] short/ccc_online_0006_esurance_toyota_rav4: OK
+  [153/252] short/census_statab_12s0035: OK
+  [154/252] short/brand_price_list_lifescience_2024: OK
+  [155/252] short/census_statab: OK
+  [156/252] short/census_statab_income_by_state: OK
+  [157/252] short/census_statab_12s0711: OK
+  [158/252] short/cfpb_closing-disclosure_H25F: OK
+  [159/252] short/cfpb_closing-disclosure_H25F_corrupted: OK
+  [160/252] short/census_statab_employment: OK
+  [161/252] short/cfpb_closing-disclosure_H25E_corrupted: OK
+  [162/252] short/dc-pepco-residential-bill: OK
+  [163/252] short/cfpb_closing-disclosure_H25E: OK
+  [164/252] short/dd1155_schedule_continuation_0002: OK
+  [165/252] short/dd1155_schedule_continuation_0008: OK
+  [166/252] short/golden_corral_receipt_refugio_county_auditor: OK
+  [167/252] short/fort_bend_operativeiq_invoice: OK
+  [168/252] short/cfpb_closing-disclosure_filled-sample_corrupted: OK
+  [169/252] short/grafton_isotrope_invoice_19503: OK
+  [170/252] short/fidelity_0002_sample: OK
+  [171/252] short/gsa_mas_it_labor_0004: OK
+  [172/252] short/h5Filing-45659-1: OK
+  [173/252] short/cfpb_closing-disclosure_filled-sample: OK
+  [174/252] short/h5Filing-45887-1: OK
+  [175/252] short/h5Filing-45884-1: OK
+  [176/252] short/h5Filing-45919-1: OK
+  [177/252] short/gsa_mas_it_labor_0020: OK
+  [178/252] short/h5Filing-46302-1: OK
+  [179/252] short/h5Filing-46383-1: OK
+  [180/252] short/h5Filing-46384-1: OK
+  [181/252] short/h5Filing-47175-1: OK
+  [182/252] short/h5Filing-48982-1: OK
+  [183/252] short/h5Filing-49070-1: OK
+  [184/252] short/h5Filing-46780-1: OK
+  [185/252] short/h5Filing-50745-2: OK
+  [186/252] short/h5Filing-66006-1: OK
+  [187/252] short/hingham-wbmason-invoice: OK
+  [188/252] short/hingham-grainger-invoice: OK
+  [189/252] short/hingham_lowes_receipt: OK
+  [190/252] short/lancaster_county_ne_requisition_po_husker_steel: OK
+  [191/252] short/lancaster_county_ne_requisition_po_husker_steel_corrupted: OK
+  [192/252] short/mcdonalds_receipt_chicago_documentcloud: OK
+  [193/252] short/mission-tx-tyler-invoice: OK
+  [194/252] short/ms_medicaid_ra_adjustments: OK
+  [195/252] short/ms_medicaid_ra_adjustments_corrupted: OK
+  [196/252] short/ms_medicaid_ra_paid_denied_claims_corrupted: OK
+  [197/252] short/ms_medicaid_ra_paid_denied_claims: OK
+  [198/252] short/oklahoma_county_purchase_order_avl_systems_corrupted: OK
+  [199/252] short/oklahoma_county_purchase_order_avl_systems: OK
+  [200/252] short/passcoag-2020-w2-p0002-r2: OK
+  [201/252] short/passcoag-2020-w2-p0002-r1: OK
+  [202/252] short/passcoag-2020-w2-p0002-r3: OK
+  [203/252] short/passcoag-2020-w2-p0002-r4: OK
+  [204/252] short/passcoag-2020-w2-p0003-r1: OK
+  [205/252] short/passcoag-2020-w2-p0003-r2: OK
+  [206/252] short/cbp_7501_continuation_0018: OK
+  [207/252] short/passcoag-2020-w2-p0003-r4: OK
+  [208/252] short/passcoag-2020-w2-p0004-r1: OK
+  [209/252] short/passcoag-2020-w2-p0003-r3: OK
+  [210/252] short/passcoag-2020-w2-p0004-r2: OK
+  [211/252] short/passcoag-2020-w2-p0004-r4: OK
+  [212/252] short/passcoag-2020-w2-p0005-r2: OK
+  [213/252] short/passcoag-2020-w2-p0004-r3: OK
+  [214/252] short/passcoag-2020-w2-p0005-r3: OK
+  [215/252] short/passcoag-2020-w2-p0005-r1: OK
+  [216/252] short/passcoag-2020-w2-p0005-r4: OK
+  [217/252] short/passcoag-2020-w2-p0006-r2: OK
+  [218/252] short/passcoag-2020-w2-p0006-r1: OK
+  [219/252] short/nport__bullfinch_fund_inc: OK
+  [220/252] short/nport__oak_associates_funds: OK
+  [221/252] short/nport__gabelli_growth_fund_2025q4: OK
+  [222/252] short/13f__radnor_capital_management_llc: OK
+  [223/252] short/passcoag-2020-w2-p0006-r3: OK
+  [224/252] short/passcoag-2020-w2-p0006-r4: OK
+  [225/252] short/ppl-two-bill-example: OK
+  [226/252] short/real_clinton_property_25_11073_corrupted: OK
+  [227/252] short/real_clinton_property_25_11073: OK
+  [228/252] short/sched_i__after_violence_project_ty2024: OK
+  [229/252] short/sched_i__rotary_club_ty2024: OK
+  [230/252] short/sched_i__idaho_humanities_council_inc_ty2023: OK
+  [231/252] short/pershing_0001: OK
+  [232/252] short/real_wyo_Niobrara_2024: OK
+  [233/252] short/southampton-ny-york-env-invoice: OK
+  [234/252] short/stephenville-axon-invoice: OK
+  [235/252] short/real_wyo_Weston_2024: OK
+  [236/252] short/texas_facilities_commission_purchase_order_shelton-keller: OK
+  [237/252] short/texas_facilities_commission_purchase_order_shelton-keller_corrupted: OK
+  [238/252] short/ti_spec_sheet_ne555_timer_corrupted: OK
+  [239/252] short/ti_spec_sheet_ne555_timer: OK
+  [240/252] short/uillinois_rate_card_carpool_2024_corrupted: OK
+  [241/252] short/uillinois_rate_card_carpool_2024: OK
+  [242/252] short/utah_fleet_rate_schedule_fy2024_corrupted: OK
+  [243/252] short/utah_fleet_rate_schedule_fy2024: OK
+  [244/252] short/sched_i__the_women_s_foundation_of_colorado_inc_ty2024: OK
+  [245/252] short/we-energies-sample-bill: OK
+  [246/252] short/real_franklin_nov_2025: OK
+  [247/252] short/real_franklin_aug_2025: OK
+  [248/252] short/real_wyo_Goshen_2024: OK
+  [249/252] short/viega_price_list_propress_2026_corrupted: OK
+  [250/252] short/sec_13f_0009_coatue_management: OK
+  [251/252] short/sec_13f_0019_soros_fund_management: OK
+  [252/252] short/viega_price_list_propress_2026: OK
+
+✅ Evaluation complete!
+📊 Results saved to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_report.json
+
+============================================================
+Evaluation Summary
+============================================================
+Total Examples:  252
+Successful:     252
+Failed:          0
+Skipped:         0
+
+Aggregate Metrics:
+  avg_accuracy: 0.9445
+  avg_array_record_accuracy: 0.9321
+  avg_array_record_f1: 0.9322
+  avg_array_record_precision: 0.9328
+  avg_array_record_recall: 0.9321
+  avg_array_record_row_count_ratio: 0.9353
+  avg_confidence_scoped_auc: 0.0000
+  avg_confidence_scoped_coverage_at_95pct_precision: 0.0000
+  avg_confidence_scoped_normalized_auc: 0.0000
+  avg_confidence_scoped_precision_at_80pct_coverage: 0.0000
+  avg_confidence_scoped_unique_value_count: 0.0000
+  avg_confidence_signal_coverage: 0.0000
+  avg_extract_evidence_bbox_IOU_alignment: 0.6247
+  avg_extract_evidence_bbox_IOU_pass_rate: 0.5926
+  avg_extract_evidence_bbox_coverage: 0.9508
+  avg_extract_evidence_bbox_covered_pass_rate: 0.9283
+  avg_extract_evidence_page_covered_pass_rate: 0.8594
+  avg_extract_evidence_page_pass_rate: 0.8383
+  avg_extract_evidence_value_pass_rate: 0.9373
+  avg_extract_unified_grounded_f1: 0.6928
+  avg_extract_unified_grounded_precision: 0.7102
+  avg_extract_unified_grounded_recall: 0.6789
+  avg_extract_unified_page_f1: 0.8717
+  avg_extract_unified_page_precision: 0.9533
+  avg_extract_unified_page_recall: 0.8199
+  avg_extract_unified_value_f1: 0.9488
+  avg_extract_unified_value_precision: 0.9492
+  avg_extract_unified_value_recall: 0.9489
+
+Total Counts:
+  total_array_record_accuracy_evaluated: 44939
+  total_array_record_accuracy_passed: 43395
+  total_array_record_f1_fn: 1544
+  total_array_record_f1_fp: 1575
+  total_array_record_f1_tp: 43395
+  total_array_record_precision_fn: 1544
+  total_array_record_precision_fp: 1575
+  total_array_record_precision_tp: 43395
+  total_array_record_recall_fn: 1544
+  total_array_record_recall_fp: 1575
+  total_array_record_recall_tp: 43395
+  total_array_record_row_count_ratio: 4033
+  total_extract_evidence_bbox_IOU_alignment_fn: 0
+  total_extract_evidence_bbox_IOU_alignment_fp: 0
+  total_extract_evidence_bbox_IOU_alignment_tp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fn: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_tp: 0
+  total_extract_evidence_bbox_coverage_fn: 0
+  total_extract_evidence_bbox_coverage_fp: 614
+  total_extract_evidence_bbox_coverage_tp: 32706
+  total_extract_evidence_bbox_covered_pass_rate_fn: 0
+  total_extract_evidence_bbox_covered_pass_rate_fp: 1096
+  total_extract_evidence_bbox_covered_pass_rate_tp: 32224
+  total_extract_evidence_page_covered_pass_rate_fn: 0
+  total_extract_evidence_page_covered_pass_rate_fp: 5077
+  total_extract_evidence_page_covered_pass_rate_tp: 34105
+  total_extract_evidence_page_pass_rate_fn: 0
+  total_extract_evidence_page_pass_rate_fp: 5958
+  total_extract_evidence_page_pass_rate_tp: 40078
+  total_extract_evidence_value_pass_rate_fn: 0
+  total_extract_evidence_value_pass_rate_fp: 1539
+  total_extract_evidence_value_pass_rate_tp: 44497
+============================================================
+📄 CSV exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_results.csv
+🧩 Rule CSV exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_rule_results.csv
+📝 Markdown report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_report.md
+🌐 HTML report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_report.html
+🌐 Detailed HTML report exported to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_report_detailed.html
+Loading evaluation summary from: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_report.json
+Generating detailed HTML report...
+  Evaluation dir: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short
+  Output dir (inference): output_full_2026-11-20_rescored/landingai_ade_v2_extract
+  Test cases dir: data
+  Output file: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_report_detailed.html
+
+✓ Detailed report saved to: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_report_detailed.html
+  Open in browser to view interactive report
+
+============================================================
+Generating Aggregation Dashboard
+============================================================
+
+Dashboard: output_full_2026-11-20_rescored/landingai_ade_v2_extract/_evaluation_report_dashboard.html
+  long: output_full_2026-11-20_rescored/landingai_ade_v2_extract/long/_evaluation_report_detailed.html
+  medium: output_full_2026-11-20_rescored/landingai_ade_v2_extract/medium/_evaluation_report_detailed.html
+  short: output_full_2026-11-20_rescored/landingai_ade_v2_extract/short/_evaluation_report_detailed.html
+
+============================================================
+Generating Leaderboard
+============================================================
+
+Leaderboard: output_full_2026-11-20_rescored/_leaderboard.html
+
+============================================================
+Pipeline Complete!
+============================================================
+
+Results: output_full_2026-11-20_rescored/landingai_ade_v2_extract
+
+To view reports with PDF rendering, run:
+  uv run extract-bench serve output_full_2026-11-20_rescored/landingai_ade_v2_extract
+0

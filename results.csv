@@ -2,5 +2,6 @@ benchmark,task,split,metric,score,num_samples,ade_model,qa_model,run_date,result
 docvqa,document_visual_question_answering,validation,exact_match_accuracy,0.98822,5349,dpt-2-latest,claude-sonnet-4-5,2025-11-09,benchmarks/docvqa/results/2025-11/
 docvqa,document_visual_question_answering,validation,exact_match_accuracy_excl_dataset_issues,0.99156,5331,dpt-2-latest,claude-sonnet-4-5,2025-11-09,benchmarks/docvqa/results/2025-11/
 docvqa,document_visual_question_answering,validation,anls_derived,0.9908,5349,dpt-2-latest,claude-sonnet-4-5,2025-11-09,benchmarks/docvqa/results/2025-11/
-extractbench,schema_guided_extraction,full,value_f1,0.9402,370,extract-20261111,,2026-11-12,benchmarks/extractbench/results/2026-11/
-extractbench,schema_guided_extraction,full,value_f1,0.9162,370,extract-20260903,,2026-11-12,benchmarks/extractbench/results/2026-11/
+extractbench,schema_guided_extraction,full,value_f1,0.9411,370,dpt-3-pro-20261111 + extract-20261111,,2026-11-20,benchmarks/extractbench/results/2026-11/
+extractbench,schema_guided_extraction,full,word_grounding_f1,0.6614,370,dpt-3-pro-20261111 + extract-20261111,,2026-11-20,benchmarks/extractbench/results/2026-11/
+extractbench,schema_guided_extraction,full,page_grounding_f1,0.8348,370,dpt-3-pro-20261111 + extract-20261111,,2026-11-20,benchmarks/extractbench/results/2026-11/

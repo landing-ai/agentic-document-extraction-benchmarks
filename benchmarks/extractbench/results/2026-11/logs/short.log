@@ -1,0 +1,433 @@
+
+============================================================
+Step 1/3: Running Inference
+============================================================
+
+Filtered to 252 test cases in group 'short' (from 370 total)
+Loaded 252 test cases from data
+Creating InferenceRunner with max_concurrent=12, per_file_timeout=pipeline/default, timeout_retries=0
+Starting async run_test_cases with max_concurrent=12 max_concurrent_pages=None
+╭───────── landingai_ade_v2_extract ──────────╮
+│ ╭────────────── Statistics ───────────────╮ │
+│ │                                         │ │
+│ │ Pipeline: landingai_ade_v2_extract      │ │
+│ │ Total Files: 252                        │ │
+│ │ Processed: 252                          │ │
+│ │ In Progress: 0                          │ │
+│ │ Successful: 251                         │ │
+│ │ Failed: 1                               │ │
+│ │ Skipped: 0                              │ │
+│ │ Success Rate: 99.6%                     │ │
+│ │ Avg Latency: 294539.0ms                 │ │
+│ │ Elapsed: 6278.0s                        │ │
+│ │                                         │ │
+│ ╰─────────────────────────────────────────╯ │
+│                 Active Jobs                 │
+│ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳┳┳┓ │
+│ ┃ Example ID                           ┃┃┃┃ │
+│ ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇╇╇┩ │
+│ │ short/texas_facilities_commission_p… ││││ │
+│ │ short/ti_spec_sheet_ne555_timer      ││││ │
+│ │ short/utah_fleet_rate_schedule_fy20… ││││ │
+│ │ short/uillinois_rate_card_carpool_2… ││││ │
+│ │ short/viega_price_list_propress_202… ││││ │
+│ │ short/we-energies-sample-bill        ││││ │
+│ │ short/southampton-ny-york-env-invoi… ││││ │
+│ │ short/utah_fleet_rate_schedule_fy20… ││││ │
+│ │ short/sec_13f_0009_coatue_management ││││ │
+│ │ short/viega_price_list_propress_2026 ││││ │
+│ └──────────────────────────────────────┴┴┴┘ │
+│ Processing landingai_ade_v2_extr… 1… 252/…  │
+╰─────────────────────────────────────────────╯
+============================================================
+Inference Run Summary
+============================================================
+Total:        252
+Successful:   251
+Failed:       1
+Skipped:      0
+Success Rate: 99.60%
+Avg Latency:  294538.99ms
+Output Dir:   output_full_2026-11-20/landingai_ade_v2_extract
+============================================================
+
+⚠️  1 error(s) occurred. See output_full_2026-11-20/landingai_ade_v2_extract/_errors.json
+
+First few errors:
+
+  1. short/sched_i__after_violence_project_ty2024: Provider error: Invalid attempt billing: Final attempt cost 0.027999999999999997 is below recorded component charges 0.028000000000000004 [debug payload: short/sched_i__after_violence_project_ty2024.error.raw.json]
+    Traceback (last 5 lines):
+          ^
+        File "src/extract_bench/inference/runner.py", line 104, in observe
+          raise self.billing_error from error
+      extract_bench.inference.runner._BillingError: Invalid attempt billing: Final attempt cost 0.027999999999999997 is below recorded component charges 0.028000000000000004
+
+============================================================
+Step 2/3: Running Evaluation [short]
+============================================================
+
+Running evaluation on: output_full_2026-11-20/landingai_ade_v2_extract
+Test cases directory: data
+Filtering by product type: extract
+Filtering by group: short
+=== Evaluation Plan ===
+  Result files found: 251 | Skipped: 0
+  Documents to evaluate: 251 (251 standard, 0 QA)
+=======================
+  [1/251] short/00581-2011-p0052: OK
+  [2/251] short/07021-2016-p0018: OK
+  [3/251] short/07021-2016-p0016: OK
+  [4/251] short/07021-2016-p0014: OK
+  [5/251] short/00581-2011-p0050: OK
+  [6/251] short/00581-2011-p0102: OK
+  [7/251] short/00581-2011-p0098: OK
+  [8/251] short/07021-2016-p0026: OK
+  [9/251] short/02-10121 H-12 7-2-2024 F-22628: OK
+  [10/251] short/07021-2016-p0029: OK
+  [11/251] short/07021-2016-p0038: OK
+  [12/251] short/07021-2016-p0032: OK
+  [13/251] short/07021-2016-p0039: OK
+  [14/251] short/07021-2016-p0040: OK
+  [15/251] short/07021-2016-p0051: OK
+  [16/251] short/07021-2016-p0052: OK
+  [17/251] short/07021-2016-p0053: OK
+  [18/251] short/07021-2016-p0074: OK
+  [19/251] short/07021-2016-p0078: OK
+  [20/251] short/07021-2016-p0082: OK
+  [21/251] short/08-15427 H-12 1-21-2003 F-01341: OK
+  [22/251] short/08-20813 H-12 10-17-2008 F-01094A: OK
+  [23/251] short/08-37943 H-12 09-25-2014 F-01249: OK
+  [24/251] short/08-43259 H-12 3-18-2024 F-22737: OK
+  [25/251] short/08-51344 H-12 10-2-2023 F-22666: OK
+  [26/251] short/2A-27-103150_116454: OK
+  [27/251] short/2A-9-136008_97695: OK
+  [28/251] short/2A-9-156032_107792: OK
+  [29/251] short/2A-9-160248_109904: OK
+  [30/251] short/2A-9-160258_109909: OK
+  [31/251] short/2A-9-160268_109914: OK
+  [32/251] short/2A-9-160266_109913: OK
+  [33/251] short/2A-9-160294_109927: OK
+  [34/251] short/2A-9-160282_109921: OK
+  [35/251] short/2A-9-160318_109939: OK
+  [36/251] short/2A-9-160298_109929: OK
+  [37/251] short/3N1AB7AP8FY283932_professional_valuation: OK
+  [38/251] short/3N1AB7AP8FY283932_professional_valuation_corrupted: OK
+  [39/251] short/593338187_200912_990PF-p0023: OK
+  [40/251] short/13f__dedeker_financial_llc: OK
+  [41/251] short/593338187_200912_990PF-p0025: OK
+  [42/251] short/593338187_200912_990PF-p0024: OK
+  [43/251] short/13f__audent_global_2025q4: OK
+  [44/251] short/593338187_200912_990PF-p0027: OK
+  [45/251] short/593338187_200912_990PF-p0026: OK
+  [46/251] short/593338187_200912_990PF-p0030: OK
+  [47/251] short/13f__sl_advisors_llc: OK
+  [48/251] short/593338187_200912_990PF-p0031: OK
+  [49/251] short/593338187_200912_990PF-p0033: OK
+  [50/251] short/593338187_200912_990PF-p0032: OK
+  [51/251] short/593338187_200912_990PF-p0034: OK
+  [52/251] short/7C-02014 H-12 5-20-2013 F-01083: OK
+  [53/251] short/7C-04947 H-12 12-7-2009 F-01079: OK
+  [54/251] short/593338187_200912_990PF-p0036: OK
+  [55/251] short/H9-53-2119_2144: OK
+  [56/251] short/H9-53-23_23: OK
+  [57/251] short/H9-53-1621_1656: OK
+  [58/251] short/593338187_200912_990PF-p0035: OK
+  [59/251] short/593338187_200912_990PF-p0037: OK
+  [60/251] short/H9-53-30_30: OK
+  [61/251] short/H9-53-319_311: OK
+  [62/251] short/H9-53-24_24: OK
+  [63/251] short/H9-53-31_31: OK
+  [64/251] short/593338187_200912_990PF-p0038: OK
+  [65/251] short/H9-53-32_32: OK
+  [66/251] short/H9-53-514_1043: OK
+  [67/251] short/H9-53-59_60: OK
+  [68/251] short/H9-53-7226_7240: OK
+  [69/251] short/H9-53-7234_7248: OK
+  [70/251] short/H9-53-7239_7253: OK
+  [71/251] short/H9-53-9349_9509: OK
+  [72/251] short/P18-28-1547: OK
+  [73/251] short/H9-53-9386_9545: OK
+  [74/251] short/P18-28-21_77: OK
+  [75/251] short/P18-28-35_39: OK
+  [76/251] short/P18-28-43_44: OK
+  [77/251] short/P18-28-50_51: OK
+  [78/251] short/P18-28-52_53: OK
+  [79/251] short/P18-28-54_55: OK
+  [80/251] short/P18-28-62_62: OK
+  [81/251] short/P4-27-51094_74234: OK
+  [82/251] short/P4-27-51022_74198: OK
+  [83/251] short/P4-83-199_29: OK
+  [84/251] short/P4-27-51318_74674: OK
+  [85/251] short/P4-83-211_35: OK
+  [86/251] short/P18-28-44_45: OK
+  [87/251] short/P4-83-443_152: OK
+  [88/251] short/P18-28-55_56: OK
+  [89/251] short/P18-28-56_57: OK
+  [90/251] short/P4-83-457_159: OK
+  [91/251] short/P4-83-449_155: OK
+  [92/251] short/P4-83-631_246: OK
+  [93/251] short/P4-27-51220_74625: OK
+  [94/251] short/P4-27-51300_74665: OK
+  [95/251] short/P4-Historical Single Signature83-10963_5480: OK
+  [96/251] short/P4-83-693_277: OK
+  [97/251] short/P4-83-201_30: OK
+  [98/251] short/P4-Historical Single Signature83-257_58: OK
+  [99/251] short/P4-Historical Single Signature83-223_41: OK
+  [100/251] short/W-1-9-258_260: OK
+  [101/251] short/W-1-9-260_262: OK
+  [102/251] short/W-1-9-261_263: OK
+  [103/251] short/P4-83-433_147: OK
+  [104/251] short/REDACTED_2007_NISSAN_MURANO_professional_valuation: OK
+  [105/251] short/ROGER-WINFIELD-SCOTT-FOUNDATION-INC-2009-580655183-p0025: OK
+  [106/251] short/ROGER-WINFIELD-SCOTT-FOUNDATION-INC-2009-580655183-p0023: OK
+  [107/251] short/W14-2nd Sub 53269 Revised W14: OK
+  [108/251] short/W14-2nd Sub 55975 Revised W14 ADMIN REVIEWED: OK
+  [109/251] short/W14-52342_W14: OK
+  [110/251] short/ROGER-WINFIELD-SCOTT-FOUNDATION-INC-2009-580655183-p0024: OK
+  [111/251] short/W14-53632_W14 ADMIN REVIEWED: OK
+  [112/251] short/W14-54500_W14 admin reviewed: OK
+  [113/251] short/W14-55311_W14 reviewed: OK
+  [114/251] short/W14-55711_W14 ADMIN REVIEWED: OK
+  [115/251] short/W14-57077_W14: OK
+  [116/251] short/W14-57728_W14_REVISED: OK
+  [117/251] short/W14-58025_W14 Admin Reviewed: OK
+  [118/251] short/W14-58509_W14 2nd sub revised: OK
+  [119/251] short/W14-58549_W14: OK
+  [120/251] short/W14-Atascosa SWD Well No. 4 - W-14 (Updated 01.22.2025): OK
+  [121/251] short/W2-27-216874_212740: OK
+  [122/251] short/W2-27-217184_213122: OK
+  [123/251] short/W2-27-217314_213200: OK
+  [124/251] short/W2-27-217884_213729: OK
+  [125/251] short/WVWJK73C19P047779_professional_valuation: OK
+  [126/251] short/WVWJK73C19P047779_professional_valuation_corrupted: OK
+  [127/251] short/aclu_cdwg_invoice: OK
+  [128/251] short/YV4952BL2C1140915_professional_valuation: OK
+  [129/251] short/YV4952BL2C1140915_professional_valuation_corrupted: OK
+  [130/251] short/arif-2021: OK
+  [131/251] short/arif-2022: OK
+  [132/251] short/ca_rad_crossover_inpatient_p5: OK
+  [133/251] short/arif-2024: OK
+  [134/251] short/ca_rad_crossover_inpatient_p5_corrupted: OK
+  [135/251] short/ca_rad_crossover_outpatient_p5: OK
+  [136/251] short/ca_rad_crossover_outpatient_p5_corrupted: OK
+  [137/251] short/bianco-2024: OK
+  [138/251] short/caterpillar_spec_sheet_312c_excavator_corrupted: OK
+  [139/251] short/budget_appendix_legis: OK
+  [140/251] short/budget_appendix_doe: OK
+  [141/251] short/brand_price_list_lifescience_2024_corrupted: OK
+  [142/251] short/caterpillar_spec_sheet_330_excavator_corrupted: OK
+  [143/251] short/caterpillar_spec_sheet_312c_excavator: OK
+  [144/251] short/cbp_7501_continuation_0002: OK
+  [145/251] short/caterpillar_spec_sheet_330_excavator: OK
+  [146/251] short/cbp_7501_continuation_0016: OK
+  [147/251] short/cbp_7501_continuation_0007: OK
+  [148/251] short/cbp_7501_continuation_0001: OK
+  [149/251] short/ccc_online_0005_american_family_chevrolet_sonic_corrupted: OK
+  [150/251] short/ccc_online_0005_american_family_chevrolet_sonic: OK
+  [151/251] short/ccc_online_0006_esurance_toyota_rav4_corrupted: OK
+  [152/251] short/ccc_online_0006_esurance_toyota_rav4: OK
+  [153/251] short/census_statab_12s0035: OK
+  [154/251] short/brand_price_list_lifescience_2024: OK
+  [155/251] short/census_statab_12s0711: OK
+  [156/251] short/census_statab_employment: OK
+  [157/251] short/cfpb_closing-disclosure_H25F: OK
+  [158/251] short/census_statab_income_by_state: OK
+  [159/251] short/census_statab: OK
+  [160/251] short/cfpb_closing-disclosure_H25F_corrupted: OK
+  [161/251] short/cfpb_closing-disclosure_H25E_corrupted: OK
+  [162/251] short/cfpb_closing-disclosure_H25E: OK
+  [163/251] short/dd1155_schedule_continuation_0002: OK
+  [164/251] short/dc-pepco-residential-bill: OK
+  [165/251] short/dd1155_schedule_continuation_0008: OK
+  [166/251] short/grafton_isotrope_invoice_19503: OK
+  [167/251] short/fort_bend_operativeiq_invoice: OK
+  [168/251] short/golden_corral_receipt_refugio_county_auditor: OK
+  [169/251] short/cfpb_closing-disclosure_filled-sample_corrupted: OK
+  [170/251] short/fidelity_0002_sample: OK
+  [171/251] short/h5Filing-45659-1: OK
+  [172/251] short/gsa_mas_it_labor_0004: OK
+  [173/251] short/gsa_mas_it_labor_0020: OK
+  [174/251] short/h5Filing-45884-1: OK
+  [175/251] short/h5Filing-45919-1: OK
+  [176/251] short/h5Filing-45887-1: OK
+  [177/251] short/h5Filing-46383-1: OK
+  [178/251] short/h5Filing-46302-1: OK
+  [179/251] short/h5Filing-46384-1: OK
+  [180/251] short/cfpb_closing-disclosure_filled-sample: OK
+  [181/251] short/h5Filing-46780-1: OK
+  [182/251] short/h5Filing-47175-1: OK
+  [183/251] short/h5Filing-48982-1: OK
+  [184/251] short/h5Filing-50745-2: OK
+  [185/251] short/h5Filing-66006-1: OK
+  [186/251] short/h5Filing-49070-1: OK
+  [187/251] short/hingham-grainger-invoice: OK
+  [188/251] short/hingham-wbmason-invoice: OK
+  [189/251] short/hingham_lowes_receipt: OK
+  [190/251] short/lancaster_county_ne_requisition_po_husker_steel: OK
+  [191/251] short/lancaster_county_ne_requisition_po_husker_steel_corrupted: OK
+  [192/251] short/mcdonalds_receipt_chicago_documentcloud: OK
+  [193/251] short/mission-tx-tyler-invoice: OK
+  [194/251] short/ms_medicaid_ra_adjustments: OK
+  [195/251] short/ms_medicaid_ra_adjustments_corrupted: OK
+  [196/251] short/ms_medicaid_ra_paid_denied_claims_corrupted: OK
+  [197/251] short/ms_medicaid_ra_paid_denied_claims: OK
+  [198/251] short/cbp_7501_continuation_0018: OK
+  [199/251] short/oklahoma_county_purchase_order_avl_systems: OK
+  [200/251] short/oklahoma_county_purchase_order_avl_systems_corrupted: OK
+  [201/251] short/passcoag-2020-w2-p0002-r1: OK
+  [202/251] short/passcoag-2020-w2-p0002-r2: OK
+  [203/251] short/passcoag-2020-w2-p0002-r3: OK
+  [204/251] short/passcoag-2020-w2-p0002-r4: OK
+  [205/251] short/passcoag-2020-w2-p0003-r2: OK
+  [206/251] short/passcoag-2020-w2-p0003-r1: OK
+  [207/251] short/passcoag-2020-w2-p0003-r4: OK
+  [208/251] short/passcoag-2020-w2-p0003-r3: OK
+  [209/251] short/passcoag-2020-w2-p0004-r1: OK
+  [210/251] short/passcoag-2020-w2-p0004-r2: OK
+  [211/251] short/passcoag-2020-w2-p0004-r3: OK
+  [212/251] short/passcoag-2020-w2-p0004-r4: OK
+  [213/251] short/passcoag-2020-w2-p0005-r1: OK
+  [214/251] short/passcoag-2020-w2-p0005-r3: OK
+  [215/251] short/passcoag-2020-w2-p0005-r4: OK
+  [216/251] short/passcoag-2020-w2-p0005-r2: OK
+  [217/251] short/passcoag-2020-w2-p0006-r1: OK
+  [218/251] short/passcoag-2020-w2-p0006-r2: OK
+  [219/251] short/passcoag-2020-w2-p0006-r3: OK
+  [220/251] short/passcoag-2020-w2-p0006-r4: OK
+  [221/251] short/ppl-two-bill-example: OK
+  [222/251] short/nport__bullfinch_fund_inc: OK
+  [223/251] short/nport__oak_associates_funds: OK
+  [224/251] short/nport__gabelli_growth_fund_2025q4: OK
+  [225/251] short/real_clinton_property_25_11073_corrupted: OK
+  [226/251] short/real_clinton_property_25_11073: OK
+  [227/251] short/sched_i__idaho_humanities_council_inc_ty2023: OK
+  [228/251] short/pershing_0001: OK
+  [229/251] short/sched_i__rotary_club_ty2024: OK
+  [230/251] short/real_wyo_Niobrara_2024: OK
+  [231/251] short/real_wyo_Weston_2024: OK
+  [232/251] short/southampton-ny-york-env-invoice: OK
+  [233/251] short/stephenville-axon-invoice: OK
+  [234/251] short/texas_facilities_commission_purchase_order_shelton-keller: OK
+  [235/251] short/texas_facilities_commission_purchase_order_shelton-keller_corrupted: OK
+  [236/251] short/sched_i__the_women_s_foundation_of_colorado_inc_ty2024: OK
+  [237/251] short/ti_spec_sheet_ne555_timer_corrupted: OK
+  [238/251] short/ti_spec_sheet_ne555_timer: OK
+  [239/251] short/uillinois_rate_card_carpool_2024_corrupted: OK
+  [240/251] short/uillinois_rate_card_carpool_2024: OK
+  [241/251] short/utah_fleet_rate_schedule_fy2024_corrupted: OK
+  [242/251] short/utah_fleet_rate_schedule_fy2024: OK
+  [243/251] short/real_franklin_nov_2025: OK
+  [244/251] short/we-energies-sample-bill: OK
+  [245/251] short/real_wyo_Goshen_2024: OK
+  [246/251] short/13f__radnor_capital_management_llc: OK
+  [247/251] short/real_franklin_aug_2025: OK
+  [248/251] short/sec_13f_0009_coatue_management: OK
+  [249/251] short/viega_price_list_propress_2026_corrupted: OK
+  [250/251] short/sec_13f_0019_soros_fund_management: OK
+  [251/251] short/viega_price_list_propress_2026: OK
+
+✅ Evaluation complete!
+📊 Results saved to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report.json
+
+============================================================
+Evaluation Summary
+============================================================
+Total Examples:  252
+Successful:     251
+Failed:          1
+Skipped:         0
+
+Aggregate Metrics:
+  avg_accuracy: 0.9405
+  avg_array_record_accuracy: 0.9280
+  avg_array_record_f1: 0.9281
+  avg_array_record_precision: 0.9287
+  avg_array_record_recall: 0.9280
+  avg_array_record_row_count_ratio: 0.9312
+  avg_confidence_scoped_auc: 0.0000
+  avg_confidence_scoped_coverage_at_95pct_precision: 0.0000
+  avg_confidence_scoped_normalized_auc: 0.0000
+  avg_confidence_scoped_precision_at_80pct_coverage: 0.0000
+  avg_confidence_scoped_unique_value_count: 0.0000
+  avg_confidence_signal_coverage: 0.0000
+  avg_extract_evidence_bbox_IOU_alignment: 0.6211
+  avg_extract_evidence_bbox_IOU_pass_rate: 0.5892
+  avg_extract_evidence_bbox_coverage: 0.9464
+  avg_extract_evidence_bbox_covered_pass_rate: 0.9238
+  avg_extract_evidence_page_covered_pass_rate: 0.8553
+  avg_extract_evidence_page_pass_rate: 0.8342
+  avg_extract_evidence_value_pass_rate: 0.9333
+  avg_extract_unified_grounded_f1: 0.6888
+  avg_extract_unified_grounded_precision: 0.7062
+  avg_extract_unified_grounded_recall: 0.6750
+  avg_extract_unified_page_f1: 0.8675
+  avg_extract_unified_page_precision: 0.9491
+  avg_extract_unified_page_recall: 0.8156
+  avg_extract_unified_value_f1: 0.9448
+  avg_extract_unified_value_precision: 0.9452
+  avg_extract_unified_value_recall: 0.9449
+
+Total Counts:
+  total_array_record_accuracy_evaluated: 44890
+  total_array_record_accuracy_passed: 43346
+  total_array_record_f1_fn: 1544
+  total_array_record_f1_fp: 1575
+  total_array_record_f1_tp: 43346
+  total_array_record_precision_fn: 1544
+  total_array_record_precision_fp: 1575
+  total_array_record_precision_tp: 43346
+  total_array_record_recall_fn: 1544
+  total_array_record_recall_fp: 1575
+  total_array_record_recall_tp: 43346
+  total_array_record_row_count_ratio: 4030
+  total_extract_evidence_bbox_IOU_alignment_fn: 0
+  total_extract_evidence_bbox_IOU_alignment_fp: 0
+  total_extract_evidence_bbox_IOU_alignment_tp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fn: 0
+  total_extract_evidence_bbox_IOU_pass_rate_fp: 0
+  total_extract_evidence_bbox_IOU_pass_rate_tp: 0
+  total_extract_evidence_bbox_coverage_fn: 0
+  total_extract_evidence_bbox_coverage_fp: 664
+  total_extract_evidence_bbox_coverage_tp: 32672
+  total_extract_evidence_bbox_covered_pass_rate_fn: 0
+  total_extract_evidence_bbox_covered_pass_rate_fp: 1146
+  total_extract_evidence_bbox_covered_pass_rate_tp: 32190
+  total_extract_evidence_page_covered_pass_rate_fn: 0
+  total_extract_evidence_page_covered_pass_rate_fp: 5077
+  total_extract_evidence_page_covered_pass_rate_tp: 34070
+  total_extract_evidence_page_pass_rate_fn: 0
+  total_extract_evidence_page_pass_rate_fp: 6008
+  total_extract_evidence_page_pass_rate_tp: 40028
+  total_extract_evidence_value_pass_rate_fn: 0
+  total_extract_evidence_value_pass_rate_fp: 1589
+  total_extract_evidence_value_pass_rate_tp: 44447
+
+⚠️  1 evaluation(s) failed
+============================================================
+📄 CSV exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_results.csv
+🧩 Rule CSV exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_rule_results.csv
+📝 Markdown report exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report.md
+🌐 HTML report exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report.html
+🌐 Detailed HTML report exported to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report_detailed.html
+
+============================================================
+Step 3/3: Generating Detailed Report [short]
+============================================================
+
+Loading evaluation summary from: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report.json
+Generating detailed HTML report...
+  Evaluation dir: output_full_2026-11-20/landingai_ade_v2_extract
+  Output dir (inference): output_full_2026-11-20/landingai_ade_v2_extract
+  Test cases dir: data
+  Output file: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report_detailed.html
+
+✓ Detailed report saved to: output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report_detailed.html
+  Open in browser to view interactive report
+
+============================================================
+Pipeline Complete!
+============================================================
+
+Results: output_full_2026-11-20/landingai_ade_v2_extract
+Report:  output_full_2026-11-20/landingai_ade_v2_extract/_evaluation_report_detailed.html
+0
