@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "required": [
+    "transactions"
+  ],
+  "properties": {
+    "transactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "amount",
+          "description",
+          "check_number",
+          "account_number_last4",
+          "transaction_type"
+        ],
+        "properties": {
+          "date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Posted date (or transaction date if posted date is not available). Prefer posted date.",
+            "format": "YYYY-MM-DD"
+          },
+          "amount": {
+            "type": "object",
+            "required": [
+              "amount",
+              "iso_4217_currency_code"
+            ],
+            "properties": {
+              "amount": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "The numeric value of the currency."
+              },
+              "iso_4217_currency_code": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "The ISO 4217 currency code (e.g., USD, EUR, GBP)."
+              }
+            },
+            "description": "The absolute monetary value of the transaction as printed.",
+            "additionalProperties": false
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Transaction description/memo as printed (merchant, check number, transfer label, etc.). CRITICAL: When a page of the transaction listing starts with a row that has NO DATE but contains description text (often an ID or suffix), that text is the CONTINUATION of the LAST transaction from the previous page - it belongs to that previous transaction's description, not to the next dated transaction. A transaction's own description begins only in the row that contains its date. Do not prepend orphaned continuation text from the top of a page to the next dated transaction."
+          },
+          "check_number": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Check number associated with this transaction when it represents a check being paid out of the account (i.e., a check written by the account holder).\n- Extract ONLY when the transaction is a check withdrawal (money leaving the account) and the description/memo contains a check identifier like \"CHECK 000000001042\", \"CHECK #1042\", or similar.\n- DO NOT extract for deposited checks, incoming checks, or any credits to the account.\n- Value must be the digits of the check number with any leading zeros removed (e.g., \"CHECK 000000001042\" -> \"1042\").\n- If the transaction is not a check withdrawal (or no check number is present), return null."
+          },
+          "transaction_type": {
+            "enum": [
+              "CREDIT",
+              "DEBIT",
+              null
+            ],
+            "description": "CREDIT or DEBIT relative to the account's balance direction. Never use the description text or merchant name even if a description mentions a company that typically sends payments.\nUse the first matching rule:\n1. If there are two amount columns determine type from the column in which the amount appears (e.g., 'Deposits/Additions/Credits' column \u2192 CREDIT; 'Withdrawals/Subtractions/Debits' column \u2192 DEBIT).\n2. If there are separate tables or sections per transaction category use the section header to determine type. Headers such as \"Deposits,\" \"Additions,\" \"Credits,\" or \"Electronic Credits\" \u2192 CREDIT. Headers such as \"Withdrawals,\" \"Subtractions,\" \"Debits,\" \"ATM and Debit Card Subtractions,\" \"Service Fees,\" or \"Electronic Withdrawals\" \u2192 DEBIT.\n3. Single \"Amount\" column with signed values: A positive amount \u2192 CREDIT; a negative amount \u2192 DEBIT. Allowed values: CREDIT = The transaction amount increases the account balance for deposit accounts (checking/savings). For credit accounts, CREDIT means a payment/refund that reduces the owed balance.; DEBIT = The transaction amount decreases the account balance for deposit accounts (checking/savings). For credit accounts, DEBIT means a purchase/fee/interest charge that increases the owed balance."
+          },
+          "account_number_last4": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The last four digits of the account number for the account this transaction belongs to. CRITICAL RULES: (1) Extract ONLY the final four digits of the account number (e.g., \"7104137390\" \u2192 \"7390\"). NEVER return the full account number. (2) Prefer the masked/truncated account number shown in page headers or account summaries (e.g., \"***** 7390\", \"Acct# ...4218\"), as these explicitly represent the correct suffix. (3) The value must be exactly four numeric digits with no masking characters, spaces, or prefixes (e.g., return \"7390\", NOT \"*****7390\" or \"...7390\"). (4) EVERY transaction in the SAME account section shares the IDENTICAL last four digits. Once identified for a section, reuse that exact value for ALL transactions in that section, including continuation pages. (5) For combined statements with multiple accounts (e.g., checking + savings), each account section has its own account number suffix. (6) This field must never be null\u2014every transaction belongs to an account with an identifiable suffix present in the statement."
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Posted transactions for this account during the statement period. Extract from the main detailed transaction activity listing \u2014 the section that shows individual transactions with columns for Date, Description/Memo, and Debit/Credit amounts (often with a running balance column). Each transaction must appear exactly once. Continuation pages of the main transaction listing are part of the same section and should be attributed to the same account.\nCheck transactions: Some statements list check withdrawals only in a dedicated check summary table (e.g., \"Checks Paid\", \"Checks Cleared\") rather than in the main transaction listing. If such a section exists, extract those rows as individual transactions and populate check_number. In other statements, checks appear in both the check summary and the main listing and the `check_number` should be used to identify and omit duplicates.\nCRITICAL EXCLUSION - Do NOT extract BALANCE ROWS: beginning balance, ending balance, and subtotal/total rows."
+    }
+  },
+  "additionalProperties": false
+}

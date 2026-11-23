@@ -1,0 +1,306 @@
+{
+  "type": "object",
+  "required": [
+    "case_name",
+    "court",
+    "docket_number",
+    "defendants",
+    "counts",
+    "charged_facts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "case_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The case caption or case name for the pleading."
+    },
+    "court": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The court where the pleading was filed."
+    },
+    "docket_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The docket, case, or cause number shown on the pleading."
+    },
+    "defendants": {
+      "type": "array",
+      "description": "All named defendants in the pleading.",
+      "items": {
+        "type": "object",
+        "required": [
+          "defendant_id",
+          "name",
+          "aliases",
+          "residence",
+          "role"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "defendant_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The stable defendant identifier if shown or inferable from the pleading."
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The defendant's full name."
+          },
+          "aliases": {
+            "type": "array",
+            "description": "Aliases, screen names, or handles associated with the defendant.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "residence": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Residence or location associated with the defendant."
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The role attributed to the defendant in the alleged scheme."
+          }
+        }
+      }
+    },
+    "counts": {
+      "type": "array",
+      "description": "Every charged count in the pleading. Count ranges must be expanded into one item per count.",
+      "items": {
+        "type": "object",
+        "required": [
+          "count_number",
+          "count_label",
+          "offense",
+          "statutes",
+          "defendants",
+          "incorporated_paragraphs",
+          "date_range",
+          "source_page"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "count_number": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The numeric count number."
+          },
+          "count_label": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The count label exactly as used in the document, e.g. Count Twelve."
+          },
+          "offense": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The charged offense named for this count."
+          },
+          "statutes": {
+            "type": "array",
+            "description": "Statutes cited for this count.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "defendants": {
+            "type": "array",
+            "description": "Defendant names charged in this count.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "incorporated_paragraphs": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Paragraphs incorporated by reference for this count."
+          },
+          "date_range": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Date range alleged for this count."
+          },
+          "source_page": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The generated PDF page where the count heading starts."
+          }
+        }
+      }
+    },
+    "charged_facts": {
+      "type": "array",
+      "description": "Every charged act, overt act, predicate act, or count-linked fact alleged in the pleading. Extract all items, including repeated or cross-referenced acts.",
+      "items": {
+        "type": "object",
+        "required": [
+          "fact_id",
+          "paragraph_id",
+          "primary_count",
+          "also_applies_to_counts",
+          "relationship_type",
+          "date",
+          "actor",
+          "actor_alias",
+          "defendants",
+          "victim",
+          "object",
+          "method",
+          "venue",
+          "amount_usd",
+          "referenced_exhibits",
+          "source_page"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "fact_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The stable act identifier shown in the pleading."
+          },
+          "paragraph_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The paragraph identifier for the act."
+          },
+          "primary_count": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The primary count to which this act belongs."
+          },
+          "also_applies_to_counts": {
+            "type": "array",
+            "description": "Other counts to which this same act is expressly incorporated or cross-applied.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "relationship_type": {
+            "enum": [
+              "charged_act",
+              "incorporated_by_reference",
+              "background_only",
+              null
+            ],
+            "description": "How the fact relates to the primary count. Allowed values: charged_act = The act is directly charged as part of the primary count.; incorporated_by_reference = The act is incorporated into another count by reference.; background_only = The act is background context and not directly charged.; null = The relationship type is not found."
+          },
+          "date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The act date in ISO format.",
+            "format": "YYYY-MM-DD"
+          },
+          "actor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The main actor for this fact."
+          },
+          "actor_alias": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Alias or handle used by the actor in this fact."
+          },
+          "defendants": {
+            "type": "array",
+            "description": "Defendants expressly associated with the fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "victim": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Victim, rights holder, entity, or counterparty affected by the fact."
+          },
+          "object": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The work, file, product, account, payment, or other object involved."
+          },
+          "method": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The alleged method or action."
+          },
+          "venue": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Server, channel, location, district, or venue tied to the act."
+          },
+          "amount_usd": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Dollar amount alleged for this fact, if any."
+          },
+          "referenced_exhibits": {
+            "type": "array",
+            "description": "Exhibits or schedules referenced for this fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_page": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The generated PDF page where the act starts."
+          }
+        }
+      }
+    }
+  }
+}

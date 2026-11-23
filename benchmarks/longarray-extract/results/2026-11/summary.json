@@ -1,0 +1,34 @@
+{
+  "all": {
+    "documents": 45,
+    "completed": 45,
+    "macro_accuracy": 0.9903996964605758,
+    "micro_accuracy": 0.9901753122391187,
+    "rows_expected": 29328,
+    "rows_predicted": 29331
+  },
+  "clinical": {
+    "documents": 12,
+    "completed": 12,
+    "macro_accuracy": 0.9924302639323154,
+    "micro_accuracy": 0.9908872530027121,
+    "rows_expected": 5162,
+    "rows_predicted": 5166
+  },
+  "financial": {
+    "documents": 25,
+    "completed": 25,
+    "macro_accuracy": 0.9913725318837099,
+    "micro_accuracy": 0.9928449583017438,
+    "rows_expected": 21104,
+    "rows_predicted": 21103
+  },
+  "legal": {
+    "documents": 8,
+    "completed": 8,
+    "macro_accuracy": 0.984313734555672,
+    "micro_accuracy": 0.981539141439505,
+    "rows_expected": 3062,
+    "rows_predicted": 3062
+  }
+}

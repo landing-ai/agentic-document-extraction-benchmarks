@@ -1,0 +1,239 @@
+{
+  "type": "object",
+  "required": [
+    "adverse_events"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "adverse_events": {
+      "type": "array",
+      "description": "Every adverse event occurrence listed in the primary patient-level adverse-event listing. Extract one row per printed adverse event occurrence. Copy subject-level context such as subject_id, site_id, treatment_group, age_years, sex, and race from the subject header above the event rows. Do not extract zero-event subject blocks, legends, footnotes, summaries, serious-only repeats, related-only repeats, AESI-only repeats, concomitant medications, protocol deviations, or any supportive listing outside the primary adverse-event listing.",
+      "items": {
+        "type": "object",
+        "required": [
+          "subject_id",
+          "site_id",
+          "treatment_group",
+          "age_years",
+          "sex",
+          "race",
+          "system_organ_class",
+          "system_organ_class_code",
+          "preferred_term",
+          "preferred_term_code",
+          "lower_level_term",
+          "lower_level_term_code",
+          "verbatim_term",
+          "start_date",
+          "end_date",
+          "relative_start_day",
+          "relative_end_day",
+          "duration_days",
+          "serious",
+          "severity",
+          "relationship_to_study_product",
+          "action_taken",
+          "outcome",
+          "aesi_category",
+          "narrative_reference"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "subject_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The subject or participant identifier from the subject block containing the event."
+          },
+          "site_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The site identifier associated with the subject."
+          },
+          "treatment_group": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The randomized or assigned treatment group for the subject at the time of the event."
+          },
+          "age_years": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "The subject age in years as printed in the subject header."
+          },
+          "sex": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The subject sex as printed in the subject header."
+          },
+          "race": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The subject race as printed in the subject header."
+          },
+          "system_organ_class": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The system organ class for the adverse event."
+          },
+          "system_organ_class_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The MedDRA-style numeric code printed alongside the system organ class label, when present."
+          },
+          "preferred_term": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The coded preferred term for the adverse event."
+          },
+          "preferred_term_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The MedDRA-style numeric code printed alongside the preferred term label, when present."
+          },
+          "lower_level_term": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The lower level term printed below the preferred term, when present. May equal the preferred term or be a finer-grained descriptor."
+          },
+          "lower_level_term_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The MedDRA-style numeric code printed alongside the lower level term, when present."
+          },
+          "verbatim_term": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The investigator-reported or verbatim event term, preserving the printed wording."
+          },
+          "start_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The event start date in ISO format.",
+            "format": "YYYY-MM-DD"
+          },
+          "end_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The event end date in ISO format, or null when ongoing or blank.",
+            "format": "YYYY-MM-DD"
+          },
+          "relative_start_day": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "The event start study day relative to first dose or procedure day."
+          },
+          "relative_end_day": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "The event end study day relative to first dose or procedure day, or null when ongoing or blank."
+          },
+          "duration_days": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "The printed or inferable duration in days when present for the event."
+          },
+          "serious": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the event is marked serious."
+          },
+          "severity": {
+            "enum": [
+              "MILD",
+              "MODERATE",
+              "SEVERE",
+              null
+            ],
+            "description": "The event severity category."
+          },
+          "relationship_to_study_product": {
+            "enum": [
+              "NOT_RELATED",
+              "UNLIKELY_RELATED",
+              "POSSIBLY_RELATED",
+              "PROBABLY_RELATED",
+              "RELATED",
+              null
+            ],
+            "description": "The investigator relationship assessment to the study product or procedure."
+          },
+          "action_taken": {
+            "enum": [
+              "NONE",
+              "DOSE_NOT_CHANGED",
+              "DOSE_REDUCED",
+              "DOSE_INTERRUPTED",
+              "DRUG_WITHDRAWN",
+              "NOT_APPLICABLE",
+              null
+            ],
+            "description": "The action taken with study product because of the event."
+          },
+          "outcome": {
+            "enum": [
+              "RECOVERED",
+              "RECOVERING",
+              "NOT_RECOVERED",
+              "RECOVERED_WITH_SEQUELAE",
+              "FATAL",
+              "UNKNOWN",
+              null
+            ],
+            "description": "The event outcome."
+          },
+          "aesi_category": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The adverse-event-of-special-interest category printed for the event, when the event matches one of the study's AESI definitions. Null when the event is not flagged as an AESI."
+          },
+          "narrative_reference": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The narrative cross-reference identifier (e.g. 'Narrative 14.3.2.S001') printed for the event when a per-event narrative exists. Null when no narrative is referenced."
+          }
+        }
+      }
+    }
+  }
+}
