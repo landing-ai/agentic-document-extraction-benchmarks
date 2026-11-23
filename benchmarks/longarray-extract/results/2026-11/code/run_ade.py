@@ -1,4 +1,4 @@
-"""Run ADE (DPT-3 Pro parse + v2 extract) on LongArray-Extract. PREPARED, NOT YET RUN.
+"""Run ADE (DPT-3 Pro parse + v2 extract) on LongArray-Extract.
 
 Dry run by default: prints the plan, document/page counts and a cost estimate,
 and calls nothing. Add --go to call the API.
