@@ -4,6 +4,7 @@ A dated record of every benchmark run published in this repository. Newest first
 
 ## 2026-11
 
+- **LongArray-Extract (Extend, 45 docs), run 2026-11-23:** ADE Parse dpt-3-pro-20261111 + Extract extract-20261111, public production API, standard tier. Mean per-document accuracy 99.04% (micro 99.02%; clinical 99.24%, financial 99.14%, legal 98.43%), 45/45 completed, no retries, 15,083.7 credits ($0.070 per page). Scored with Extend's reference scorer, unchanged. Predictions, run record, logs and code published in `benchmarks/longarray-extract/results/2026-11/`.
 - **ExtractBench (LlamaIndex, full 370 docs), run 2026-11-20, official submission ([run-llama/ExtractBench#172](https://github.com/run-llama/ExtractBench/pull/172)):** ADE Parse dpt-3-pro-20261111 + Extract extract-20261111, public production API, standard tier. Value F1 94.11 (short 94.88, medium 93.26, long 88.65), word grounding F1 66.14, page grounding F1 83.48, $0.0474 per page, 1 failed document, none over 30 minutes. All outputs and evaluator files published in `benchmarks/extractbench/results/2026-11/`. These files replace the preliminary 2026-11-12 import below; its summary numbers remain recorded here.
 - Repository created with scaffolding for DocVQA and ExtractBench (LlamaIndex).
 - **ExtractBench (LlamaIndex, full 370 docs), run 2026-11-12, preliminary (internal staging run; files superseded by the 2026-11-20 run):** extract-20261111 value F1 94.02 vs. 91.62 for extract-20260903. Grounding F1 not yet reported; re-run with latency improvements pending.

@@ -2,7 +2,7 @@
 
 **Reproducible results for LandingAI [Agentic Document Extraction (ADE)](https://landing.ai/agentic-document-extraction) on public document AI benchmarks published by others.**
 
-This repository reports how ADE performs on third-party benchmarks for AI document processing (also called intelligent document processing, or IDP). These benchmarks cover document question answering and structured field extraction. Every number here was produced by LandingAI using the code, configuration, and ADE version recorded alongside it. Each run is dated and kept, so you can see how results change over time.
+This repository reports how ADE performs on third-party benchmarks for AI document processing (also called intelligent document processing, or IDP). These benchmarks cover document question answering, structured field extraction and long-array extraction. Every number here was produced by LandingAI using the code, configuration, and ADE version recorded alongside it. Each run is dated and kept, so you can see how results change over time.
 
 > **Scope:** This is a single-vendor results repository, not an independent leaderboard. Where we show other systems' scores, they come from the benchmark authors' published leaderboard or paper, with a source link and retrieval date. We did not run those systems ourselves.
 
@@ -12,6 +12,7 @@ This repository reports how ADE performs on third-party benchmarks for AI docume
 |---|---|---|---|---|---|---|
 | [DocVQA](benchmarks/docvqa/) (validation) | Document visual question answering | Exact-match accuracy | **98.82%** (99.156% excl. 18 dataset issues; ANLS 0.991) | DPT-2 + Claude Sonnet 4.5 for QA | 2025-11-09 | [README](benchmarks/docvqa/README.md) |
 | [ExtractBench](benchmarks/extractbench/) (LlamaIndex) | Schema-guided extraction | Value F1 | **94.11** (word grounding F1 66.14) | DPT-3 Pro + extract-20261111 | 2026-11-20 | [README](benchmarks/extractbench/README.md) |
+| [LongArray-Extract](benchmarks/longarray-extract/) (Extend) | Long-array extraction | Mean per-document accuracy | **99.04%** (45/45 completed) | DPT-3 Pro + extract-20261111 | 2026-11-23 | [README](benchmarks/longarray-extract/README.md) |
 
 The machine-readable version of this table is in [`results.csv`](results.csv). The full history of runs is in [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -39,7 +40,9 @@ See [`METHODOLOGY.md`](METHODOLOGY.md) for how runs are configured, which metric
     │   ├── config.yaml
     │   ├── download_data.py # pulls from the official source; no data is committed
     │   └── results/YYYY-MM/ # summary.json + predictions.jsonl per run
-    └── extractbench/
+    ├── extractbench/
+    │   └── ...
+    └── longarray-extract/
         └── ...
 ```
 

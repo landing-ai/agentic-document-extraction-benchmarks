@@ -5,3 +5,5 @@ docvqa,document_visual_question_answering,validation,anls_derived,0.9908,5349,dp
 extractbench,schema_guided_extraction,full,value_f1,0.9411,370,dpt-3-pro-20261111 + extract-20261111,,2026-11-20,benchmarks/extractbench/results/2026-11/
 extractbench,schema_guided_extraction,full,word_grounding_f1,0.6614,370,dpt-3-pro-20261111 + extract-20261111,,2026-11-20,benchmarks/extractbench/results/2026-11/
 extractbench,schema_guided_extraction,full,page_grounding_f1,0.8348,370,dpt-3-pro-20261111 + extract-20261111,,2026-11-20,benchmarks/extractbench/results/2026-11/
+longarray-extract,long_array_extraction,full,mean_per_document_accuracy,0.9904,45,dpt-3-pro-20261111 + extract-20261111,,2026-11-23,benchmarks/longarray-extract/results/2026-11/
+longarray-extract,long_array_extraction,full,micro_accuracy,0.9902,45,dpt-3-pro-20261111 + extract-20261111,,2026-11-23,benchmarks/longarray-extract/results/2026-11/

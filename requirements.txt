@@ -5,3 +5,7 @@ python-Levenshtein
 tqdm
 llama-extract-bench
 huggingface_hub
+pyarrow
+scipy
+rapidfuzz
+numpy

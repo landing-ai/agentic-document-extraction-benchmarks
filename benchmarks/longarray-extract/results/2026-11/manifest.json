@@ -1,0 +1,70 @@
+{
+  "benchmark": "LongArray-Extract",
+  "dataset": {
+    "repo": "Extend-AI/LongArray-Extract",
+    "revision": "f2ae30264ecd942fa0a9b9e787bb42e1e2577184",
+    "parquet_sha256": {
+      "clinical/test-00000-of-00001.parquet": "44cae66e2446358a7feadd87b0af8757a53b99c3d544b4b2bfaeabad66887794",
+      "financial/test-00000-of-00001.parquet": "783fa26d265288d3f2ea8d8df831a133ad94a37d380b44dfb64c3ba3b65f7a1a",
+      "legal/test-00000-of-00001.parquet": "28f71f11399276e07b24b565ebbc9d72bbeb0c5e29e06adcc90a3ab478a64454"
+    }
+  },
+  "documents": 45,
+  "pages": 2152,
+  "system": {
+    "parse_api": "ADE v2 parse jobs",
+    "parse_model": "dpt-3-pro-20261111",
+    "extract_api": "ADE v2 extract jobs",
+    "extract_model": "extract-20261111",
+    "service_tier": "standard",
+    "extract_options": "defaults (strict=false, grounding=true)",
+    "endpoint": "https://api.ade.landing.ai (production)",
+    "sdk": "landingai-ade 1.18.1"
+  },
+  "procedure": {
+    "workers": 4,
+    "job_timeout_s": 7200,
+    "poll_interval_s": 5.0,
+    "retries": "retry on failure only: a parse or extract job that errors, fails or times out is resubmitted, up to 3 attempts per stage (waits 30 s, then 120 s). A job that completes is never re-run, whatever its output. Every attempt is logged. A document that still fails has no prediction and scores 0",
+    "post_processing": "none; the extract result's `extraction` object is the prediction",
+    "schemas": "published schemas with Extend-only keys translated (schema_for_ade.py, METHOD.md)"
+  },
+  "schemas_sha256": {
+    "schemas/clinical.json": "72ab5c627cb993c277679ac831d3356513a84b28185edee5dcc7cd246f397aed",
+    "schemas/financial.json": "573399d7110a39b3f9b7d7be0bd70fcb3ba14aa72491607ae4412c4415b5ee3d",
+    "schemas/legal.json": "ac85008f709557d1860da6a3bfc071dafeb7262f4edd0ece92516901ce95d346",
+    "schemas_ade/clinical.json": "d695f10521e88952b40aa171609399b76a1aaab30e83e9235cd0f37793ee66dd",
+    "schemas_ade/financial.json": "0cf249574f05659417c3683973d8a488611799c0a61da102b2f6794db2633761",
+    "schemas_ade/legal.json": "fd918011d05cd68d9418fcbb1bd91ffac9999f5517d2b9593f8d818f2799dbe0"
+  },
+  "code_sha256": {
+    "run_ade.py": "5f1673740c353bdaf1726b57f07a695baa0a589d5c65707ef03a5c6ef781c23d",
+    "schema_for_ade.py": "534ed8235288484d65d96df8114b724368c6b280945e5d287b6f052e5dce1832",
+    "score.py": "1dda2ee1b59b5e164525a2ff01a304da16f85afe4ffdbe962b337747023ab291"
+  },
+  "environment": {
+    "python": "3.13.7",
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "packages": {
+      "landingai-ade": "1.18.1",
+      "numpy": "2.5.5",
+      "scipy": "1.18.1",
+      "rapidfuzz": "3.14.6"
+    }
+  },
+  "command": "python -I run_ade.py --run 2026-11-23_dpt-3-pro-20261111 --go",
+  "started_at": "2026-11-23T20:41:51+00:00",
+  "finished_at": "2026-11-23T22:09:56+00:00",
+  "outcome": {
+    "completed": 45,
+    "failed": [],
+    "parse_model_versions": [
+      "dpt-3-pro-20261111"
+    ],
+    "extract_model_versions": [
+      "extract-20261111"
+    ],
+    "documents_with_retries": [],
+    "credits": 15083.7
+  }
+}
