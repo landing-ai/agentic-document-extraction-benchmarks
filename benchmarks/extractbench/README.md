@@ -22,6 +22,10 @@ LandingAI Agentic Document Extraction (ADE): Parse `dpt-3-pro-20261111` and Extr
 - **Scoring:** ExtractBench's own evaluator at [`ab573f7`](https://github.com/run-llama/ExtractBench/commit/ab573f7). Scores are identical under the earlier evaluator (`36e9d20`).
 - **Leaderboard context:** on the leaderboard as of 2026-11-20 this ranks 17th of 59 on value F1 and has the highest word-level grounding of the 12 specialized document APIs. The leader is LlamaExtract Agentic Plus at 96.17. See the [official leaderboard](https://github.com/run-llama/ExtractBench#extractbench-leaderboard) for current standings.
 
+## Value Browser
+
+[ExtractBench Value Browser](https://landing-ai.github.io/agentic-document-extraction-benchmarks/extractbench/browser/) shows every value the scorer assessed in this run, sorted into three groups: 756,401 correct (94.08%), 7,543 functionally equivalent (0.94%) and 40,024 errors (4.98%). A value is functionally equivalent when the scorer marks it wrong but whoever receives it would act the same as with the answer key: for example a different date format, spacing inside a word, or an abbreviation. The page has counts for every value, sample cards with page crops, and a description of each rule. The official value F1 above is unchanged.
+
 ## Files
 
 Everything from the run is in [`results/2026-11/`](results/2026-11/). Large files are gzipped. Internal job and organization IDs, and local file paths, are replaced with placeholders; nothing else is changed.
