@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Every value ExtractBench scored in LandingAI's 2026-11-20 run, split into correct, functionally equivalent and true errors, with page crops.">
+<title>ExtractBench Value Browser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600&display=swap">
+<style>
+/* Layout: a reviewer's worksheet. Summary strip, then tabs, a filter rail of rule chips, and a grid of value cards with page crops. */
+:root {
+  --paper: #f6f7f5;
+  --sheet: #ffffff;
+  --ink: #1c2321;
+  --ink-2: #56605c;
+  --rule: #dfe3e0;
+  --key: #0f8a79;
+  --ours: #d24d1c;
+  --correct: #2f7d3b;
+  --equiv: #3a5fb0;
+  --error: #b8322a;
+  --chip: #eef1ef;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141816; --sheet: #1c211f; --ink: #e4e9e6; --ink-2: #9aa5a0; --rule: #2e3532;
+    --key: #3cc0ab; --ours: #f07a4a; --correct: #6cc07a; --equiv: #86a5ec; --error: #ef7a70; --chip: #252b28;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141816; --sheet: #1c211f; --ink: #e4e9e6; --ink-2: #9aa5a0; --rule: #2e3532;
+  --key: #3cc0ab; --ours: #f07a4a; --correct: #6cc07a; --equiv: #86a5ec; --error: #ef7a70; --chip: #252b28;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px;
+}
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 28px; }
+h1 { font-family: var(--font-display); font-size: clamp(26px, 4vw, 36px); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h2 { font-family: var(--font-display); font-size: 20px; margin: 0; }
+p { margin: 0; max-width: 70ch; }
+.lede { color: var(--ink-2); }
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); font-weight: 600; }
+.num { font-variant-numeric: tabular-nums; }
+header { display: grid; gap: 10px; }
+
+/* summary */
+.summary { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 20px; display: grid; gap: 16px; }
+.totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+.total { display: grid; gap: 2px; border-left: 4px solid var(--c); padding-left: 12px; }
+.total b { font-family: var(--font-data); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.total span { color: var(--ink-2); font-size: 13px; }
+.bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; background: var(--chip); }
+.bar i { display: block; height: 100%; background: var(--c); }
+.bar-legend { font-size: 13px; color: var(--ink-2); }
+.legend-boxes { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--ink-2); }
+.swatch { display: inline-block; width: 14px; height: 10px; border: 2.5px solid var(--c); margin-right: 6px; vertical-align: -1px; }
+
+/* tabs */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+.tab { appearance: none; border: 0; background: none; font: inherit; color: var(--ink-2); padding: 10px 14px; cursor: pointer;
+  border-bottom: 3px solid transparent; margin-bottom: -1px; font-weight: 500; display: flex; gap: 8px; align-items: baseline; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--c); }
+.tab small { font-family: var(--font-data); font-size: 12px; color: var(--ink-2); }
+.tab:focus-visible, .chip:focus-visible, select:focus-visible, input:focus-visible, .more:focus-visible { outline: 2px solid var(--equiv); outline-offset: 2px; }
+
+.panel-intro { display: grid; gap: 6px; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.controls label { font-size: 13px; color: var(--ink-2); display: flex; gap: 6px; align-items: center; }
+select, input[type="search"] { font: inherit; font-size: 14px; padding: 6px 10px; border: 1px solid var(--rule); border-radius: 4px; background: var(--sheet); color: var(--ink); }
+input[type="search"] { width: min(280px, 100%); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { appearance: none; font: inherit; font-size: 13px; border: 1px solid var(--rule); background: var(--chip); color: var(--ink);
+  padding: 4px 10px; border-radius: 999px; cursor: pointer; display: inline-flex; gap: 6px; align-items: baseline; }
+.chip small { font-family: var(--font-data); font-size: 11px; color: var(--ink-2); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip[aria-pressed="true"] small { color: var(--paper); opacity: .75; }
+.rule-note { font-size: 14px; color: var(--ink-2); min-height: 1.5em; }
+.rule-note b { color: var(--ink); font-weight: 600; }
+.count { font-size: 13px; color: var(--ink-2); }
+
+/* table of counts */
+.breakdown { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 5px 10px 5px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+td.n { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; }
+th.n { text-align: right; }
+details > summary { cursor: pointer; font-size: 14px; color: var(--ink-2); }
+
+/* cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 16px; align-items: start; }
+.card { background: var(--sheet); border: 1px solid var(--rule); border-top: 3px solid var(--c); border-radius: 4px; display: grid; min-width: 0; }
+.card-head { padding: 12px 14px 8px; display: grid; gap: 4px; min-width: 0; }
+.tagrow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: space-between; }
+.tag { font-size: 12px; font-weight: 600; color: var(--c); }
+.pts { font-family: var(--font-data); font-size: 11px; color: var(--ink-2); }
+.doc { font-size: 13px; color: var(--ink-2); overflow-wrap: anywhere; }
+.path { font-family: var(--font-data); font-size: 12.5px; overflow-wrap: anywhere; }
+.vals { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; padding: 4px 14px 12px; font-size: 13.5px; }
+.vals dt { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; padding-top: 2px; white-space: nowrap; }
+.vals dt.k { color: var(--key); } .vals dt.o { color: var(--ours); }
+.vals dd { margin: 0; font-family: var(--font-data); font-size: 13px; overflow-wrap: anywhere; white-space: pre-wrap; max-height: 9.5em; overflow-y: auto; min-width: 0; }
+.vals dd.null { color: var(--ink-2); font-style: italic; font-family: var(--font-body); }
+figure { margin: 0; border-top: 1px solid var(--rule); background: #fff; }
+figure img { display: block; width: 100%; height: auto; }
+figcaption { font-size: 12px; color: var(--ink-2); padding: 6px 14px 10px; background: var(--sheet); }
+.noimg { border-top: 1px solid var(--rule); font-size: 12.5px; color: var(--ink-2); padding: 10px 14px 12px; }
+.more { justify-self: center; appearance: none; font: inherit; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); padding: 8px 18px; border-radius: 4px; cursor: pointer; }
+.empty { color: var(--ink-2); padding: 24px 0; }
+footer { font-size: 13px; color: var(--ink-2); display: grid; gap: 6px; border-top: 1px solid var(--rule); padding-top: 16px; }
+code { font-family: var(--font-data); font-size: .92em; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">ExtractBench · official run 2026-11-20 · DPT-3 Pro parse, extract-20261111</div>
+    <h1>ExtractBench Value Browser</h1>
+    <p class="lede">Every value the ExtractBench scorer checked, sorted into three groups: correct, functionally equivalent (the recipient would act the same way as with the answer key), and true errors. Cards are a sample; the counts cover every value.</p>
+  </header>
+
+  <section class="summary" aria-label="Totals">
+    <div class="totals" id="totals"></div>
+    <div class="bar" id="bar" role="img"></div>
+    <div class="legend-boxes">
+      <span><span class="swatch" style="--c: var(--key)"></span>Answer key value, found in our parse text</span>
+      <span><span class="swatch" style="--c: var(--ours)"></span>Our value, from the extraction's citation</span>
+    </div>
+  </section>
+
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+
+  <section class="panel-intro">
+    <p id="panel-desc" class="lede"></p>
+    <div class="breakdown"><details id="breakdown"><summary>Counts for every value in this group</summary><div id="breakdown-table"></div></details></div>
+  </section>
+
+  <div class="chips" id="chips" aria-label="Filter by rule or category"></div>
+  <p class="rule-note" id="rule-note"></p>
+
+  <div class="controls">
+    <label for="split">Split
+      <select id="split"><option value="">All</option><option value="short">Short</option><option value="medium">Medium</option><option value="long">Long</option></select>
+    </label>
+    <label for="q">Search
+      <input type="search" id="q" placeholder="Document, field or value">
+    </label>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <button class="more" id="more" type="button" hidden>Show more</button>
+
+  <footer>
+    <p>Source: ExtractBench official scorer cell list for the 2026-11-20 run (369 scored documents; one failed document has no cells). Classification: <code>functional_equivalence.py</code>, rules approved 2026-11-22. Points are approximate: a document's lost value-F1 points spread evenly over its wrong cells, as a share of the 370-document score.</p>
+    <p>Page images come from the public ExtractBench dataset. The key's box is found by searching our parse text for the key value, so it can be missing when our parse doesn't contain that text, or ambiguous when the text appears many times.</p>
+  </footer>
+</div>
+
+<script>
+const GROUPS = {
+  error: { label: "True errors", color: "var(--error)", desc: "Values that differ from the answer key in a way that would change what the recipient does: a different number or name, a missing value, a whole row missing or added. Sample weighted toward the values that cost the most points." },
+  equivalent: { label: "Functionally equivalent", color: "var(--equiv)", desc: "Values the scorer marked wrong but the recipient would treat the same as the key. Up to eight examples per rule, from different documents where possible." },
+  correct: { label: "Correct", color: "var(--correct)", desc: "Values the scorer marked correct. One random non-empty value from each of 50 random documents." },
+};
+const RULES = {
+  "T1 case/space/punctuation": "Same text apart from letter case, spacing or punctuation.",
+  "T1 number format": "Same number with a different currency sign, separators or trailing zeros.",
+  "T1 ID separators": "Same code with or without separators, such as a ZIP+4 or phone number.",
+  "T1 date format": "Same calendar date written differently.",
+  "T2 empty-value convention": "Blank on one side and an empty value (0, unchecked, N/A) on the other.",
+  "T3 unit or label word": "A unit word, ordinal suffix or field label added (20+ vs 20+ years).",
+  "I1 placeholder values": "Both sides are masks or redaction markers, such as XXX-XX-XXXX vs XXX-XX-XXXXX.",
+  "E1 printed vs computed": "Our value is the exact figure behind a rounded printed one (18.97 vs 19.0).",
+  "F1 encoding": "HTML entities, invisible characters, accents, or a line break written as \\n.",
+  "F2 spacing inside words": "Same characters once spaces are removed (COM CLA vs COM CL A).",
+  "F3 empty marker vs null": "Blank on one side, an empty marker on the other: a dash, NONE, NAME ON FILE, a FOIA code.",
+  "F4 suffix or state": "An organisation suffix or a state added or dropped (TRANSOIL MARKETING INC.).",
+  "F5 abbreviation": "Abbreviation vs the full word (RD vs ROAD).",
+  "F6 label prefix": "A field label in front of the value (Civil Action No. 25-1270-ACR).",
+  "F7 list same items": "Lists with the same items, in a different order or with small formatting differences.",
+  "F8 unit of measure": "A number with or without its unit or map datum (3,300 vs 3,300 ft.).",
+  "F9 comma inversion": "KOREA, REPUBLIC OF vs REPUBLIC OF KOREA.",
+  "P1 Pueblo page numbering": "Pueblo check register: our page number is one less than the key on every row, a numbering convention.",
+  "S1 sign on a loss field": "Sign flipped on a field whose name says it is a loss.",
+  "Answer-key correction": "The key was checked against the page and corrected by a person.",
+  "Exact match": "The scorer marked the value correct.",
+  "text: different value": "A different text value.",
+  "null where key has value": "We returned nothing where the key has a value.",
+  "value where key is null": "We returned a value where the key is blank.",
+  "row: extra (extracted, not in key)": "A value in a row we extracted that the key doesn't have.",
+  "row: missing (in key, not extracted)": "A value in a row of the key that we didn't extract.",
+  "number: different value": "A different number.",
+  "text: partial (one contains the other)": "One value contains the other but information is lost or added.",
+  "number: rounding (<1%)": "A number within 1% of the key, usually a misread digit.",
+  "text: date differs": "A different date, or a date where the key has other text.",
+  "structure differs": "A list with different items.",
+  "text: punctuation/case/spacing only": "A punctuation difference that changes meaning, such as 1,550 vs 1.550.",
+  "boolean flipped": "A checkbox read the opposite way.",
+  "number: sign": "Sign flipped on a field that isn't a loss.",
+  "number: scale (x100/x1000)": "The number is off by a power of ten or digits are dropped.",
+};
+const PAGE = 24;
+const state = { tab: "correct", reason: "", split: "", q: "", shown: PAGE };
+let DATA = null;
+
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => n.toLocaleString("en-US");
+const pct = (n, t) => (100 * n / t).toFixed(2) + "%";
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function groupTotals(s) {
+  return { correct: s.correct, equivalent: s.functionally_equivalent, error: s.error };
+}
+
+function renderSummary() {
+  const s = DATA.summary, t = s.cells_assessed, g = groupTotals(s);
+  $("totals").innerHTML =
+    `<div class="total" style="--c: var(--ink-2)"><span>Values the scorer assessed</span><b>${fmt(t)}</b><span>${s.documents_scored} documents</span></div>` +
+    ["correct", "equivalent", "error"].map((k) =>
+      `<div class="total" style="--c: ${GROUPS[k].color}"><span>${GROUPS[k].label}</span><b>${fmt(g[k])}</b><span>${pct(g[k], t)} of values</span></div>`).join("");
+  $("bar").innerHTML = ["correct", "equivalent", "error"].map((k) =>
+    `<i style="--c: ${GROUPS[k].color}; width: ${100 * g[k] / t}%" title="${GROUPS[k].label}: ${pct(g[k], t)}"></i>`).join("");
+  $("bar").setAttribute("aria-label", `Correct ${pct(g.correct, t)}, functionally equivalent ${pct(g.equivalent, t)}, errors ${pct(g.error, t)}`);
+}
+
+function renderTabs() {
+  const g = groupTotals(DATA.summary);
+  $("tabs").innerHTML = ["correct", "equivalent", "error"].map((k) =>
+    `<button class="tab" role="tab" style="--c: ${GROUPS[k].color}" aria-selected="${state.tab === k}" data-tab="${k}">${GROUPS[k].label} <small>${fmt(g[k])}</small></button>`).join("");
+}
+
+function reasonStats() {
+  if (state.tab === "correct") return [];
+  const key = state.tab === "error" ? "error" : "equivalent";
+  const by = DATA.summary.by_reason[key] || {};
+  return Object.entries(by).map(([r, v]) => ({ r, cells: v.cells, docs: v.docs, pts: DATA.summary.points_by_reason[r] || 0 }));
+}
+
+function renderPanel() {
+  $("panel-desc").textContent = GROUPS[state.tab].desc;
+  const stats = reasonStats();
+  const sampled = DATA.cards.filter((c) => c.cls === state.tab);
+  const inSample = {};
+  sampled.forEach((c) => (inSample[c.reason] = (inSample[c.reason] || 0) + 1));
+  $("breakdown").hidden = !stats.length;
+  if (stats.length) {
+    stats.sort((a, b) => b.cells - a.cells);
+    const ptsHead = state.tab === "error" ? "Points lost" : "Points recovered";
+    $("breakdown-table").innerHTML = `<table><thead><tr><th>${state.tab === "error" ? "Category" : "Rule"}</th><th class="n">Values</th><th class="n">Documents</th><th class="n">${ptsHead}</th><th class="n">Cards</th></tr></thead><tbody>` +
+      stats.map((s) => `<tr><td>${esc(s.r)}<br><span style="color: var(--ink-2)">${esc(RULES[s.r] || "")}</span></td><td class="n">${fmt(s.cells)}</td><td class="n">${s.docs}</td><td class="n">${s.pts.toFixed(2)}</td><td class="n">${inSample[s.r] || 0}</td></tr>`).join("") +
+      `</tbody></table>`;
+  }
+  const chipList = stats.length ? stats.filter((s) => inSample[s.r]) : [];
+  $("chips").innerHTML = chipList.length
+    ? `<button class="chip" type="button" aria-pressed="${!state.reason}" data-reason="">All <small>${sampled.length}</small></button>` +
+      chipList.map((s) => `<button class="chip" type="button" aria-pressed="${state.reason === s.r}" data-reason="${esc(s.r)}">${esc(s.r)} <small>${inSample[s.r]}</small></button>`).join("")
+    : "";
+  $("rule-note").innerHTML = state.reason ? `<b>${esc(state.reason)}.</b> ${esc(RULES[state.reason] || "")}` : "";
+}
+
+function filtered() {
+  const q = state.q.trim().toLowerCase();
+  let rows = DATA.cards.filter((c) => c.cls === state.tab &&
+    (!state.reason || c.reason === state.reason) &&
+    (!state.split || c.split === state.split) &&
+    (!q || [c.doc, c.path, c.key, c.ours, c.reason].some((v) => String(v).toLowerCase().includes(q))));
+  rows.sort((a, b) => a.doc.localeCompare(b.doc) || a.path.localeCompare(b.path));
+  return rows;
+}
+
+function caption(c) {
+  const bits = [`Page ${c.page}`];
+  if (c.whole_page) bits.push("neither value could be located, so the whole page is shown");
+  else {
+    if (!c.key_null && !c.key_located) bits.push("key value not found in our parse text");
+    if (c.key_other_page) bits.push("key value found on another page");
+    if (!c.ours_null && !c.ours_located) bits.push("no citation box for our value");
+  }
+  return bits.join(" · ");
+}
+
+function card(c) {
+  const color = GROUPS[c.cls].color;
+  const pts = c.cls === "correct" ? "" : `<span class="pts" title="Approximate share of the overall value-F1 score">${c.cls === "error" ? "−" : "+"}${c.pts < 0.001 ? "<0.001" : c.pts.toFixed(3)} pts</span>`;
+  const val = (v, isNull) => isNull ? `<dd class="null">blank</dd>` : `<dd>${esc(v)}</dd>`;
+  const img = c.img
+    ? `<figure><img src="${c.img}" loading="lazy" alt="Page crop from ${esc(c.doc)} around ${esc(c.path)}"><figcaption>${esc(caption(c))}</figcaption></figure>`
+    : `<div class="noimg">No page image: neither value could be found on the page${c.ours_null ? " (we returned nothing, and the key's text isn't in our parse)" : ""}.</div>`;
+  return `<article class="card" style="--c: ${color}">
+    <div class="card-head">
+      <div class="tagrow"><span class="tag">${esc(c.reason)}</span>${pts}</div>
+      <div class="doc">${esc(c.split)} / ${esc(c.doc)}${c.doc_f1 != null ? ` · doc value F1 ${c.doc_f1}` : ""}</div>
+      <div class="path">${esc(c.path)}</div>
+    </div>
+    <dl class="vals"><dt class="k">Key</dt>${val(c.key, c.key_null)}<dt class="o">Ours</dt>${val(c.ours, c.ours_null)}</dl>
+    ${img}
+  </article>`;
+}
+
+function renderGrid() {
+  const rows = filtered();
+  $("count").textContent = `${rows.length} card${rows.length === 1 ? "" : "s"}`;
+  $("grid").innerHTML = rows.length ? rows.slice(0, state.shown).map(card).join("") : `<p class="empty">No cards match these filters. Clear the search or choose another split.</p>`;
+  $("more").hidden = rows.length <= state.shown;
+  $("more").textContent = `Show more (${rows.length - state.shown} left)`;
+}
+
+function render() { renderTabs(); renderPanel(); renderGrid(); }
+
+function setTab(t) {
+  state.tab = GROUPS[t] ? t : "correct"; state.reason = ""; state.shown = PAGE;
+  render();
+}
+
+$("tabs").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-tab]"); if (!b) return;
+  if (location.hash !== "#" + b.dataset.tab) location.hash = b.dataset.tab; else setTab(b.dataset.tab);
+});
+$("chips").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-reason]"); if (!b) return;
+  state.reason = b.dataset.reason; state.shown = PAGE; renderPanel(); renderGrid();
+});
+$("split").addEventListener("change", (e) => { state.split = e.target.value; state.shown = PAGE; renderGrid(); });
+$("q").addEventListener("input", (e) => { state.q = e.target.value; state.shown = PAGE; renderGrid(); });
+$("more").addEventListener("click", () => { state.shown += PAGE; renderGrid(); });
+window.addEventListener("hashchange", () => setTab(location.hash.slice(1)));
+
+fetch("cards.json").then((r) => r.json()).then((d) => {
+  DATA = d;
+  renderSummary();
+  setTab(location.hash.slice(1) || "correct");
+}).catch(() => {
+  $("grid").innerHTML = `<p class="empty">The card data didn't load. Reload the page to try again.</p>`;
+});
+</script>
+
+</body>
+</html>
