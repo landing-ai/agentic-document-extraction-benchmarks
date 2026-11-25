@@ -7,3 +7,6 @@ extractbench,schema_guided_extraction,full,word_grounding_f1,0.6614,370,dpt-3-pr
 extractbench,schema_guided_extraction,full,page_grounding_f1,0.8348,370,dpt-3-pro-20261111 + extract-20261111,,2026-11-20,benchmarks/extractbench/results/2026-11/
 longarray-extract,long_array_extraction,full,mean_per_document_accuracy,0.9904,45,dpt-3-pro-20261111 + extract-20261111,,2026-11-23,benchmarks/longarray-extract/results/2026-11/
 longarray-extract,long_array_extraction,full,micro_accuracy,0.9902,45,dpt-3-pro-20261111 + extract-20261111,,2026-11-23,benchmarks/longarray-extract/results/2026-11/
+pulsebench-tab,table_extraction,full,tlag_excl_missing,0.7863,1532,dpt-3-pro-20261111,,2026-11-24,benchmarks/pulsebench-tab/results/2026-11/
+pulsebench-tab,table_extraction,full,tlag_missing_as_zero,0.6619,1820,dpt-3-pro-20261111,,2026-11-24,benchmarks/pulsebench-tab/results/2026-11/
+pulsebench-tab,table_extraction,full,coverage,0.8418,1820,dpt-3-pro-20261111,,2026-11-24,benchmarks/pulsebench-tab/results/2026-11/
