@@ -1,0 +1,48 @@
+{
+ "benchmark": "PulseBench-Tab",
+ "dataset": {
+  "repo": "pulse-ai/PulseBench-Tab",
+  "revision": "e0e1fd5c4b3f7daa0c6afed88177ed9242e6593d",
+  "samples": 1820
+ },
+ "scorer": {
+  "repo": "Pulse-Software-Corp/PulseBench-Tab",
+  "commit": "b57992cba5b7a36fba6c1351aafc011353f6d329",
+  "file": "tlag_scorer.py",
+  "sha256": "9fd210a171c99659046b3f75393ef3a8ea17f81c93e73820fdfb6c776ffb8026",
+  "mode": "exclude-missing (Pulse's published mode); coverage reported"
+ },
+ "system": {
+  "api": "ADE v2 Parse Jobs (POST /v2/parse/jobs, poll GET /v2/parse/jobs/{job_id})",
+  "model": "dpt-3-pro-20261111",
+  "service_tier": "standard",
+  "options": "documented defaults (tables as HTML)",
+  "endpoint": "https://api.ade.landing.ai (production)",
+  "client": "aiohttp 3.14.5 (REST, no SDK)"
+ },
+ "procedure": {
+  "runner": "Pulse's providers/run.py with our adapter providers/landingai.py (code/landingai.py), registry key landingai_dpt3_pro, concurrency 16",
+  "prediction": "every `table` block in the response, in document order, sliced verbatim from the response Markdown by grounding.range; nothing cleaned or edited. A response with no table block has no prediction file and counts as missing",
+  "retries": "API errors only (--retry-errors); none occurred. No sample was re-run",
+  "tuning": "none; one pass of all samples"
+ },
+ "environment": {
+  "python": "3.12.11",
+  "aiohttp": "3.14.5"
+ },
+ "command": "python -m providers.run run --provider landingai_dpt3_pro && python -m providers.run score --provider landingai_dpt3_pro",
+ "started_at": "2026-11-24T22:21:07Z",
+ "finished_at": "2026-11-24T22:45:36Z",
+ "outcome": {
+  "samples": 1820,
+  "with_table": 1532,
+  "no_table": 288,
+  "api_errors": 0,
+  "retries": 0,
+  "credits": 1619.3
+ },
+ "code_sha256": {
+  "landingai.py": "7efcb6153db868c802b9c09ad4b95de9361cf7a85e2ee29de77c20b50c90140b",
+  "revised_score.py": "2fe4c74adf9c25be0af02da34f39bbb32148bdfd0981cd53073972403888718c"
+ }
+}
