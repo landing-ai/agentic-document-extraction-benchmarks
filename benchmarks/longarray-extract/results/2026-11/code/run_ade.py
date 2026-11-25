@@ -13,7 +13,7 @@ schema_for_ade.py). Saves per document under runs/<run>/:
 A document that fails is left without a prediction, so it scores 0.
 Re-running skips documents that already have a prediction.
 
-Key: VISION_AGENT_API_KEY in .env.local next to this file (never in Drive).
+Key: ADE_API_KEY in .env.local next to this file (never in Drive).
 
 Usage:
   python -I run_ade.py --run 2026-11-XX_dpt-3-pro-20261111           # dry run
@@ -226,9 +226,9 @@ def main() -> None:
     if not (a.data / "schemas_ade").exists():
         raise SystemExit("run schema_for_ade.py first")
     load_env()
-    key = os.environ.get("VISION_AGENT_API_KEY")
+    key = os.environ.get("ADE_API_KEY")
     if not key:
-        raise SystemExit("VISION_AGENT_API_KEY not set (put it in .env.local)")
+        raise SystemExit("ADE_API_KEY not set (put it in .env.local)")
     from landingai_ade import LandingAIADE
 
     client = LandingAIADE(apikey=key)

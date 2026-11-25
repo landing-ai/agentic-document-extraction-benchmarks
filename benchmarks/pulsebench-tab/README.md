@@ -108,7 +108,7 @@ python benchmarks/pulsebench-tab/results/2026-11/code/revised_score.py \
     --data data/pulsebench-tab --pred benchmarks/pulsebench-tab/results/2026-11/predictions
 ```
 
-To produce new predictions, clone [Pulse-Software-Corp/PulseBench-Tab](https://github.com/Pulse-Software-Corp/PulseBench-Tab), add `code/landingai.py` as `providers/landingai.py` with the registry entry in `METHOD.md`, set `VISION_AGENT_API_KEY` (never commit it) and run `python -m providers.run run --provider landingai_dpt3_pro`.
+To produce new predictions, clone [Pulse-Software-Corp/PulseBench-Tab](https://github.com/Pulse-Software-Corp/PulseBench-Tab), add `code/landingai.py` as `providers/landingai.py` with the registry entry in `METHOD.md`, set `ADE_API_KEY` to your LandingAI API key (never commit it) and run `python -m providers.run run --provider landingai_dpt3_pro`.
 
 ## Dataset and license
 

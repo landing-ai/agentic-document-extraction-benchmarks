@@ -63,7 +63,7 @@ Everything from the run is in [`results/2026-11/`](results/2026-11/). Internal j
 | `logs.jsonl` | One line per document: every job attempt, model versions reported by the API, page count, failed pages, credits, timings |
 | `predictions/<vertical>/<doc>.json` | The extracted object returned by ADE for each document (what the scorer reads) |
 | `schemas_ade/` | The schemas sent to ADE |
-| `code/` | The exact code used (`run_ade.py`, `schema_for_ade.py`, `score.py`; checksums match `manifest.json`) and `METHOD.md` |
+| `code/` | The exact code used (`run_ade.py`, `schema_for_ade.py`, `score.py`; checksums match `manifest.json`) and `METHOD.md`. On 2026-11-25 `run_ade.py` was changed to read the API key from `ADE_API_KEY` (the run used `VISION_AGENT_API_KEY`); nothing else changed, and its checksum in `manifest.json` was updated. |
 | `raw_files.txt` | SHA-256 of the raw parse and extract outputs, which are kept by LandingAI and not published here |
 
 ## Reproduce
@@ -76,7 +76,7 @@ mkdir work && cp benchmarks/longarray-extract/results/2026-11/code/*.py work/
 ln -s ../data/longarray-extract work/data
 cd work
 python schema_for_ade.py                     # writes data/schemas_ade/ (identical to results/2026-11/schemas_ade/)
-echo "VISION_AGENT_API_KEY=..." > .env.local  # your LandingAI API key; never commit it
+echo "ADE_API_KEY=..." > .env.local          # your LandingAI API key; never commit it
 python run_ade.py --run my-run --go
 python score.py runs/my-run/predictions
 ```
